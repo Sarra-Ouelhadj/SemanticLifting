@@ -1,0 +1,375 @@
+@prefix ns1: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix ns2: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://data.grandlyon.com/vocab/accotement_revetu_hors_cvcb> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Ame_d_options>,
+        <https://data.grandlyon.com/vocab/Ame_g_options> ;
+    ns2:prefLabel "ACCOTEMENT REVETU HORS CVCB" .
+
+<https://data.grandlyon.com/vocab/aire_pietonne> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Regime_d_options>,
+        <https://data.grandlyon.com/vocab/Regime_g_options> ;
+    ns2:prefLabel "AIRE PIETONNE" .
+
+<https://data.grandlyon.com/vocab/amenagement_mixte_pieton_velo_hors_voie_verte> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Ame_d_options>,
+        <https://data.grandlyon.com/vocab/Ame_g_options> ;
+    ns2:prefLabel "AMENAGEMENT MIXTE PIETON VELO HORS VOIE VERTE" .
+
+<https://data.grandlyon.com/vocab/aucun> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Ame_d_options>,
+        <https://data.grandlyon.com/vocab/Ame_g_options> ;
+    ns2:prefLabel "AUCUN" .
+
+<https://data.grandlyon.com/vocab/autre> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Ame_d_options>,
+        <https://data.grandlyon.com/vocab/Ame_g_options>,
+        <https://data.grandlyon.com/vocab/Regime_d_options>,
+        <https://data.grandlyon.com/vocab/Regime_g_options>,
+        <https://data.grandlyon.com/vocab/Reseau_loc_options> ;
+    ns2:prefLabel "AUTRE",
+        "Autre" .
+
+<https://data.grandlyon.com/vocab/bande_cyclable> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Ame_d_options>,
+        <https://data.grandlyon.com/vocab/Ame_g_options> ;
+    ns2:prefLabel "BANDE CYCLABLE" .
+
+<https://data.grandlyon.com/vocab/bidirectionnel> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Sens_d_options>,
+        <https://data.grandlyon.com/vocab/Sens_g_options> ;
+    ns2:prefLabel "BIDIRECTIONNEL" .
+
+<https://data.grandlyon.com/vocab/chaussee> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Local_d_options>,
+        <https://data.grandlyon.com/vocab/Local_g_options> ;
+    ns2:prefLabel "CHAUSSEE" .
+
+<https://data.grandlyon.com/vocab/chaussee_a_voie_centrale_banalisee> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Ame_d_options>,
+        <https://data.grandlyon.com/vocab/Ame_g_options> ;
+    ns2:prefLabel "CHAUSSEE A VOIE CENTRALE BANALISEE" .
+
+<https://data.grandlyon.com/vocab/couloir_bus+_velo> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Ame_d_options>,
+        <https://data.grandlyon.com/vocab/Ame_g_options> ;
+    ns2:prefLabel "COULOIR BUS+VELO" .
+
+<https://data.grandlyon.com/vocab/double_sens_cyclable_bande> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Ame_d_options>,
+        <https://data.grandlyon.com/vocab/Ame_g_options> ;
+    ns2:prefLabel "DOUBLE SENS CYCLABLE BANDE" .
+
+<https://data.grandlyon.com/vocab/double_sens_cyclable_non_materialise> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Ame_d_options>,
+        <https://data.grandlyon.com/vocab/Ame_g_options> ;
+    ns2:prefLabel "DOUBLE SENS CYCLABLE NON MATERIALISE" .
+
+<https://data.grandlyon.com/vocab/double_sens_cyclable_piste> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Ame_d_options>,
+        <https://data.grandlyon.com/vocab/Ame_g_options> ;
+    ns2:prefLabel "DOUBLE SENS CYCLABLE PISTE" .
+
+<https://data.grandlyon.com/vocab/en_agglomeration> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Regime_d_options>,
+        <https://data.grandlyon.com/vocab/Regime_g_options> ;
+    ns2:prefLabel "EN AGGLOMERATION" .
+
+<https://data.grandlyon.com/vocab/en_service> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Statut_d_options>,
+        <https://data.grandlyon.com/vocab/Statut_g_options> ;
+    ns2:prefLabel "EN SERVICE" .
+
+<https://data.grandlyon.com/vocab/en_travaux> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Statut_d_options>,
+        <https://data.grandlyon.com/vocab/Statut_g_options> ;
+    ns2:prefLabel "EN TRAVAUX" .
+
+<https://data.grandlyon.com/vocab/goulotte> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Ame_d_options>,
+        <https://data.grandlyon.com/vocab/Ame_g_options> ;
+    ns2:prefLabel "GOULOTTE" .
+
+<https://data.grandlyon.com/vocab/hors_agglomeration> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Regime_d_options>,
+        <https://data.grandlyon.com/vocab/Regime_g_options> ;
+    ns2:prefLabel "HORS AGGLOMERATION" .
+
+<https://data.grandlyon.com/vocab/intermediaire> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Local_d_options>,
+        <https://data.grandlyon.com/vocab/Local_g_options> ;
+    ns2:prefLabel "INTERMEDIAIRE" .
+
+<https://data.grandlyon.com/vocab/lisse> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Revet_d_options>,
+        <https://data.grandlyon.com/vocab/Revet_g_options> ;
+    ns2:prefLabel "LISSE" .
+
+<https://data.grandlyon.com/vocab/meuble> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Revet_d_options>,
+        <https://data.grandlyon.com/vocab/Revet_g_options> ;
+    ns2:prefLabel "MEUBLE" .
+
+<https://data.grandlyon.com/vocab/piste_cyclable> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Ame_d_options>,
+        <https://data.grandlyon.com/vocab/Ame_g_options> ;
+    ns2:prefLabel "PISTE CYCLABLE" .
+
+<https://data.grandlyon.com/vocab/provisoire> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Statut_d_options>,
+        <https://data.grandlyon.com/vocab/Statut_g_options> ;
+    ns2:prefLabel "PROVISOIRE" .
+
+<https://data.grandlyon.com/vocab/rampe> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Ame_d_options>,
+        <https://data.grandlyon.com/vocab/Ame_g_options> ;
+    ns2:prefLabel "RAMPE" .
+
+<https://data.grandlyon.com/vocab/roller> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Access_ame_options> ;
+    ns2:prefLabel "ROLLER" .
+
+<https://data.grandlyon.com/vocab/rugueux> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Revet_d_options>,
+        <https://data.grandlyon.com/vocab/Revet_g_options> ;
+    ns2:prefLabel "RUGUEUX" .
+
+<https://data.grandlyon.com/vocab/structurant> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Reseau_loc_options> ;
+    ns2:prefLabel "Structurant" .
+
+<https://data.grandlyon.com/vocab/trottoir> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Local_d_options>,
+        <https://data.grandlyon.com/vocab/Local_g_options> ;
+    ns2:prefLabel "TROTTOIR" .
+
+<https://data.grandlyon.com/vocab/unidirectionnel> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Sens_d_options>,
+        <https://data.grandlyon.com/vocab/Sens_g_options> ;
+    ns2:prefLabel "UNIDIRECTIONNEL" .
+
+<https://data.grandlyon.com/vocab/velo_de_route> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Access_ame_options> ;
+    ns2:prefLabel "VELO DE ROUTE" .
+
+<https://data.grandlyon.com/vocab/velo_rue> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Ame_d_options>,
+        <https://data.grandlyon.com/vocab/Ame_g_options> ;
+    ns2:prefLabel "VELO RUE" .
+
+<https://data.grandlyon.com/vocab/voie_verte> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Ame_d_options>,
+        <https://data.grandlyon.com/vocab/Ame_g_options> ;
+    ns2:prefLabel "VOIE VERTE" .
+
+<https://data.grandlyon.com/vocab/vtc> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Access_ame_options> ;
+    ns2:prefLabel "VTC" .
+
+<https://data.grandlyon.com/vocab/vtt> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Access_ame_options> ;
+    ns2:prefLabel "VTT" .
+
+<https://data.grandlyon.com/vocab/zone_30> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Regime_d_options>,
+        <https://data.grandlyon.com/vocab/Regime_g_options> ;
+    ns2:prefLabel "ZONE 30" .
+
+<https://data.grandlyon.com/vocab/zone_de_rencontre> a ns2:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "" ;
+    ns2:inScheme <https://data.grandlyon.com/vocab/Regime_d_options>,
+        <https://data.grandlyon.com/vocab/Regime_g_options> ;
+    ns2:prefLabel "ZONE DE RENCONTRE" .
+
+<https://data.grandlyon.com/vocab/Reseau_loc_options> a ns2:ConceptScheme ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "Type de réseau structurant local auquel l'aménagement appartient" ;
+    ns2:prefLabel "reseau_loc_options" .
+
+<https://data.grandlyon.com/vocab/Sens_d_options> a ns2:ConceptScheme ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "Sens de circulation pour les cyclistes sur la voie de droite" ;
+    ns2:prefLabel "sens_d_options" .
+
+<https://data.grandlyon.com/vocab/Sens_g_options> a ns2:ConceptScheme ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "Sens de circulation pour les cyclistes sur la voie de gauche" ;
+    ns2:prefLabel "sens_g_options" .
+
+<https://data.grandlyon.com/vocab/Local_d_options> a ns2:ConceptScheme ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "Emplacement de l'aménagement sur la voie de droite" ;
+    ns2:prefLabel "local_d_options" .
+
+<https://data.grandlyon.com/vocab/Local_g_options> a ns2:ConceptScheme ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "Emplacement de l'aménagement sur la voie de gauche" ;
+    ns2:prefLabel "local_g_options" .
+
+<https://data.grandlyon.com/vocab/Revet_d_options> a ns2:ConceptScheme ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "Type de revêtement de l'aménagement sur la voie de droite" ;
+    ns2:prefLabel "revet_d_options" .
+
+<https://data.grandlyon.com/vocab/Revet_g_options> a ns2:ConceptScheme ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "Type de revêtement de l'aménagement sur la voie de gauche" ;
+    ns2:prefLabel "revet_g_options" .
+
+<https://data.grandlyon.com/vocab/Statut_d_options> a ns2:ConceptScheme ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "Niveau de réalisation de l'infrastructure sur la voie de droite" ;
+    ns2:prefLabel "statut_d_options" .
+
+<https://data.grandlyon.com/vocab/Statut_g_options> a ns2:ConceptScheme ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "Niveau de réalisation de l'infrastructure sur la voie de gauche" ;
+    ns2:prefLabel "statut_g_options" .
+
+<https://data.grandlyon.com/vocab/Access_ame_options> a ns2:ConceptScheme ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "Accessibilité des amanégements par type de véhicule à deux roues non motorisé" ;
+    ns2:prefLabel "access_ame_options" .
+
+<https://data.grandlyon.com/vocab/Regime_d_options> a ns2:ConceptScheme ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "Régime présent sur la voie de droite" ;
+    ns2:prefLabel "regime_d_options" .
+
+<https://data.grandlyon.com/vocab/Regime_g_options> a ns2:ConceptScheme ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "Régime présent sur la voie de gauche" ;
+    ns2:prefLabel "regime_g_options" .
+
+<https://data.grandlyon.com/vocab/Ame_d_options> a ns2:ConceptScheme ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "Type d'aménagement présent sur la voie de droite" ;
+    ns2:prefLabel "ame_d_options" .
+
+<https://data.grandlyon.com/vocab/Ame_g_options> a ns2:ConceptScheme ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns1:term_status "testing" ;
+    ns2:definition "Type d'aménagement présent sur la voie de gauche" ;
+    ns2:prefLabel "ame_g_options" .
+

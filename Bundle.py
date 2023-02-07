@@ -1,6 +1,7 @@
+from library import helpers as h
 from SemanticModel import SemanticModel
 import subprocess
-from library import generateOntology as onto, generateSparqlGenerateQuery as q
+from library import generateOntology as onto
 import pandas as pd
 
 class Bundle :
@@ -20,17 +21,53 @@ class Bundle :
     def annotate(self, class_:dict=None, attributes:dict=None, enumerations:dict=None, enum_values:dict=None, associations:dict=None):
         self.semantic_model.annotate(class_=class_, attributes=attributes, enumerations=enumerations, enum_values=enum_values, associations=associations)
 
-    #TODO
-    def write_rdf (self, query_path:str, ontology_path:str, vocabulary_path:str, instance_path:str,
+    def write_rdf (self, ontology_path:str="./results/ontology.ttl", vocabulary_path:str="./results/vocabulary.ttl", instance_path:str="./results/instance.ttl",
                     ontology_namespace = "https://data.grandlyon.com/onto/", 
                     vocabulary_namespace ="https://data.grandlyon.com/vocab/", 
                     instances_namespace = "https://data.grandlyon.com/id/") :
-        """generate RDF data from SPARQL Generate query"""
 
         onto.generateOntology(self.semantic_model,ontology_path,vocabulary_path,ontology_namespace,vocabulary_namespace)
-        query_file=q.generateSparqlGenerateQuery(self,query_path,vocabulary_namespace, instances_namespace)
+        self.generateSparqlGenerateQuery(vocabulary_namespace, instances_namespace)
+        subprocess.run('java -jar ./sparql-generate*.jar --query-file query.rqg --output '+instance_path, shell=True)
 
-        subprocess.run('java -jar /home/sarra/Documents/Doctorat/Python/SemanticLifting2/sparql-generate*.jar --query-file '+ query_file+' --output '+instance_path, shell=True)
+    def generateSparqlGenerateQuery (self, vocabulary_namespace :str, instances_namespace :str) :
+        """generate SPARQL Generate query"""
+
+        s = """PREFIX iter: <http://w3id.org/sparql-generate/iter/>
+        PREFIX fun: <http://w3id.org/sparql-generate/fn/>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+        GENERATE {\n"""
+        
+        #iterate over classes
+        for list in self.semantic_model.classes:
+            s+=("?{} a <{}>".format(h.convertToPascalcase(list["name"]),list["IRI"]))+ ";\n"
+
+            #iterate over attributes
+            l=len(list["attributes"])
+            for i , attr in enumerate(list["attributes"]):
+                s+=("\t<{}> ?{}".format(attr["IRI"],h.convertToPascalcase(attr["name"])))
+                s+=";\n" if (i<l-1) else ".\n"
+        
+        #iterate over associations
+        for list in self.semantic_model.associations:
+            s += ("?{} <{}> ?{}".format(h.convertToPascalcase(list["source"]),list["IRI"],h.convertToPascalcase(list["destination"]))) + ".\n"
+        
+        s+=("}} \n SOURCE <{}> AS ?source \nITERATOR iter:GeoJSON(?source) AS ?geometricCoordinates ?properties \n WHERE {{\n".format(self.dataset))
+
+        #bindings
+        for list in self.semantic_model.classes:
+            for attr in list["attributes"]:
+                s+=('BIND (fun:JSONPath(?properties,"$.{}") AS ?{})\n'.format(attr["source"], h.convertToPascalcase(attr["name"]))) 
+                if (attr["id"]=="oui") :
+                    s+=('BIND(IRI(CONCAT("{}/",fun:JSONPath(?properties,"$.{}"))) AS ?{})\n'.format(instances_namespace+ h.convertToPascalcase(list["name"]),attr["source"],h.convertToPascalcase(list["name"])))
+            
+        for enum in self.semantic_model.enumerations:
+            s+=('BIND(IRI(CONCAT("{}",REPLACE(LCASE(fun:JSONPath(?properties,"$.{}"))," ","_"))) AS ?{})\n'.format(vocabulary_namespace,enum["source"],h.convertToPascalcase(enum["name"])))
+        
+        s+= "}\n"
+        with open("query.rqg", 'w') as fp:
+            fp.write(s)
 
     #TODO
     def read_tableSchema_csvData(schema_path:str, dataset_path:str):
@@ -46,23 +83,4 @@ class Bundle :
     #TODO
     def read_from_jsonData():
         ...
-
-# ---------------------------------
-schema = "https://schema.data.gouv.fr/schemas/etalab/schema-amenagements-cyclables/0.3.3/schema_amenagements_cyclables.json"
-titre = "AmenagementCyclable"
-dataset="https://www.data.gouv.fr/fr/datasets/r/9ca17d67-3ba3-410b-9e32-6ac7948c3e06"
-
-b0=Bundle.read_jsonSchema_geojsonData(schema,dataset,titre)
-b0.annotate(attributes={"nom_loc":"http://schema.org/name"},
-            class_={"AmenagementCyclable":"http://schema.org/Thing"},
-            associations={"aPourreseau_loc":"http://exemple/aPourreseau_loc"},
-            enum_values={("reseau_loc_options","REV"):"http://exemple/REV"}
-)
-
-ontology_path="/home/sarra/Documents/Doctorat/Python/SemanticLifting2/ontology.ttl"
-vocabulary_path="/home/sarra/Documents/Doctorat/Python/SemanticLifting2/vocabulary.ttl"
-instance_path="/home/sarra/Documents/Doctorat/Python/SemanticLifting2/instance.ttl"
-query_path="/home/sarra/Documents/Doctorat/Python/SemanticLifting2/query.rq"
-
-#b0.write_rdf(query_path,ontology_path,vocabulary_path,instance_path)
 

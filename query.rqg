@@ -1,0 +1,72 @@
+PREFIX iter: <http://w3id.org/sparql-generate/iter/>
+        PREFIX fun: <http://w3id.org/sparql-generate/fn/>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+        GENERATE {
+?Amenagementcyclable a <http://schema.org/Thing>;
+	<https://data.grandlyon.com/onto/idLocal> ?Id_local;
+	<http://schema.org/name> ?Nom_loc;
+	<https://data.grandlyon.com/onto/idOsm> ?Id_osm;
+	<https://data.grandlyon.com/onto/numIti> ?Num_iti;
+	<https://data.grandlyon.com/onto/codeComD> ?Code_com_d;
+	<https://data.grandlyon.com/onto/largeurD> ?Largeur_d;
+	<https://data.grandlyon.com/onto/codeComG> ?Code_com_g;
+	<https://data.grandlyon.com/onto/largeurG> ?Largeur_g;
+	<https://data.grandlyon.com/onto/dateMaj> ?Date_maj;
+	<https://data.grandlyon.com/onto/traficVit> ?Trafic_vit;
+	<https://data.grandlyon.com/onto/lumiere> ?Lumiere;
+	<https://data.grandlyon.com/onto/dService> ?D_service;
+	<https://data.grandlyon.com/onto/comm> ?Comm;
+	<https://data.grandlyon.com/onto/source> ?Source;
+	<https://data.grandlyon.com/onto/projectC> ?Project_c;
+	<https://data.grandlyon.com/onto/refGeo> ?Ref_geo.
+?Amenagementcyclable <http://exemple/aPourreseau_loc> ?Reseau_loc_options.
+?Amenagementcyclable <https://data.grandlyon.com/onto/apourameD> ?Ame_d_options.
+?Amenagementcyclable <https://data.grandlyon.com/onto/apourregimeD> ?Regime_d_options.
+?Amenagementcyclable <https://data.grandlyon.com/onto/apoursensD> ?Sens_d_options.
+?Amenagementcyclable <https://data.grandlyon.com/onto/apourlocalD> ?Local_d_options.
+?Amenagementcyclable <https://data.grandlyon.com/onto/apourstatutD> ?Statut_d_options.
+?Amenagementcyclable <https://data.grandlyon.com/onto/apourrevetD> ?Revet_d_options.
+?Amenagementcyclable <https://data.grandlyon.com/onto/apourameG> ?Ame_g_options.
+?Amenagementcyclable <https://data.grandlyon.com/onto/apourregimeG> ?Regime_g_options.
+?Amenagementcyclable <https://data.grandlyon.com/onto/apoursensG> ?Sens_g_options.
+?Amenagementcyclable <https://data.grandlyon.com/onto/apourlocalG> ?Local_g_options.
+?Amenagementcyclable <https://data.grandlyon.com/onto/apourstatutG> ?Statut_g_options.
+?Amenagementcyclable <https://data.grandlyon.com/onto/apourrevetG> ?Revet_g_options.
+?Amenagementcyclable <https://data.grandlyon.com/onto/apouraccessAme> ?Access_ame_options.
+} 
+ SOURCE <https://www.data.gouv.fr/fr/datasets/r/9ca17d67-3ba3-410b-9e32-6ac7948c3e06> AS ?source 
+ITERATOR iter:GeoJSON(?source) AS ?geometricCoordinates ?properties 
+ WHERE {
+BIND (fun:JSONPath(?properties,"$.id_local") AS ?Id_local)
+BIND(IRI(CONCAT("https://data.grandlyon.com/id/Amenagementcyclable/",fun:JSONPath(?properties,"$.id_local"))) AS ?Amenagementcyclable)
+BIND (fun:JSONPath(?properties,"$.nom_loc") AS ?Nom_loc)
+BIND (fun:JSONPath(?properties,"$.id_osm") AS ?Id_osm)
+BIND (fun:JSONPath(?properties,"$.num_iti") AS ?Num_iti)
+BIND (fun:JSONPath(?properties,"$.code_com_d") AS ?Code_com_d)
+BIND (fun:JSONPath(?properties,"$.largeur_d") AS ?Largeur_d)
+BIND (fun:JSONPath(?properties,"$.code_com_g") AS ?Code_com_g)
+BIND (fun:JSONPath(?properties,"$.largeur_g") AS ?Largeur_g)
+BIND (fun:JSONPath(?properties,"$.date_maj") AS ?Date_maj)
+BIND (fun:JSONPath(?properties,"$.trafic_vit") AS ?Trafic_vit)
+BIND (fun:JSONPath(?properties,"$.lumiere") AS ?Lumiere)
+BIND (fun:JSONPath(?properties,"$.d_service") AS ?D_service)
+BIND (fun:JSONPath(?properties,"$.comm") AS ?Comm)
+BIND (fun:JSONPath(?properties,"$.source") AS ?Source)
+BIND (fun:JSONPath(?properties,"$.project_c") AS ?Project_c)
+BIND (fun:JSONPath(?properties,"$.ref_geo") AS ?Ref_geo)
+BIND(IRI(CONCAT("https://data.grandlyon.com/vocab/",REPLACE(LCASE(fun:JSONPath(?properties,"$.reseau_loc"))," ","_"))) AS ?Reseau_loc_options)
+BIND(IRI(CONCAT("https://data.grandlyon.com/vocab/",REPLACE(LCASE(fun:JSONPath(?properties,"$.ame_d"))," ","_"))) AS ?Ame_d_options)
+BIND(IRI(CONCAT("https://data.grandlyon.com/vocab/",REPLACE(LCASE(fun:JSONPath(?properties,"$.regime_d"))," ","_"))) AS ?Regime_d_options)
+BIND(IRI(CONCAT("https://data.grandlyon.com/vocab/",REPLACE(LCASE(fun:JSONPath(?properties,"$.sens_d"))," ","_"))) AS ?Sens_d_options)
+BIND(IRI(CONCAT("https://data.grandlyon.com/vocab/",REPLACE(LCASE(fun:JSONPath(?properties,"$.local_d"))," ","_"))) AS ?Local_d_options)
+BIND(IRI(CONCAT("https://data.grandlyon.com/vocab/",REPLACE(LCASE(fun:JSONPath(?properties,"$.statut_d"))," ","_"))) AS ?Statut_d_options)
+BIND(IRI(CONCAT("https://data.grandlyon.com/vocab/",REPLACE(LCASE(fun:JSONPath(?properties,"$.revet_d"))," ","_"))) AS ?Revet_d_options)
+BIND(IRI(CONCAT("https://data.grandlyon.com/vocab/",REPLACE(LCASE(fun:JSONPath(?properties,"$.ame_g"))," ","_"))) AS ?Ame_g_options)
+BIND(IRI(CONCAT("https://data.grandlyon.com/vocab/",REPLACE(LCASE(fun:JSONPath(?properties,"$.regime_g"))," ","_"))) AS ?Regime_g_options)
+BIND(IRI(CONCAT("https://data.grandlyon.com/vocab/",REPLACE(LCASE(fun:JSONPath(?properties,"$.sens_g"))," ","_"))) AS ?Sens_g_options)
+BIND(IRI(CONCAT("https://data.grandlyon.com/vocab/",REPLACE(LCASE(fun:JSONPath(?properties,"$.local_g"))," ","_"))) AS ?Local_g_options)
+BIND(IRI(CONCAT("https://data.grandlyon.com/vocab/",REPLACE(LCASE(fun:JSONPath(?properties,"$.statut_g"))," ","_"))) AS ?Statut_g_options)
+BIND(IRI(CONCAT("https://data.grandlyon.com/vocab/",REPLACE(LCASE(fun:JSONPath(?properties,"$.revet_g"))," ","_"))) AS ?Revet_g_options)
+BIND(IRI(CONCAT("https://data.grandlyon.com/vocab/",REPLACE(LCASE(fun:JSONPath(?properties,"$.access_ame"))," ","_"))) AS ?Access_ame_options)
+}

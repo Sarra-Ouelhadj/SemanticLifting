@@ -3,7 +3,7 @@ from rdflib.namespace import RDF, RDFS, OWL, SKOS
 from rdflib import Graph, Literal, URIRef, Namespace
 from SemanticModel import SemanticModel
 
-def generateOntology(semantic_model : SemanticModel,ontology_path:str, vocabulary_path:str,
+def generateOntology(semantic_model : SemanticModel, ontology_path:str, vocabulary_path:str,
                     ontology_namespace : str, vocabulary_namespace : str):
     """generate ontology files from the semantic model"""
 
