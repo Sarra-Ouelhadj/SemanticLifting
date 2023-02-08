@@ -1,4 +1,5 @@
 from library import helpers as h
+import copy
 from SemanticModel import SemanticModel
 import subprocess
 from library import generateOntology as onto
@@ -68,6 +69,51 @@ class Bundle :
         s+= "}\n"
         with open("query.rqg", 'w') as fp:
             fp.write(s)
+
+    def split(self,new_class_name:str,class_id: str, class_attributes:list,class_association_new_class:str,IRI: str = "", definition : str = "",enumerations:list=[]):
+        """
+        >>> b1=b0.split(new_class_name = 'Commune', class_id='code_com_d', class_attributes = ['code_com_g'],
+                class_association_new_class='traverseCommuneADroite', definition="Division administrative de la Métropole de Lyon")
+        """
+        if (IRI == "" and definition == ""):
+            raise Exception("IRI or definition parameter must be passed!")
+        else :
+            d={}
+            d["classes"]=[]
+            d["associations"]=[]
+            d["enumerations"]=[]
+
+            semantic_model = SemanticModel(d)
+            
+            attributes=[]
+            attr_elem = copy.deepcopy(self.semantic_model.get_id())
+            attr_elem['id']="non" # clé étrangère
+            attributes.append(attr_elem)
+
+            attr_elem = self.semantic_model.get_attribute(class_id)
+            self.semantic_model.classes[0]['attributes'].remove(attr_elem) # MAJ du bundle initial
+            attr_elem['id']="oui"
+            attributes.append(attr_elem)
+
+            for attr_name in class_attributes:
+                attr_elem = self.semantic_model.get_attribute(attr_name)
+                self.semantic_model.classes[0]['attributes'].remove(attr_elem) # MAJ du bundle initial
+                attributes.append(attr_elem)
+
+            semantic_model.add_class(new_class_name,IRI, definition,attributes)
+
+            if (enumerations != []) :
+                for enum_name in enumerations :
+                    enum_temp = self.semantic_model.get_enumeration(enum_name)
+                    self.semantic_model.enumerations.remove(enum_temp) # MAJ du bundle initial
+                    semantic_model.enumerations.append(enum_temp)
+                    for ass in self.semantic_model.associations :
+                        if (ass['destination'] == enum_name + "_options"):
+                            self.semantic_model.associations.remove(ass) # MAJ du bundle initial
+                            ass['source'] = new_class_name
+                            semantic_model.associations.append(ass)
+            
+            return Bundle(semantic_model, self.dataset)
 
     #TODO
     def read_tableSchema_csvData(schema_path:str, dataset_path:str):

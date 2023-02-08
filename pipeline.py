@@ -10,4 +10,10 @@ b0.annotate(attributes={"nom_loc":"http://schema.org/name"},
             associations={"aPourreseau_loc":"http://exemple/aPourreseau_loc"},
             enum_values={("reseau_loc_options","REV"):"http://exemple/REV"}
 )
-b0.write_rdf()
+#b0.write_rdf()
+
+b1=b0.split(new_class_name = 'Commune', class_id='code_com_d', class_attributes = ['code_com_g'],
+        class_association_new_class='traverseCommuneADroite',definition="Division administrative de la Métropole de Lyon",enumerations=['reseau_loc'])
+
+b0.write_rdf("./results/ontology0.ttl","./results/vocabulary0.ttl","./results/instance0.ttl" )
+b1.write_rdf("./results/ontology1.ttl","./results/vocabulary1.ttl","./results/instance1.ttl" )

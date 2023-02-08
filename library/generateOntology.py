@@ -17,7 +17,7 @@ def generateOntology(semantic_model : SemanticModel, ontology_path:str, vocabula
     if (semantic_model.classes[0]['IRI']==''):
         classeURI = URIRef(ontology_namespace + h.convertToPascalcase(semantic_model.classes[0]['name']))
 
-        semantic_model.annotate(class_=str(classeURI))
+        semantic_model.annotate(class_={semantic_model.classes[0]['name']:str(classeURI)})
         
         g.add((classeURI,RDF.type, OWL.Class))    
         g.add((classeURI,RDFS.label, Literal(semantic_model.classes[0]["name"])))

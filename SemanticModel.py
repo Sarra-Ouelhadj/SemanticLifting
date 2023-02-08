@@ -83,7 +83,36 @@ class SemanticModel :
                 return i
         raise Exception
 
+    def get_id(self) -> dict:
+        for attribute_element in self.classes[0]['attributes']:
+            if attribute_element['id']=="oui":
+                return attribute_element
+        else : raise Exception ("L'identifiant de la classe n'est pas précisé dans le modèle sémantique")
+    
+    def get_attribute(self, name_attribute: str) -> dict:
+        for attribute_element in self.classes[0]["attributes"]:
+            if attribute_element["name"]==name_attribute :
+                return attribute_element
+        else : raise Exception("L'attribut indiqué n'existe pas")
+
+    def get_enumeration(self, name_enumeration: str) -> dict:
+        for enumeration_element in self.enumerations:
+            if enumeration_element["name"] == name_enumeration + "_options" :
+                return enumeration_element
+        else : raise Exception("L'énumération indiquée n'existe pas")
+
+    def add_class(self, name: str, IRI: str, definition : str, attributes:list):
+        class_element={}
+        class_element["name"]=name
+        class_element["IRI"]=IRI
+        class_element["definition"]=definition
+        class_element["attributes"] = attributes
+        
+        self.classes.append(class_element)
+        return self
+    
     #----------------------------------Brainstoming---------------------------------------------
+    
     def isAtomic(self) -> bool:
         """si le modèle sémantique contient un seul élément UML"""
         return False if (len(self.classes)>1 or len(self.enumerations)>1 or len(self.associations)>1) else True 
@@ -93,31 +122,18 @@ class SemanticModel :
             if class_element["name"]==name :
                 return class_element
         else : raise Exception("La classe indiquée n'existe pas")
-    
-    def add_class(self, name: str, IRI: str = None, definition : str = None) -> None:
-        class_element={}
-        class_element["name"]=name
-        class_element["IRI"]=IRI
-        class_element["definition"]=definition
-        class_element["attributes"] = []
-
-        #ajouter un attribut exemple pour la nouvelle classe
-        self.add_attribute_class(class_element,name_attribute="attribut1")
-        
-        self.classes.append(class_element)
-        return self
 
     def delete_class(self, name : str) -> None:
         cl = self.get_class(name)
         self.classes.remove(cl)
         return self
 
-    def get_attribute_class(self, name_class:str, name_attribute: str) -> 'tuple[dict, dict]':
-        class_element= self.get_class(name_class)
-        for attribute_element in class_element["attributes"]:
-            if attribute_element["name"]==name_attribute :
-                return class_element, attribute_element
-        else : raise Exception("L'attribut indiqué n'existe pas")
+    # def get_attribute_class(self, name_class:str, name_attribute: str) -> 'tuple[dict, dict]':
+    #     class_element= self.get_class(name_class)
+    #     for attribute_element in class_element["attributes"]:
+    #         if attribute_element["name"]==name_attribute :
+    #             return class_element, attribute_element
+    #     else : raise Exception("L'attribut indiqué n'existe pas")
     
     def add_attribute_class(self, class_element:dict, name_attribute: str, IRI:str=None, source:str=None, definition:str=None, type:str="string", required:bool="non", id:bool="non") -> None:
         element_niv1={}
@@ -154,10 +170,4 @@ class SemanticModel :
 
     def delete_value_enumeration():
         pass
-
-if __name__=="__main__":
-    sem= SemanticModel()
-    sem.read("semantic_model.json")
-    print(sem.isAtomic())
-
-    #print(sem.classes)
+    
