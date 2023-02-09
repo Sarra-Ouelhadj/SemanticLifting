@@ -1,0 +1,9 @@
+*.pyc
+__pycache__
+env/
+*.ipynb*
+inputs/
+pipeline_draft.py
+UML.*
+*.odt
+*.odt#
