@@ -1,11 +1,15 @@
+from abc import abstractmethod
 import json
 from library.initiateSemanticModelFromJsonSchema import *
 
-class SemanticModel :
+class SemanticModel() :
     
     classes:list
     associations:list
     enumerations:list
+
+    ontology_namespace = "https://data.grandlyon.com/onto/"
+    vocabulary_namespace ="https://data.grandlyon.com/vocab/"
 
     def __init__(self, d:dict) -> None:
         self.classes = d['classes']
@@ -34,49 +38,20 @@ class SemanticModel :
     def write_excel():
         ...
     
+    @abstractmethod
     def annotate(self, class_:dict=None, attributes:dict=None, enumerations:dict=None, enum_values:dict=None, associations:dict=None):
-        """
-        >>> annotate(class_={"AmenagementCyclable":"http://schema.org/Thing"})
-        >>> annotate(attributes={"nom_loc":"http://schema.org/name", "num_iti":"http://schema.org/name"})
-        >>> annotate(associations={"aPourreseau_loc":"http://exemple/aPourreseau_loc"})
-        >>> annotate(enum_values={("reseau_loc_options","REV"):"http://exemple/REV"})
-        """
-        args = locals()
-        if (any(args.values())==True):
-            if (class_!=None):
-                self.classes[0]['IRI']=class_[self.classes[0]['name']]
+        pass
 
-            if (attributes!=None):
-                attributes_keys = list(attributes.keys())
-                for value in attributes_keys: 
-                    i=self.index(self.classes[0]['attributes'],'name', value)
-                    #affecter l'IRI
-                    self.classes[0]['attributes'][i]['IRI']=attributes[value]
-
-            if (associations!=None):
-                associations_keys=list(associations.keys())
-                for value in associations_keys: 
-                    i=self.index(self.associations,'name', value)
-                    #affecter l'IRI
-                    self.associations[i]['IRI']=associations[value]
-            
-            if (enumerations!=None):
-                enumerations_keys=list(enumerations.keys())
-                for value in enumerations_keys:
-                    i=self.index(self.enumerations,'name', value)
-                    #affecter l'IRI
-                    self.enumerations[i]['IRI']=enumerations[value]      
-
-            if (enum_values!=None):
-                enum_values_keys=list(enum_values.keys())
-                for value_x, value_y in enum_values_keys:
-                    i=self.index(self.enumerations,'name', value_x)
-                    j=self.index(self.enumerations[i]['values'],'name', value_y)
-                    #affecter l'IRI
-                    self.enumerations[i]['values'][j]['IRI']=enum_values[(value_x, value_y)]
-        else:
-            raise ValueError('At least one default parameter should be passed!')
-
+    @abstractmethod
+    def validate(self):
+        pass
+    
+    @abstractmethod
+    def generateOntology(self, ontology_path:str, vocabulary_path:str):
+        pass
+    
+    #---------------------------------- utilities --------------------------------
+    
     def index(self, lst:list, key, value):
         for i, dic in enumerate(lst):
             if dic[key] == value:
@@ -87,21 +62,36 @@ class SemanticModel :
         for attribute_element in self.classes[0]['attributes']:
             if attribute_element['id']=="oui":
                 return attribute_element
-        else : raise Exception ("L'identifiant de la classe n'est pas précisé dans le modèle sémantique")
+        raise Exception ("L'identifiant de la classe n'est pas précisé dans le modèle sémantique")
     
     def get_attribute(self, name_attribute: str) -> dict:
         for attribute_element in self.classes[0]["attributes"]:
             if attribute_element["name"]==name_attribute :
                 return attribute_element
-        else : raise Exception("L'attribut indiqué n'existe pas")
+        raise Exception("L'attribut indiqué n'existe pas")
 
     def get_enumeration(self, name_enumeration: str) -> dict:
         for enumeration_element in self.enumerations:
-            if enumeration_element["name"] == name_enumeration + "_options" :
+            if enumeration_element["name"] == name_enumeration :
                 return enumeration_element
-        else : raise Exception("L'énumération indiquée n'existe pas")
-
-    def add_class(self, name: str, IRI: str, definition : str, attributes:list):
+        raise Exception("L'énumération indiquée n'existe pas")
+    
+    def get_association(self, name_association:str = None, source:str = None, destination:str=None) -> dict:
+        args = locals()
+        if (any(args.values())==True) :
+            for association_element in self.associations:
+                if (args['source']!= None):
+                    if (association_element['source'] == source): return association_element
+                else :
+                    if (args['destination']!= None):
+                        if (association_element['destination'] == destination): return association_element
+                    else :
+                        if (association_element['name'] == name_association) : return association_element
+            raise Exception("L'association indiquée n'existe pas")
+        else:
+            raise ValueError('Au moins un paramètre par défaut doit être passé !')
+        
+    def add_class(self, name: str, IRI: str="", definition : str="", attributes:list=[]):
         class_element={}
         class_element["name"]=name
         class_element["IRI"]=IRI
@@ -110,64 +100,21 @@ class SemanticModel :
         
         self.classes.append(class_element)
         return self
-    
-    #----------------------------------Brainstoming---------------------------------------------
+
+    def add_association(self, name: str, source:str, destination:str, IRI: str="", definition : str=""):
+        association_element={}
+        association_element["name"]=name
+        association_element["IRI"]=IRI
+        association_element["definition"]=definition
+        association_element["source"] = source
+        association_element["destination"] = destination
+        
+        self.associations.append(association_element)
+        return self
     
     def isAtomic(self) -> bool:
-        """si le modèle sémantique contient un seul élément UML"""
-        return False if (len(self.classes)>1 or len(self.enumerations)>1 or len(self.associations)>1) else True 
-    
-    def get_class(self, name: str) -> dict :
-        for class_element in self.classes:
-            if class_element["name"]==name :
-                return class_element
-        else : raise Exception("La classe indiquée n'existe pas")
-
-    def delete_class(self, name : str) -> None:
-        cl = self.get_class(name)
-        self.classes.remove(cl)
-        return self
-
-    # def get_attribute_class(self, name_class:str, name_attribute: str) -> 'tuple[dict, dict]':
-    #     class_element= self.get_class(name_class)
-    #     for attribute_element in class_element["attributes"]:
-    #         if attribute_element["name"]==name_attribute :
-    #             return class_element, attribute_element
-    #     else : raise Exception("L'attribut indiqué n'existe pas")
-    
-    def add_attribute_class(self, class_element:dict, name_attribute: str, IRI:str=None, source:str=None, definition:str=None, type:str="string", required:bool="non", id:bool="non") -> None:
-        element_niv1={}
-        element_niv1["name"]=name_attribute
-        element_niv1["IRI"]=IRI
-        element_niv1["source"]=source
-        element_niv1["definition"]=definition
-        element_niv1["type"]=type
-        element_niv1["required"]=required
-        element_niv1["id"]=id
-        
-        #class_element = self.get_class(name_class)
-        class_element["attributes"].append(element_niv1)
-        return self
-
-    def delete_attribute_class(self, name_class:str, name_attribute:str) -> None:
-        cl, attr=self.get_attribute_class(name_class, name_attribute)
-        cl["attributes"].remove(attr)
-
-    def add_association():
-        pass
-
-    def delete_association():
-        pass
-
-    def add_enumeration():
-        pass
-
-    def delete_enumeration():
-        pass
-
-    def add_value_enumeration():
-        pass
-
-    def delete_value_enumeration():
-        pass
-    
+        """
+        Si le modèle sémantique contient une seule classe ou (exclusif) une seule énumération UML.
+        Les associations ne sont pas incluses dans la définition de l'atomicité du modèle sémantique
+        """
+        return False if (len(self.classes)>1 or len(self.enumerations)>1 or (len(self.classes)>=1 and len(self.enumerations)>=1)) else True 

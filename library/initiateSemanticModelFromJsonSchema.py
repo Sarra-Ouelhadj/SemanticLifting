@@ -1,4 +1,5 @@
 import requests
+from library import helpers as h
 
 def initiateSemanticModelFromJsonSchema(schema_url: str, title:str) -> dict:
 
@@ -11,7 +12,7 @@ def initiateSemanticModelFromJsonSchema(schema_url: str, title:str) -> dict:
     d["enumerations"]=[]
 
     class_element={}
-    class_element["name"]= title
+    class_element["name"]= h.convertToPascalcase(title)
     class_element["definition"]= ""
     class_element["IRI"]= ""
     class_element["attributes"]=[]
@@ -55,11 +56,11 @@ def initiateSemanticModelFromJsonSchema(schema_url: str, title:str) -> dict:
             class_element["attributes"].append(element_niv1)
         
         else: # c'est une énumération
-            element_niv1["name"] = attr_elem + "_options" #création du type énuméré
+            element_niv1["name"] = attr_elem #création du type énuméré
             
             #création de l'association entre la classe et le type énuméré
             ass_elem={}
-            ass_elem["name"]="aPour"+ attr_elem
+            ass_elem["name"]=attr_elem
             ass_elem["source"]=class_element["name"]
             ass_elem["destination"]=element_niv1["name"]
             ass_elem["definition"]=""
