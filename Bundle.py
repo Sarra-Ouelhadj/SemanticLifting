@@ -51,7 +51,7 @@ class Bundle(ABC) :
     def generateOntology(self, narrow = True, kpi_results = pd.DataFrame()):
         pass
 
-    def insert(instance_path:str="./results/instances.ttl"): #doesn't work yet, in progress
+    def insert(instance_path:str="./results/instances.ttl"):
         
         headers = {
             'Content-Type': 'application/x-turtle',
