@@ -5,8 +5,11 @@ class BundleCollection :
 
     @classmethod
     def __init__(cls,root):
+        cls.root = root
         cls.graph = nx.DiGraph()
         cls.graph.add_node(root)
+        for l in root.linked_to :
+            cls.graph.add_edge(root, l["destination"], predicate = l["name"], operation = "creation")
     
     @classmethod
     def add_bundle(cls, origin_bundle, new_bundle, predicate:str, operation:str = "split"):
@@ -32,11 +35,10 @@ class BundleCollection :
         edgedict = {}
         colors = []
         for n in cls.graph:
+            labeldict[n]= n.name
             if (str(type(n)) == "<class 'BundleClass.BundleClass'>") :
-                labeldict[n]=n.semantic_model.classes[0]['name']
                 colors.append("orange")
             else : 
-                labeldict[n]=n.semantic_model.enumerations[0]['name']
                 colors.append("cyan")
         for u, v, d in cls.graph.edges(data='predicate'):
             edgedict[u,v] = d

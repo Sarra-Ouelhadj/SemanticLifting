@@ -1,5 +1,7 @@
 import requests
 from library import helpers as h
+from BundleClass import BundleClass
+from BundleEnum import BundleEnum
 
 def initiateSemanticModelFromJsonSchema(schema_url: str, title:str) -> dict:
 
@@ -10,7 +12,7 @@ def initiateSemanticModelFromJsonSchema(schema_url: str, title:str) -> dict:
     d["classes"]=[]
     d["associations"]=[]
     d["enumerations"]=[]
-
+    
     class_element={}
     class_element["name"]= h.convertToPascalcase(title)
     class_element["definition"]= ""

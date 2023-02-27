@@ -1,59 +1,93 @@
-from SemanticModel import SemanticModel
 import geopandas as gpd
 from abc import ABC, abstractmethod
+import pandas as pd
+from library import helpers as h
 
 class Bundle(ABC) :
+ 
+    name : str
+    IRI : str
+    definition : str
+    linked_to : list
     
-    semantic_model : SemanticModel
     dataset: gpd.GeoDataFrame
      
     instances_namespace = "https://data.grandlyon.com/id/"
+    ontology_namespace = "https://data.grandlyon.com/onto/"
+    vocabulary_namespace ="https://data.grandlyon.com/vocab/"
 
-    def __init__(self, semantic_model : SemanticModel, dataset : gpd.GeoDataFrame) -> None:
-        self.semantic_model=semantic_model
+    def __init__(self, name : str, dataset : gpd.GeoDataFrame, IRI = None, definition = None, linked_to = []) -> None:
+        self.name = h.convertToPascalcase(name)
         self.dataset=dataset
+        self.IRI = IRI
+        self.definition = definition
+        self.linked_to = linked_to
+    
+    def show(self):
+        print ("name :" , self.name)
+        print ("IRI :" ,self.IRI)
+        print ("definition :" ,self.definition)
+    
+    def next(self) :
+        next = {}
+        for bun in self.linked_to:
+            next[bun["name"]] = bun["destination"]
+        return next
+    
+    @abstractmethod
+    def document(self):
+        pass
 
-    def annotate_association(self, associations:dict):
-        """
-        >>> annotate_association(associations={"reseau_loc":"http://exemple/reseau_loc"})
-        """
-        associations_keys=list(associations.keys())
-        for value in associations_keys: 
-            i=self.semantic_model.index(self.semantic_model.associations,'name', value)
-            #affecter l'IRI
-            self.semantic_model.associations[i]['IRI']=associations[value]
+    @abstractmethod
+    def annotate(self):
+        pass
 
-    def validate_association(self):
-        """
-        associations validation \n
-        0. Chaque association doit avoir un nom
-        1. Chaque association doit avoir un lien de référence ou une définition
-        2. Chaque association doit avoir une source
-        3. Chaque association doit avoir une destination
-        """
-        errors =[]
-        #------------------------
-        #associations validation
-        #------------------------
-
-        for ass in self.semantic_model.associations :
-            #0. Chaque association doit avoir un nom
-            if (ass['name']=='' or ass['name']== None): errors.append ("Le nom de l'association est obligatoire")
-
-            #1. Chaque association doit avoir un lien de référence ou une définition
-            if ((ass['IRI']=='' or ass['IRI']== None) and (ass['definition']=='' or ass['definition'] == None )): errors.append(f"L'association {ass['name']} doit avoir un lien de référence ou une définition")
-
-            #2. Chaque association doit avoir une source
-            if (ass['source']=='' or ass['source']==None) : errors.append (f"L'association {ass['name']} doit avoir une source")
-
-            #3. Chaque association doit avoir une destination
-            if (ass['destination']=='' or ass['destination']==None) : errors.append (f"L'association {ass['name']} doit avoir une destination")
-            
-        if errors:
-            raise Exception (errors)
-        else : return True
+    @abstractmethod
+    def validate(self, errors = [], narrow = True):
+        pass
+    
+    @abstractmethod
+    def generateOntology(self, narrow = True, kpi_results = pd.DataFrame()):
+        pass
 
     
     #---------------------------------- dataset utilities --------------------------------
     def show_dataset(self):
         print(self.dataset)
+
+    #---------------------------------- utilities --------------------------------
+    
+    def index(self, lst:list, key, value):
+        for i, dic in enumerate(lst):
+            if dic[key] == value:
+                return i
+        raise Exception
+    
+    def add_link(self, name: str, destination: "Bundle", IRI=None, definition : str=None):
+        association_element={}
+        association_element["name"]=name
+        association_element["IRI"]=IRI
+        association_element["definition"]=definition
+        association_element["source"] = self
+        association_element["destination"] = destination
+        
+        self.linked_to.append(association_element)
+
+    def get_link(self, name:str = None, source:str = None, destination:str = None) -> dict:
+        args = locals()
+        if (any(args.values())==True) :
+            for association_element in self.linked_to:
+                if (args['source']!= None):
+                    if (association_element['source'].name == h.convertToPascalcase(source)): return association_element
+                    
+                else :
+                    if (args['destination']!= None):
+                        if (association_element['destination'].name == h.convertToPascalcase(destination)): return association_element
+                    else :
+                        if (association_element['name'] == name) : return association_element
+            raise Exception("L'association indiquée n'existe pas")
+        else:
+            raise ValueError('Au moins un paramètre par défaut doit être passé !')
+
+    def write_json(self):
+        ...
