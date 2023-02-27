@@ -1,5 +1,7 @@
 import copy
 import subprocess
+
+import requests
 from BundleCollection import BundleCollection
 import json
 from library import helpers as h
@@ -442,6 +444,7 @@ class BundleClass(Bundle):
 
         # --- Créer la nouvelle classe et le lien avec la classe initiale
         new_bundle = BundleClass(new_class_name, new_dataset, attributes= attributes, linked_to=[])
+        BundleCollection.add_bundle(self, new_bundle, predicate)
 
         self.add_link(name = predicate, destination= new_bundle)
 
@@ -449,21 +452,17 @@ class BundleClass(Bundle):
             for enum_name in enumerations :
                 ass_temp = self.get_link(destination=enum_name)
                 self.linked_to.remove(ass_temp) # MAJ du bundle initial
+
+                BundleCollection.graph.remove_edge(self, ass_temp['destination'])
                 
                 ass_temp['source']= new_bundle # modifier la source
                 new_bundle.linked_to.append(ass_temp) # ajouter le lien à la nouvelle classe
+
+                BundleCollection.add_bundle(new_bundle, ass_temp['destination'], ass_temp['name'])
                 
                 # MAJ datasets
                 new_bundle.dataset = new_bundle.dataset.join(self.dataset[ass_temp['destination'].source])                
                 self.dataset.drop(columns=ass_temp['destination'].source, inplace = True) # MAJ du bundle initial
-                
- 
-                #---------------------- voir pour bundleCollection
-
-                
-                #BundleCollection.add_bundle(new_bundle,enumbun,ass_temp['name'])
-
-        #BundleCollection.add_bundle(origin_bundle=self, new_bundle=new_bundle, predicate=predicate)
  
         return new_bundle
 

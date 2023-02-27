@@ -1,6 +1,7 @@
 import geopandas as gpd
 from abc import ABC, abstractmethod
 import pandas as pd
+import requests
 from library import helpers as h
 
 class Bundle(ABC) :
@@ -49,6 +50,16 @@ class Bundle(ABC) :
     @abstractmethod
     def generateOntology(self, narrow = True, kpi_results = pd.DataFrame()):
         pass
+
+    def insert(instance_path:str="./results/instances.ttl"): #doesn't work yet, in progress
+        
+        headers = {
+            'Content-Type': 'application/x-turtle',
+            'Accept': 'application/json'
+        }
+
+        with open(instance_path, 'rb') as f:
+            requests.post('http://192.168.123.158:7200/repositories/Project/statements', data=f, headers=headers)
 
     
     #---------------------------------- dataset utilities --------------------------------

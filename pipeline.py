@@ -1,45 +1,40 @@
-from Bundle import Bundle
-from BundleCollection import BundleCollection
 from library.read import *
+from Bundle import Bundle
 
 schema = "https://schema.data.gouv.fr/schemas/etalab/schema-amenagements-cyclables/0.3.3/schema_amenagements_cyclables.json"
 titre = "Amenagement Cyclable"
-#dataset="https://www.data.gouv.fr/fr/datasets/r/9ca17d67-3ba3-410b-9e32-6ac7948c3e06"
 dataset="./inputs/data_amenagement_cyclable.geojson"
 
 
 b0=read_jsonSchema_geojsonData(schema,dataset,titre)
 
-f=b0[0].split('Commune', 'code_com_d', ['code_com_g'],predicate='traverseCommuneADroite', enumerations=['reseau_loc'])
-b0[0].show_dataset()
-f.show_dataset()
-#dataset = self.dataset.merge(bun.dataset, left_on=self.semantic_model.get_id()['source'], right_on=bun.semantic_model.get_id()['source'])
+#b0.show()
+#BundleCollection.show()
 
 
+# dagling_bundles = b0.next()
+
+# dagling_bundles['revet_g'].show()
+
+# dagling_bundles['revet_g'].annotate(enumeration_IRI="http://schema.org/Thing", enum_values={"LISSE":"http://exemple/LISSE"} )
+
+# dagling_bundles['revet_g'].show()
+
+b1=b0.split("Commune",'code_com_d','traverse', ['nom_loc','num_iti'], ['ame_d', 'regime_d'])
 
 #BundleCollection.show()
 
-#b0[0].generateSparqlGenerateQuery()
 
-#b0.semantic_model.write_json("./results/semantic_model0.json")
-# b0.annotate(attributes={"nom_loc":"http://schema.org/name"},
-#             class_={"AmenagementCyclable":"http://schema.org/Thing"},
-#             associations={"reseau_loc":"http://exemple/reseau_loc"},
-#             enum_values={("reseau_loc","REV"):"http://exemple/REV"}
-# )
-#print(b0.semantic_model.get_association())
-#b0.semantic_model.generateOntology("./results/ontologyX.ttl","./results/vocabularyX.ttl",b0.ontology_namespace, b0.vocabulary_namespace)
+# b1.show()
 
-#b0.write_rdf("./results/instanceX.ttl")
+# b1.document("Division administrative de la Métropole de Lyon")
+b0.annotate("http://schema.org/Thing")
+b0.document(associations={'traverse': 'un aménagement qui traverse une commune'})
 
-# b1=b0.split(new_class_name = 'Commune', class_id='code_com_d', class_attributes = ['code_com_g'],
-#         predicate='traverseCommuneADroite',enumerations=['reseau_loc'])
+# b1.show()
 
+b0.generateOntology("./results/oo.ttl")
 
+b0.write_rdf()
 
-#BundleCollection.show()
-
-#b1.semantic_model.write_json("./results/semantic_model1.json")
-
-#b0.write_rdf("./results/ontology0.ttl","./results/vocabulary0.ttl","./results/instance0.ttl" )
-#b1.write_rdf("./results/ontology1.ttl","./results/vocabulary1.ttl","./results/instance1.ttl" )
+Bundle.insert()
