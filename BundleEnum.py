@@ -56,7 +56,7 @@ class BundleEnum(Bundle):
         else:
             raise ValueError('Au moins un paramètre par défaut doit être passé !')
 
-    def validate(self, errors = [], narrow = True):
+    def validate(self, errors = [], deep = False):
         
         """
         enumerations validation \n
@@ -116,7 +116,7 @@ class BundleEnum(Bundle):
         else:
             raise ValueError('Au moins un paramètre par défaut doit être passé !')
 
-    def generateOntology(self,vocabulary_path:str, narrow = True, vocabulary_graph=Graph(), kpi_results = pd.DataFrame()):
+    def generateOntology(self, vocabulary_path:str, deep = False, vocabulary_graph=Graph(), kpi_results = pd.DataFrame()):
         """generate ontology files from the semantic model"""
 
         VS = Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
@@ -142,7 +142,7 @@ class BundleEnum(Bundle):
             g2.add((enumerationURI,VS.term_status, Literal("testing")))
             enum_created = True
 
-            if (narrow == False) :
+            if (deep) :
                 df = pd.DataFrame({
                     "IRI" : str(enumerationURI),
                     "type": pd.Categorical(["ConceptScheme"]),
@@ -172,14 +172,14 @@ class BundleEnum(Bundle):
             
             kpi_results = pd.concat([kpi_results,df],ignore_index=True)
 
-        if (narrow and enum_created):
+        if (deep==False and enum_created):
             print(f"IRI de l'énumération {self.name} a été créé : {self.IRI}")
             
-        if (narrow and value_created):
+        if (deep==False and value_created):
             
             print(f"Le nombre de valeurs créées pour l'énumération `{self.name}` est : {kpi_results.loc[kpi_results['type']=='Concept', 'IRI'].count()}")
 
         with open(vocabulary_path, 'a') as fv :
             fv.write(g2.serialize(format="turtle"))
 
-        if (narrow == False) : return g2, kpi_results
+        if (deep) : return g2, kpi_results

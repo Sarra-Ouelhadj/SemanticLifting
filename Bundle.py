@@ -29,11 +29,11 @@ class Bundle(ABC) :
         print ("IRI :" ,self.IRI)
         print ("definition :" ,self.definition)
     
-    def next(self) :
-        next = {}
+    def children(self) :
+        children = {}
         for bun in self.linked_to:
-            next[bun["name"]] = bun["destination"]
-        return next
+            children[bun["name"]] = bun["destination"]
+        return children
     
     @abstractmethod
     def document(self):
@@ -50,17 +50,6 @@ class Bundle(ABC) :
     @abstractmethod
     def generateOntology(self, narrow = True, kpi_results = pd.DataFrame()):
         pass
-
-    def insert(instance_path:str="./results/instances.ttl"):
-        
-        headers = {
-            'Content-Type': 'application/x-turtle',
-            'Accept': 'application/json'
-        }
-
-        with open(instance_path, 'rb') as f:
-            requests.post('http://192.168.123.158:7200/repositories/Project/statements', data=f, headers=headers)
-
     
     #---------------------------------- dataset utilities --------------------------------
     def show_dataset(self):

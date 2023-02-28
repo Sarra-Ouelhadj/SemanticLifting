@@ -1,9 +1,6 @@
 import copy
 import subprocess
-
-import requests
 from BundleCollection import BundleCollection
-import json
 from library import helpers as h
 from rdflib.namespace import RDF, RDFS, OWL, SKOS
 from rdflib import Graph, Literal, URIRef, Namespace
@@ -19,7 +16,7 @@ class BundleClass(Bundle):
         super().__init__(name, dataset, IRI, definition, linked_to)
         self.attributes = attributes
 
-    def show(self, narrow = True):
+    def show(self, deep = False):
         print("------- Class -------")
         super().show()
         print("\t ------- attributes -------")
@@ -37,11 +34,11 @@ class BundleClass(Bundle):
             print("IRI :" ,l["IRI"])
             print("definition :" ,l["definition"])
             print("source :" ,l["source"])
-            if (narrow) : 
+            if (deep) : 
+                l["destination"].show()
+            else :
                 print("destination :" ,l["destination"].name)
                 print("--------------")
-            else :
-                l["destination"].show()
         
     def annotate(self, class_IRI:str=None, attributes:dict=None, associations: dict = None):
         """
@@ -70,7 +67,7 @@ class BundleClass(Bundle):
         else:
             raise ValueError('Au moins un paramètre par défaut doit être passé !')
     
-    def validate(self, errors = [], narrow = True):
+    def validate(self, errors = [], deep = False):
         """
         class validation \n
         0. La classe doit avoir un nom
@@ -150,7 +147,7 @@ class BundleClass(Bundle):
             #3. Chaque association doit avoir une destination
             if (ass['destination']=='' or ass['destination']==None) : errors.append (f"L'association {ass['name']} doit avoir une destination")
 
-            if (narrow == False) : 
+            if (deep) : 
                 ass['destination'].validate(errors, False)
         
         try :
@@ -185,7 +182,7 @@ class BundleClass(Bundle):
         else:
             raise ValueError('Au moins un paramètre par défaut doit être passé !')
 
-    def generateOntology(self, ontology_path:str, narrow = True, ontology_graph = Graph(), kpi_results = pd.DataFrame()):
+    def generateOntology(self, ontology_path:str, deep = False, ontology_graph = Graph(), kpi_results = pd.DataFrame()):
         """generate ontology files from the semantic model"""
 
         VS = Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
@@ -209,7 +206,7 @@ class BundleClass(Bundle):
             
             class_created = True
 
-            if (narrow == False):
+            if (deep):
                 df = pd.DataFrame({
                     "IRI" : str(classeURI),
                     "type": pd.Categorical(["Class"]),
@@ -263,21 +260,21 @@ class BundleClass(Bundle):
             kpi_results = pd.concat([kpi_results,df],ignore_index=True)
 
 
-            if (narrow==False):
+            if (deep):
                  g, kpi_results = ass['destination'].generateOntology(ontology_path, False, g, kpi_results)
 
         
-        if (narrow and class_created) :
+        if (deep==False and class_created) :
             print(f"L'IRI de la classe `{self.name}` a été créé : {self.IRI}")
             
-        if (narrow):
+        if (deep==False):
             print(f"Le nombre de DatatypeProperties créées pour la classe `{self.name}` : {kpi_results.loc[kpi_results['type']=='DatatypeProperty', 'IRI'].count()}")
             print(f"Le nombre d'ObjectProperties créés pour la classe `{self.name}` : {kpi_results.loc[kpi_results['type']=='ObjectProperty', 'IRI'].count()}")
 
         with open(ontology_path, 'a') as fo :
             fo.write(g.serialize(format="turtle"))
 
-        if (narrow == False and BundleCollection.root is self):
+        if (deep and BundleCollection.root is self):
         
             # Le nombre de classes créées au total 
             nb_cl = kpi_results.loc[kpi_results['type']=='Class', 'IRI'].count()
@@ -286,39 +283,39 @@ class BundleClass(Bundle):
             # Le nombre de DatatypeProperties créées au total 
             print("Le nombre de DatatypeProperties créées au total : ",kpi_results.loc[kpi_results['type']=='DatatypeProperty', 'IRI'].count())
             
-            # Le nombre d'ObjectProperties créés au total 
+            # Le nombre d'ObjectProperties créés au total
             print("Le nombre d'ObjectProperties créés au total : ",kpi_results.loc[kpi_results['type']=='ObjectProperty', 'IRI'].count())
             
-            # Le nombre de ConceptSchemes (énumérations) créés au total 
+            # Le nombre de ConceptSchemes (énumérations) créés au total
             nb_csch = kpi_results.loc[kpi_results['type']=='ConceptScheme', 'IRI'].count()
             print("Le nombre de ConceptSchemes (énumérations) créés au total : ", nb_csch)
             
-            # Le nombre de Concepts (valeurs d'énumération) créés au total 
+            # Le nombre de Concepts (valeurs d'énumération) créés au total
             print("Le nombre de Concepts (valeurs d'énumération) créés au total : ",kpi_results.loc[kpi_results['type']=='Concept', 'IRI'].count())
             
             if (nb_cl > 1) :
-                # Le nombre de DatatypeProperties créées par classe 
+                # Le nombre de DatatypeProperties créées par classe
                 print("Le nombre de DatatypeProperties créées par classe : \n",kpi_results.loc[kpi_results['type']=='DatatypeProperty', ['IRI', 'related']].groupby('related')['IRI'].count().to_frame())
                 
-                # Le nombre d'ObjectProperties créés par classe 
+                # Le nombre d'ObjectProperties créés par classe
                 print("Le nombre d'ObjectProperties créés par classe : \n",kpi_results.loc[kpi_results['type']=='ObjectProperty', ['IRI', 'related']].groupby('related')['IRI'].count().to_frame())
                 
             if (nb_csch > 1) :
-                # Le nombre de Concepts créés par ConceptSchemes 
+                # Le nombre de Concepts créés par ConceptSchemes
                 print("Le nombre de Concepts créés par ConceptSchemes : \n",kpi_results.loc[kpi_results['type']=='Concept', ['IRI', 'related']].groupby('related')['IRI'].count().to_frame())
 
-        if (narrow == False) : return g, kpi_results
+        if (deep) : return g, kpi_results
 
-    def write_rdf(self, instance_path:str="./results/instances.ttl", ontology_path:str = "./results/ontology.ttl", narrow = True) :
+    def write_rdf(self, instance_path:str="./results/instances.ttl", ontology_path:str = "./results/ontology.ttl", deep = False) :
         
-        if (self.validate(narrow = narrow)):
-            self.generateSparqlGenerateQuery1(narrow=narrow)
+        if (self.validate(deep=deep)):
+            self.generateSparqlGenerateQuery1(deep=deep)
             result = subprocess.run('java -jar ./sparql-generate*.jar --query-file query.rqg --output '+instance_path, shell=True ,capture_output=True, text=True)
             with open('./results/out.log','w') as fout,  open('./results/err.log','w') as ferr :
                 fout.write(result.stdout)
                 ferr.write(result.stderr)
 
-    def recursive_gen_part1(self, s1, dataset, s2="", narrow = True):
+    def recursive_gen_part1(self, s1, dataset, s2="", deep = False):
         
         #iterate over classes
         s1+=("?{} a <{}>".format(h.convertToPascalcase(self.name), self.IRI))+ ";\n"
@@ -343,10 +340,10 @@ class BundleClass(Bundle):
                 s2+=('BIND(IRI(CONCAT("{}",REPLACE(LCASE(fun:JSONPath(?properties,"$.{}"))," ","_"))) AS ?{})\n'.format(self.vocabulary_namespace, l["destination"].source, h.convertToPascalcase(l["destination"].name)))
 
             else : # c'est une classe
-                if (narrow==False):
+                if (deep):
                     dataset = self.dataset.merge(l["destination"].dataset, on=l["destination"].get_id()['source'])
 
-                    s1, s2, dataset = l["destination"].recursive_gen_part1(s1, dataset, s2, False)
+                    s1, s2, dataset = l["destination"].recursive_gen_part1(s1, dataset, s2, True)
                     s1 += ("?{} <{}> ?{}".format(h.convertToPascalcase(self.name),l["IRI"],h.convertToPascalcase(l["destination"].name))) + ".\n"
 
 
@@ -391,7 +388,7 @@ class BundleClass(Bundle):
         with open("query.rqg", 'w') as fp:
             fp.write(s)
 
-    def generateSparqlGenerateQuery1 (self, narrow = True) :
+    def generateSparqlGenerateQuery1 (self, deep = False) :
         """generate SPARQL Generate query"""
 
         s1 = """PREFIX iter: <http://w3id.org/sparql-generate/iter/>
@@ -400,7 +397,7 @@ class BundleClass(Bundle):
         PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
         GENERATE {\n"""
         
-        s1, s2, dataset = self.recursive_gen_part1(s1, self.dataset, narrow=narrow)
+        s1, s2, dataset = self.recursive_gen_part1(s1, self.dataset, deep=deep)
         
         if (type(dataset)== gpd.GeoDataFrame):
             dataset_path = "./results/data.geojson"
