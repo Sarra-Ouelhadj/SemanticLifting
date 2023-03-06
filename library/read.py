@@ -1,30 +1,26 @@
 import requests
-from library import helpers as h
 from BundleClass import BundleClass
 from BundleEnum import BundleEnum
+from BundleCollection import BundleCollection
+import geopandas as gpd
+from library import helpers as h
 
-def initiateSemanticModelFromJsonSchema(schema_url: str, title:str) -> dict:
-
-    response = requests.get(schema_url)
-    schema = response.json()
-
-    d={}
-    d["classes"]=[]
-    d["associations"]=[]
-    d["enumerations"]=[]
+def read_jsonSchema_geojsonData(schema_path:str, dataset_path:str, schema_title:str="exemple") :
     
-    class_element={}
-    class_element["name"]= h.convertToPascalcase(title)
-    class_element["definition"]= ""
-    class_element["IRI"]= ""
-    class_element["attributes"]=[]
+    response = requests.get(schema_path)
+    schema = response.json()
+    dataset=gpd.read_file(dataset_path)
+
+    class_name = schema_title
+    root_bundle = BundleClass(class_name, dataset)
+
     id_detected= False
 
     attributes = schema["properties"]["features"]["items"]["properties"]["properties"]["properties"]
 
     for attr_elem in attributes:
         element_niv1={}
-        element_niv1["IRI"]= ""
+        element_niv1["IRI"]= None
         element_niv1["source"]= attr_elem    
         
         # le champs "description" est obligatoire
@@ -32,7 +28,7 @@ def initiateSemanticModelFromJsonSchema(schema_url: str, title:str) -> dict:
             element_niv1["definition"]= attributes[attr_elem]["description"]
         elif ('items' in attributes[attr_elem] and 'description' in attributes[attr_elem]["items"]):
             element_niv1["definition"]=attributes[attr_elem]["items"]["description"]
-        else : element_niv1["definition"]="une définition exemple"
+        else : element_niv1["definition"] = "une définition exemple"
 
         if 'type' in attributes[attr_elem]: #nouveau ajout
             element_niv1["type"]= attributes[attr_elem]["type"]
@@ -46,47 +42,56 @@ def initiateSemanticModelFromJsonSchema(schema_url: str, title:str) -> dict:
         #nouveau ajout    
         element_niv1["required"] = "oui" if attr_elem in schema["properties"]["features"]["items"]["properties"]["properties"]["required"] else "non"
 
+        element_niv1["name"] = attr_elem
 
         if 'enum' not in attributes[attr_elem]: # c'est un attribut
-            element_niv1["name"] = attr_elem
             element_niv1["id"]= "non"
             
             if (not id_detected and attr_elem == schema["properties"]["features"]["items"]["properties"]["properties"]["required"][0]):
                 element_niv1["id"]= "oui"
                 id_detected = True
             
-            class_element["attributes"].append(element_niv1)
+            root_bundle.attributes.append(element_niv1)
         
         else: # c'est une énumération
-            element_niv1["name"] = attr_elem #création du type énuméré
-            
+            new_enum_bundle = BundleEnum(attr_elem, dataset[attr_elem].to_frame(), definition= element_niv1["definition"], linked_to=[])
+            new_enum_bundle.source = element_niv1["source"]
+            new_enum_bundle.type = element_niv1["type"]
+            new_enum_bundle.required = element_niv1["required"]
+
             #création de l'association entre la classe et le type énuméré
             ass_elem={}
             ass_elem["name"]=attr_elem
-            ass_elem["source"]=class_element["name"]
-            ass_elem["destination"]=element_niv1["name"]
-            ass_elem["definition"]=""
-            ass_elem["IRI"]=""
-            d["associations"].append(ass_elem)
+            ass_elem["source"]=root_bundle
+            ass_elem["destination"]=new_enum_bundle
+            ass_elem["definition"]= element_niv1["definition"]
+            ass_elem["IRI"]=None
+            
+            root_bundle.linked_to.append(ass_elem)
             
             #valeurs du type énuméré
-            element_niv1["values"]=[]
             for enum_value in attributes[attr_elem]["enum"]:
                 enum_elem={}
                 enum_elem["name"]=enum_value
-                enum_elem["definition"]=""
-                enum_elem["IRI"]=""
-                element_niv1["values"].append(enum_elem)
+                enum_elem["definition"]=None
+                enum_elem["IRI"]=None
+                new_enum_bundle.values.append(enum_elem)
                 
-            d["enumerations"].append(element_niv1)
+    BundleCollection(root_bundle)
+    return root_bundle
 
-    d["classes"].append(class_element)
+#TODO
+def read_tableSchema_csvData(schema_path:str, dataset_path:str):
+    ...
 
-    return d
+#TODO
+def read_from_csvData():
+    ...
 
-if __name__ == "__main__":
-    schema_url = "https://schema.data.gouv.fr/schemas/etalab/schema-amenagements-cyclables/0.3.3/schema_amenagements_cyclables.json"
-    title = "AmenagementCyclable"
-    print(initiateSemanticModelFromJsonSchema(schema_url, title))
+#TODO
+def read_from_geojsonData():
+    ...
 
-
+#TODO
+def read_from_jsonData():
+    ...

@@ -1,132 +1,120 @@
-from library import helpers as h
-import copy
-from SemanticModel import SemanticModel
-import subprocess
-from library import generateOntology as onto
+import geopandas as gpd
+from abc import ABC, abstractmethod
 import pandas as pd
 
-class Bundle :
+class Bundle(ABC) :
+ 
+    name : str
+    IRI : str
+    definition : str
+    linked_to : list
     
-    semantic_model : SemanticModel
-    dataset: str
+    dataset: gpd.GeoDataFrame
+     
+    instances_namespace = "https://data.grandlyon.com/id/"
+    ontology_namespace = "https://data.grandlyon.com/onto/"
+    vocabulary_namespace ="https://data.grandlyon.com/vocab/"
 
-    def __init__(self, semantic_model : SemanticModel, dataset: str) -> None:
-        self.semantic_model=semantic_model
+    def __init__(self, name : str, dataset : gpd.GeoDataFrame, IRI = None, definition = None, linked_to = []) -> None:
+        self.name = name
         self.dataset=dataset
-
-    def read_jsonSchema_geojsonData(schema_path:str, dataset_path:str, schema_title:str="exemple"):
-        semantic_model=SemanticModel.initiate_from_jsonSchema(schema_url=schema_path,title=schema_title)
-        dataset=dataset_path
-        return Bundle(semantic_model, dataset)
-
-    def annotate(self, class_:dict=None, attributes:dict=None, enumerations:dict=None, enum_values:dict=None, associations:dict=None):
-        self.semantic_model.annotate(class_=class_, attributes=attributes, enumerations=enumerations, enum_values=enum_values, associations=associations)
-
-    def write_rdf (self, ontology_path:str="./results/ontology.ttl", vocabulary_path:str="./results/vocabulary.ttl", instance_path:str="./results/instance.ttl",
-                    ontology_namespace = "https://data.grandlyon.com/onto/", 
-                    vocabulary_namespace ="https://data.grandlyon.com/vocab/", 
-                    instances_namespace = "https://data.grandlyon.com/id/") :
-
-        onto.generateOntology(self.semantic_model,ontology_path,vocabulary_path,ontology_namespace,vocabulary_namespace)
-        self.generateSparqlGenerateQuery(vocabulary_namespace, instances_namespace)
-        subprocess.run('java -jar ./sparql-generate*.jar --query-file query.rqg --output '+instance_path, shell=True)
-
-    def generateSparqlGenerateQuery (self, vocabulary_namespace :str, instances_namespace :str) :
-        """generate SPARQL Generate query"""
-
-        s = """PREFIX iter: <http://w3id.org/sparql-generate/iter/>
-        PREFIX fun: <http://w3id.org/sparql-generate/fn/>
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-        GENERATE {\n"""
-        
-        #iterate over classes
-        for list in self.semantic_model.classes:
-            s+=("?{} a <{}>".format(h.convertToPascalcase(list["name"]),list["IRI"]))+ ";\n"
-
-            #iterate over attributes
-            l=len(list["attributes"])
-            for i , attr in enumerate(list["attributes"]):
-                s+=("\t<{}> ?{}".format(attr["IRI"],h.convertToPascalcase(attr["name"])))
-                s+=";\n" if (i<l-1) else ".\n"
-        
-        #iterate over associations
-        for list in self.semantic_model.associations:
-            s += ("?{} <{}> ?{}".format(h.convertToPascalcase(list["source"]),list["IRI"],h.convertToPascalcase(list["destination"]))) + ".\n"
-        
-        s+=("}} \n SOURCE <{}> AS ?source \nITERATOR iter:GeoJSON(?source) AS ?geometricCoordinates ?properties \n WHERE {{\n".format(self.dataset))
-
-        #bindings
-        for list in self.semantic_model.classes:
-            for attr in list["attributes"]:
-                s+=('BIND (fun:JSONPath(?properties,"$.{}") AS ?{})\n'.format(attr["source"], h.convertToPascalcase(attr["name"]))) 
-                if (attr["id"]=="oui") :
-                    s+=('BIND(IRI(CONCAT("{}/",fun:JSONPath(?properties,"$.{}"))) AS ?{})\n'.format(instances_namespace+ h.convertToPascalcase(list["name"]),attr["source"],h.convertToPascalcase(list["name"])))
-            
-        for enum in self.semantic_model.enumerations:
-            s+=('BIND(IRI(CONCAT("{}",REPLACE(LCASE(fun:JSONPath(?properties,"$.{}"))," ","_"))) AS ?{})\n'.format(vocabulary_namespace,enum["source"],h.convertToPascalcase(enum["name"])))
-        
-        s+= "}\n"
-        with open("query.rqg", 'w') as fp:
-            fp.write(s)
-
-    def split(self,new_class_name:str,class_id: str, class_attributes:list,class_association_new_class:str,IRI: str = "", definition : str = "",enumerations:list=[]):
-        """
-        >>> b1=b0.split(new_class_name = 'Commune', class_id='code_com_d', class_attributes = ['code_com_g'],
-                class_association_new_class='traverseCommuneADroite', definition="Division administrative de la Métropole de Lyon")
-        """
-        if (IRI == "" and definition == ""):
-            raise Exception("IRI or definition parameter must be passed!")
-        else :
-            d={}
-            d["classes"]=[]
-            d["associations"]=[]
-            d["enumerations"]=[]
-
-            semantic_model = SemanticModel(d)
-            
-            attributes=[]
-            attr_elem = copy.deepcopy(self.semantic_model.get_id())
-            attr_elem['id']="non" # clé étrangère
-            attributes.append(attr_elem)
-
-            attr_elem = self.semantic_model.get_attribute(class_id)
-            self.semantic_model.classes[0]['attributes'].remove(attr_elem) # MAJ du bundle initial
-            attr_elem['id']="oui"
-            attributes.append(attr_elem)
-
-            for attr_name in class_attributes:
-                attr_elem = self.semantic_model.get_attribute(attr_name)
-                self.semantic_model.classes[0]['attributes'].remove(attr_elem) # MAJ du bundle initial
-                attributes.append(attr_elem)
-
-            semantic_model.add_class(new_class_name,IRI, definition,attributes)
-
-            if (enumerations != []) :
-                for enum_name in enumerations :
-                    enum_temp = self.semantic_model.get_enumeration(enum_name)
-                    self.semantic_model.enumerations.remove(enum_temp) # MAJ du bundle initial
-                    semantic_model.enumerations.append(enum_temp)
-                    for ass in self.semantic_model.associations :
-                        if (ass['destination'] == enum_name + "_options"):
-                            self.semantic_model.associations.remove(ass) # MAJ du bundle initial
-                            ass['source'] = new_class_name
-                            semantic_model.associations.append(ass)
-            
-            return Bundle(semantic_model, self.dataset)
-
-    #TODO
-    def read_tableSchema_csvData(schema_path:str, dataset_path:str):
-        ...
-
-    #TODO
-    def read_from_csvData():
-        ...
-    #TODO
-    def read_from_geojsonData():
-        ...
+        self.IRI = IRI
+        self.definition = definition
+        self.linked_to = linked_to
     
-    #TODO
-    def read_from_jsonData():
-        ...
+    def show(self):
+        """
+        show the content of the semantic model
+        """
+        print ("name :" , self.name)
+        print ("IRI :" ,self.IRI)
+        print ("definition :" ,self.definition)
+    
+    def children(self) -> dict:
+        """
+        return the linked bundles in a dictionary of the form: {"name_of_the_bundle": memory_address_of_the_bundle}  
+        """
+        children = {}
+        for bun in self.linked_to:
+            children[bun["name"]] = bun["destination"]
+        return children
+    
+    @abstractmethod
+    def document(self):
+        """
+        give a definition to an element of the semantic model
+        """
+        pass
 
+    @abstractmethod
+    def annotate(self):
+        """
+        give an IRI (Internationalized Resource Identifier) to an element of the semantic model
+        """
+        pass
+
+    @abstractmethod
+    def validate(self, errors = [], narrow = True):
+        """
+        verify the correctness of the semantic model, i.e. a BundleClass must have an IRI or a definition
+        """
+        pass
+    
+    @abstractmethod
+    def generateOntology(self, narrow = True, kpi_results = pd.DataFrame()):
+        """
+        generate a turtle ontology file from the semantic model of the bundle
+        """
+        pass
+    
+    #---------------------------------- dataset utilities --------------------------------
+    def show_dataset(self):
+        """
+        show the content of the dataset 
+        """
+        print(self.dataset)
+
+    #---------------------------------- utilities --------------------------------
+    
+    def index(self, lst:list, key, value):
+        """
+        get the index of an element in a list of dictionnaries
+        """
+        for i, dic in enumerate(lst):
+            if dic[key] == value:
+                return i
+        raise Exception
+    
+    def add_link(self, name: str, destination: "Bundle", IRI=None, definition : str=None):
+        """
+        add to the bundle source a link to another bundle destination
+        """
+        association_element={}
+        association_element["name"]=name
+        association_element["IRI"]=IRI
+        association_element["definition"]=definition
+        association_element["source"] = self
+        association_element["destination"] = destination
+        
+        self.linked_to.append(association_element)
+
+    def get_link(self, name:str = None, destination:str = None) -> dict:
+        """
+        get the information about a link of the bundle according to its name or its destination
+        """
+        args = locals()
+        if (any(args.values())==True) :
+            for association_element in self.linked_to:
+                if (args['destination']!= None):
+                    if (association_element['destination'].name == destination): return association_element
+                else :
+                    if (association_element['name'] == name) : return association_element
+            raise Exception("L'association indiquée n'existe pas")
+        else:
+            raise ValueError('Au moins un paramètre par défaut doit être passé !')
+
+    def write_json(self):
+        """
+        serialize the semantic model of the bundle in a json file
+        """
+        ...
