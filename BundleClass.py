@@ -2,7 +2,7 @@ import copy
 import subprocess
 from BundleCollection import BundleCollection
 from library import helpers as h
-from rdflib.namespace import RDF, RDFS, OWL, SKOS
+from rdflib.namespace import RDF, RDFS, OWL
 from rdflib import Graph, Literal, URIRef, Namespace
 from Bundle import Bundle
 import geopandas as gpd
@@ -17,6 +17,9 @@ class BundleClass(Bundle):
         self.attributes = attributes
 
     def show(self, deep = False):
+        """
+        show the content of the semantic model
+        """
         print("------- Class -------")
         super().show()
         print("\t ------- attributes -------")
@@ -42,6 +45,7 @@ class BundleClass(Bundle):
         
     def annotate(self, class_IRI:str=None, attributes:dict=None, associations: dict = None):
         """
+        give an IRI (Internationalized Resource Identifier) to an element of the semantic model
         >>> annotate(class_IRI="http://schema.org/Thing")
         >>> annotate(attributes={"nom_loc":"http://schema.org/name", "num_iti":"http://schema.org/name"})
         >>> annotate(associations={"reseau_loc":"http://exemple/reseau_loc"})
@@ -69,6 +73,9 @@ class BundleClass(Bundle):
     
     def validate(self, errors = [], deep = False):
         """
+        verify the correctness of the semantic model
+        
+        
         class validation \n
         0. La classe doit avoir un nom
         1. La classe doit avoir un lien de référence ou une définition
@@ -97,7 +104,7 @@ class BundleClass(Bundle):
         if (self.name == '' or self.name == None): errors.append ("Le nom de la classe est obligatoire") 
         
         #1. La classe doit avoir un lien de référence ou une définition
-        if ((self.IRI == '' or self.IRI == None) and (self.definition == '' or self.definition == None )): errors.append (f"La classe {self.name} doit avoir un lien de référence ou une définition") 
+        if ((self.IRI == '' or self.IRI == None) and (self.definition == '' or self.definition == None )): errors.append (f"La classe `{self.name}` doit avoir un lien de référence ou une définition") 
 
         #------------------------
         #attributes validation
@@ -112,20 +119,20 @@ class BundleClass(Bundle):
             if (attr['name']=='' or attr['name']== None) : errors.append ("Le nom de l'attribut est obligatoire")
 
             #1. Chaque attribut doit avoir un lien de référence ou une définition
-            if ((attr['IRI']=='' or attr['IRI']== None) and (attr['definition']=='' or attr['definition'] == None )): errors.append (f"L'attribut {attr['name']} doit avoir un lien de référence ou une définition")
+            if ((attr['IRI']=='' or attr['IRI']== None) and (attr['definition']=='' or attr['definition'] == None )): errors.append (f"L'attribut `{attr['name']}` doit avoir un lien de référence ou une définition")
             
             #2. Chaque attribut doit avoir une source
-            if (attr['source']=='' or attr['source']== None): errors.append (f"L'attribut {attr['name']} doit avoir une source")
+            if (attr['source']=='' or attr['source']== None): errors.append (f"L'attribut `{attr['name']}` doit avoir une source")
 
             #3. Le champs identifiant n'est pas vide
-            if (attr['id']=='' or attr['id']== None): errors.append (f"Le champs 'Identifiant' n'est pas précisé pour l'attribut {attr['name']}")            
+            if (attr['id']=='' or attr['id']== None): errors.append (f"Le champs 'Identifiant' n'est pas précisé pour l'attribut `{attr['name']}`")            
             
             list.append(attr['id'])
             attribute_total_number+=1
             set_of_attributes.add(attr['name'])
         
         #4. La classe doit avoir au minimum un identifiant
-        if ("oui" not in list) : errors.append (f"la classe {self.name} n'a pas d'identifiant")
+        if ("oui" not in list) : errors.append (f"la classe `{self.name}` n'a pas d'identifiant")
 
         #5. Pas d'attributs avec le même nom dans le modèle sémantique
         if len(set_of_attributes)< attribute_total_number : errors.append(f"Des attributs de même nom existent dans le modèle sémantique")
@@ -139,16 +146,19 @@ class BundleClass(Bundle):
             if (ass['name']=='' or ass['name']== None): errors.append ("Le nom de l'association est obligatoire")
 
             #1. Chaque association doit avoir un lien de référence ou une définition
-            if ((ass['IRI']=='' or ass['IRI']== None) and (ass['definition']=='' or ass['definition'] == None )): errors.append(f"L'association {ass['name']} doit avoir un lien de référence ou une définition")
+            if ((ass['IRI']=='' or ass['IRI']== None) and (ass['definition']=='' or ass['definition'] == None )): errors.append(f"L'association `{ass['name']}` doit avoir un lien de référence ou une définition")
 
             #2. Chaque association doit avoir une source
-            if (ass['source']=='' or ass['source']==None) : errors.append (f"L'association {ass['name']} doit avoir une source")
+            if (ass['source']=='' or ass['source']==None) : errors.append (f"L'association `{ass['name']}` doit avoir une source")
 
             #3. Chaque association doit avoir une destination
-            if (ass['destination']=='' or ass['destination']==None) : errors.append (f"L'association {ass['name']} doit avoir une destination")
+            if (ass['destination']=='' or ass['destination']==None) : errors.append (f"L'association `{ass['name']}` doit avoir une destination")
 
-            if (deep) : 
-                ass['destination'].validate(errors, False)
+            if (type(ass['destination']) == type(self)):            
+                if (deep) : 
+                    ass['destination'].validate(errors, deep)
+            else:
+                ass['destination']._validate(errors, deep)
         
         try :
             if errors:
@@ -159,6 +169,7 @@ class BundleClass(Bundle):
 
     def document(self, class_definition : str = None, attributes:dict = None, associations:dict = None):
         """
+        give a definition to an element of the semantic model
         >>> document(associations = {'aPourProfession' : 'La profession de la personne'})
         """
         args = locals()
@@ -182,13 +193,63 @@ class BundleClass(Bundle):
         else:
             raise ValueError('Au moins un paramètre par défaut doit être passé !')
 
-    def generateOntology(self, ontology_path:str, deep = False, ontology_graph = Graph(), kpi_results = pd.DataFrame()):
-        """generate ontology files from the semantic model"""
+    def generateOntology(self, ontology_path:str, deep = False):
+        """
+        generate a turtle ontology file from the semantic model of the bundle and some indicators: \n
+       - number of classes
+       - number of DatatypeProperties created 
+       - number of ObjectProperties created
+       - number of ConceptSchemes created
+       - number of Concepts created
+       - number of DatatypeProperties create per class if multiple classes created
+       - number of ObjectProperties created per class if multiple classes created
+       - number of Concepts created per ConceptSchemes if multiple ConceptSchemes created
+
+        """
+        ontology_graph = Graph()
+        kpi_results = pd.DataFrame()
+        g, kpi_results = self._generateOntology(ontology_path, deep, ontology_graph, kpi_results)
+
+        if (kpi_results.empty == False) :
+
+            with open(ontology_path, 'w') as fo :
+                fo.write(g.serialize(format="turtle"))
+
+            # Le nombre de classes créées au total
+            nb_cl = kpi_results.loc[kpi_results['type']=='Class', 'IRI'].count()
+            print("Le nombre de classes créées au total : ", nb_cl)
+            
+            # Le nombre de DatatypeProperties créées au total
+            print("Le nombre de DatatypeProperties créées au total : ",kpi_results.loc[kpi_results['type']=='DatatypeProperty', 'IRI'].count())
+            
+            # Le nombre d'ObjectProperties créés au total
+            print("Le nombre d'ObjectProperties créés au total : ",kpi_results.loc[kpi_results['type']=='ObjectProperty', 'IRI'].count())
+            
+            # Le nombre de ConceptSchemes (énumérations) créés au total
+            nb_csch = kpi_results.loc[kpi_results['type']=='ConceptScheme', 'IRI'].count()
+            print("Le nombre de ConceptSchemes (énumérations) créés au total : ", nb_csch)
+            
+            # Le nombre de Concepts (valeurs d'énumération) créés au total
+            print("Le nombre de Concepts (valeurs d'énumération) créés au total : ",kpi_results.loc[kpi_results['type']=='Concept', 'IRI'].count())
+            
+            if (nb_cl > 1) :
+                # Le nombre de DatatypeProperties créées par classe
+                print("Le nombre de DatatypeProperties créées par classe : \n",kpi_results.loc[kpi_results['type']=='DatatypeProperty', ['IRI', 'related']].groupby('related')['IRI'].count().to_frame())
+                
+                # Le nombre d'ObjectProperties créés par classe
+                print("Le nombre d'ObjectProperties créés par classe : \n",kpi_results.loc[kpi_results['type']=='ObjectProperty', ['IRI', 'related']].groupby('related')['IRI'].count().to_frame())
+                
+            if (nb_csch > 1) :
+                # Le nombre de Concepts créés par ConceptSchemes
+                print("Le nombre de Concepts créés par ConceptSchemes : \n",kpi_results.loc[kpi_results['type']=='Concept', ['IRI', 'related']].groupby('related')['IRI'].count().to_frame())
+
+    def _generateOntology(self, ontology_path:str, deep = False, ontology_graph = Graph(), kpi_results = pd.DataFrame()):
+        """ 
+        return rdflib graph of the ontology created
+        """
 
         VS = Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
         g = ontology_graph
-        
-        class_created = False
 
         #------------------------
         #Classes
@@ -203,18 +264,15 @@ class BundleClass(Bundle):
             g.add((classeURI,RDFS.comment, Literal(self.definition)))
             g.add((classeURI,RDFS.isDefinedBy, URIRef(self.ontology_namespace)))
             g.add((classeURI,VS.term_status, Literal("testing")))
-            
-            class_created = True
 
-            if (deep):
-                df = pd.DataFrame({
-                    "IRI" : str(classeURI),
-                    "type": pd.Categorical(["Class"]),
-                    "related": "NA"
-                })
-                
-                kpi_results = pd.concat([kpi_results,df],ignore_index=True)
+            df = pd.DataFrame({
+                "IRI" : str(classeURI),
+                "type": pd.Categorical(["Class"]),
+                "related": "NA"
+            })
             
+            kpi_results = pd.concat([kpi_results,df],ignore_index=True)
+        
         #------------------------
         #Data Properties
         #------------------------
@@ -259,165 +317,42 @@ class BundleClass(Bundle):
             
             kpi_results = pd.concat([kpi_results,df],ignore_index=True)
 
-
-            if (deep):
-                 g, kpi_results = ass['destination'].generateOntology(ontology_path, False, g, kpi_results)
-
-        
-        if (deep==False and class_created) :
-            print(f"L'IRI de la classe `{self.name}` a été créé : {self.IRI}")
-            
-        if (deep==False):
-            print(f"Le nombre de DatatypeProperties créées pour la classe `{self.name}` : {kpi_results.loc[kpi_results['type']=='DatatypeProperty', 'IRI'].count()}")
-            print(f"Le nombre d'ObjectProperties créés pour la classe `{self.name}` : {kpi_results.loc[kpi_results['type']=='ObjectProperty', 'IRI'].count()}")
-
-        with open(ontology_path, 'a') as fo :
-            fo.write(g.serialize(format="turtle"))
-
-        if (deep and BundleCollection.root is self):
-        
-            # Le nombre de classes créées au total 
-            nb_cl = kpi_results.loc[kpi_results['type']=='Class', 'IRI'].count()
-            print("Le nombre de classes créées au total : ", nb_cl)
-            
-            # Le nombre de DatatypeProperties créées au total 
-            print("Le nombre de DatatypeProperties créées au total : ",kpi_results.loc[kpi_results['type']=='DatatypeProperty', 'IRI'].count())
-            
-            # Le nombre d'ObjectProperties créés au total
-            print("Le nombre d'ObjectProperties créés au total : ",kpi_results.loc[kpi_results['type']=='ObjectProperty', 'IRI'].count())
-            
-            # Le nombre de ConceptSchemes (énumérations) créés au total
-            nb_csch = kpi_results.loc[kpi_results['type']=='ConceptScheme', 'IRI'].count()
-            print("Le nombre de ConceptSchemes (énumérations) créés au total : ", nb_csch)
-            
-            # Le nombre de Concepts (valeurs d'énumération) créés au total
-            print("Le nombre de Concepts (valeurs d'énumération) créés au total : ",kpi_results.loc[kpi_results['type']=='Concept', 'IRI'].count())
-            
-            if (nb_cl > 1) :
-                # Le nombre de DatatypeProperties créées par classe
-                print("Le nombre de DatatypeProperties créées par classe : \n",kpi_results.loc[kpi_results['type']=='DatatypeProperty', ['IRI', 'related']].groupby('related')['IRI'].count().to_frame())
-                
-                # Le nombre d'ObjectProperties créés par classe
-                print("Le nombre d'ObjectProperties créés par classe : \n",kpi_results.loc[kpi_results['type']=='ObjectProperty', ['IRI', 'related']].groupby('related')['IRI'].count().to_frame())
-                
-            if (nb_csch > 1) :
-                # Le nombre de Concepts créés par ConceptSchemes
-                print("Le nombre de Concepts créés par ConceptSchemes : \n",kpi_results.loc[kpi_results['type']=='Concept', ['IRI', 'related']].groupby('related')['IRI'].count().to_frame())
-
-        if (deep) : return g, kpi_results
-
-    def write_rdf(self, instance_path:str="./results/instances.ttl", ontology_path:str = "./results/ontology.ttl", deep = False) :
-        
-        if (self.validate(deep=deep)):
-            self.generateSparqlGenerateQuery1(deep=deep)
-            result = subprocess.run('java -jar ./sparql-generate*.jar --query-file query.rqg --output '+instance_path, shell=True ,capture_output=True, text=True)
-            with open('./results/out.log','w') as fout,  open('./results/err.log','w') as ferr :
-                fout.write(result.stdout)
-                ferr.write(result.stderr)
-
-    def recursive_gen_part1(self, s1, dataset, s2="", deep = False):
-        
-        #iterate over classes
-        s1+=("?{} a <{}>".format(h.convertToPascalcase(self.name), self.IRI))+ ";\n"
-
-        #iterate over attributes
-        l=len(self.attributes)
-        for i , attr in enumerate(self.attributes):
-            s1+=("\t<{}> ?{}".format(attr["IRI"],h.convertToPascalcase(attr["name"])))
-            s1+=";\n" if (i<l-1) else ".\n"
-        
-        #bindings attributes
-            s2+=('BIND (fun:JSONPath(?properties,"$.{}") AS ?{})\n'.format(attr["source"], h.convertToPascalcase(attr["name"]))) 
-            if (attr["id"]=="oui") :
-                s2+=('BIND(IRI(CONCAT("{}/",fun:JSONPath(?properties,"$.{}"))) AS ?{})\n'.format(self.instances_namespace+ h.convertToPascalcase(self.name),attr["source"],h.convertToPascalcase(self.name)))
- 
-        #iterate over associations
-        for l in self.linked_to:
-            if (type(l["destination"])!=type(self)): # c'est une énumération
-                s1 += ("?{} <{}> ?{}".format(h.convertToPascalcase(self.name),l["IRI"],h.convertToPascalcase(l["destination"].name))) + ".\n"
-
-                # bindings enumerations
-                s2+=('BIND(IRI(CONCAT("{}",REPLACE(LCASE(fun:JSONPath(?properties,"$.{}"))," ","_"))) AS ?{})\n'.format(self.vocabulary_namespace, l["destination"].source, h.convertToPascalcase(l["destination"].name)))
-
-            else : # c'est une classe
+            if (type(ass['destination']) == type(self)) :
                 if (deep):
-                    dataset = self.dataset.merge(l["destination"].dataset, on=l["destination"].get_id()['source'])
+                    g, kpi_results = ass['destination']._generateOntology(ontology_path, deep, g, kpi_results)
+            else :
+                g, kpi_results = ass['destination']._generateOntology(g, kpi_results)
 
-                    s1, s2, dataset = l["destination"].recursive_gen_part1(s1, dataset, s2, True)
-                    s1 += ("?{} <{}> ?{}".format(h.convertToPascalcase(self.name),l["IRI"],h.convertToPascalcase(l["destination"].name))) + ".\n"
+        return g, kpi_results
 
+    def write_rdf(self, instance_path:str="./results/instances.ttl", ontology_path:str = "./results/ontology.ttl", deep = False):
+        """
+        Write in rdf the dataset.
+        """
+        g = self._write_rdf(ontology_path, deep)
+        if (len(g)):
+            with open(instance_path, 'w') as f :
+                f.write(g.serialize(format='turtle'))            
 
-        return s1, s2, dataset
-
-    def generateSparqlGenerateQuery (self) :
-        """generate SPARQL Generate query"""
-
-        s = """PREFIX iter: <http://w3id.org/sparql-generate/iter/>
-        PREFIX fun: <http://w3id.org/sparql-generate/fn/>
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-        GENERATE {\n"""
-        
-        #iterate over classes
-        s+=("?{} a <{}>".format(h.convertToPascalcase(self.name), self.IRI))+ ";\n"
-
-        #iterate over attributes
-        l=len(self.attributes)
-        for i , attr in enumerate(self.attributes):
-            s+=("\t<{}> ?{}".format(attr["IRI"],h.convertToPascalcase(attr["name"])))
-            s+=";\n" if (i<l-1) else ".\n"
-        
-        #iterate over associations
-        for l in self.linked_to:
-            s += ("?{} <{}> ?{}".format(h.convertToPascalcase(self.name),l["IRI"],h.convertToPascalcase(l["destination"].name))) + ".\n"
-        
-        self.dataset.to_file("./results/data.geojson", driver="GeoJSON")
-
-        s+=("}} \n SOURCE <{}> AS ?source \nITERATOR iter:GeoJSON(?source) AS ?geometricCoordinates ?properties \n WHERE {{\n".format("./results/data.geojson"))
-
-        #bindings
-        for attr in self.attributes:
-            s+=('BIND (fun:JSONPath(?properties,"$.{}") AS ?{})\n'.format(attr["source"], h.convertToPascalcase(attr["name"]))) 
-            if (attr["id"]=="oui") :
-                s+=('BIND(IRI(CONCAT("{}/",fun:JSONPath(?properties,"$.{}"))) AS ?{})\n'.format(self.instances_namespace+ h.convertToPascalcase(self.name),attr["source"],h.convertToPascalcase(self.name)))
-            
-        for l in self.linked_to:
-            s+=('BIND(IRI(CONCAT("{}",REPLACE(LCASE(fun:JSONPath(?properties,"$.{}"))," ","_"))) AS ?{})\n'.format(self.vocabulary_namespace, l["destination"].source, h.convertToPascalcase(l["destination"].name)))
-        
-        s+= "}\n"
-        with open("query.rqg", 'w') as fp:
-            fp.write(s)
-
-    def generateSparqlGenerateQuery1 (self, deep = False) :
-        """generate SPARQL Generate query"""
-
-        s1 = """PREFIX iter: <http://w3id.org/sparql-generate/iter/>
-        PREFIX fun: <http://w3id.org/sparql-generate/fn/>
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-        GENERATE {\n"""
-        
-        s1, s2, dataset = self.recursive_gen_part1(s1, self.dataset, deep=deep)
-        
-        if (type(dataset)== gpd.GeoDataFrame):
-            dataset_path = "./results/data.geojson"
-            dataset.to_file(dataset_path, driver="GeoJSON")
-        else :
-            dataset_path = "./results/data.json"
-            dataset.to_json(dataset_path)
-        
-        s1+=("}} \n SOURCE <{}> AS ?source \nITERATOR iter:GeoJSON(?source) AS ?geometricCoordinates ?properties \n WHERE {{\n".format(dataset_path))
-
-        s1 = s1 + s2
-        
-        s1+= "}\n"
-        with open("query.rqg", 'w') as fp:
-            fp.write(s1)
+    def _write_rdf(self, ontology_path:str = "./results/ontology.ttl", deep = False, instance_graph = Graph()) :
+        """
+        return rdflib graph of the dataset converted to RDF
+        """
+        g = instance_graph
+        if (self.validate(deep=deep)):
+            self.generateOntology(ontology_path, deep)
+            g= self._to_rdf(g)
+            if (deep):
+                for l in self.linked_to:
+                    if (type(l['destination'])== type(self)):
+                        g = l['destination']._write_rdf(deep=deep, instance_graph=g)
+        return g
 
     def split(self, new_class_name:str, class_id:str, predicate:str, class_attributes:list=[], enumerations:list=[]):
         """
-        >>> b1=b0.split(new_class_name = 'Commune', class_id='code_com_d', class_attributes = ['code_com_g'],
-                predicate='traverseCommuneADroite')
+        divide a bundle into 2 new bundles linked to each other 
+        >>> b1=b0.split(new_class_name = 'Commune', class_id='code_com_d', predicate='traverseCommuneADroite', 
+                        class_attributes = ['code_com_g'])
         """
 
         attributes=[]
@@ -463,15 +398,52 @@ class BundleClass(Bundle):
  
         return new_bundle
 
-    #---------------------------------- utilities --------------------------------
+    def _to_rdf(self, g = Graph()) -> Graph :
+        """
+        Return an rdflib graph of a given bundle and it's dangling enumeration bundles
+        """
+        class_id = self.get_id()['source']
+        for index, series in self.dataset.iterrows():
+            s = self.instances_namespace + self.name + '/' + series.get(class_id)
+            
+            for attr in filter (lambda value : False if (value['id']=='oui') else True, self.attributes) :
+                p = attr['IRI']
+                o = series.get(attr['source'])
+                if (pd.notna(o) and pd.notnull(o)):
+                    g.add((URIRef(s), URIRef(p), Literal(o)))
+            
+            for l in self.linked_to:
+                p = l['IRI']
+                
+                if (type(l['destination'])!=type(self)): # it's an enumeration
+                    val = series.get(l['destination'].source)
+                    if (pd.notna(val) and pd.notnull(val)):
+                        o =  l['destination'].get_value(val)['IRI']
+                        g.add((URIRef(s),URIRef(p),URIRef(o)))
+
+                else : # it's a class                         
+                    dest_class_id = l['destination'].get_id()['source']
+                    val = series.get(dest_class_id)
+                    if (pd.notna(val) and pd.notnull(val)):
+                        o = l['destination'].instances_namespace + l['destination'].name + '/' + val
+                        g.add((URIRef(s),URIRef(p),URIRef(o)))
+        return g
+        
+    #---------------------------------- Utilities --------------------------------
 
     def get_id(self) -> dict:
+        """
+        get the identifier of the BundleClass and its information
+        """
         for attribute_element in self.attributes:
             if attribute_element['id']=="oui":
                 return attribute_element
         raise Exception (f"L'identifiant de la classe {self.name} n'est pas précisé dans le modèle sémantique")
     
     def get_attribute(self, name_attribute: str) -> dict:
+        """
+        get an attribute of the bundle and its information
+        """
         for attribute_element in self.attributes:
             if attribute_element["name"]==name_attribute :
                 return attribute_element

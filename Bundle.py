@@ -1,8 +1,6 @@
 import geopandas as gpd
 from abc import ABC, abstractmethod
 import pandas as pd
-import requests
-from library import helpers as h
 
 class Bundle(ABC) :
  
@@ -18,18 +16,24 @@ class Bundle(ABC) :
     vocabulary_namespace ="https://data.grandlyon.com/vocab/"
 
     def __init__(self, name : str, dataset : gpd.GeoDataFrame, IRI = None, definition = None, linked_to = []) -> None:
-        self.name = h.convertToPascalcase(name)
+        self.name = name
         self.dataset=dataset
         self.IRI = IRI
         self.definition = definition
         self.linked_to = linked_to
     
     def show(self):
+        """
+        show the content of the semantic model
+        """
         print ("name :" , self.name)
         print ("IRI :" ,self.IRI)
         print ("definition :" ,self.definition)
     
-    def children(self) :
+    def children(self) -> dict:
+        """
+        return the linked bundles in a dictionary of the form: {"name_of_the_bundle": memory_address_of_the_bundle}  
+        """
         children = {}
         for bun in self.linked_to:
             children[bun["name"]] = bun["destination"]
@@ -37,33 +41,54 @@ class Bundle(ABC) :
     
     @abstractmethod
     def document(self):
+        """
+        give a definition to an element of the semantic model
+        """
         pass
 
     @abstractmethod
     def annotate(self):
+        """
+        give an IRI (Internationalized Resource Identifier) to an element of the semantic model
+        """
         pass
 
     @abstractmethod
     def validate(self, errors = [], narrow = True):
+        """
+        verify the correctness of the semantic model, i.e. a BundleClass must have an IRI or a definition
+        """
         pass
     
     @abstractmethod
     def generateOntology(self, narrow = True, kpi_results = pd.DataFrame()):
+        """
+        generate a turtle ontology file from the semantic model of the bundle
+        """
         pass
     
     #---------------------------------- dataset utilities --------------------------------
     def show_dataset(self):
+        """
+        show the content of the dataset 
+        """
         print(self.dataset)
 
     #---------------------------------- utilities --------------------------------
     
     def index(self, lst:list, key, value):
+        """
+        get the index of an element in a list of dictionnaries
+        """
         for i, dic in enumerate(lst):
             if dic[key] == value:
                 return i
         raise Exception
     
     def add_link(self, name: str, destination: "Bundle", IRI=None, definition : str=None):
+        """
+        add to the bundle source a link to another bundle destination
+        """
         association_element={}
         association_element["name"]=name
         association_element["IRI"]=IRI
@@ -73,21 +98,23 @@ class Bundle(ABC) :
         
         self.linked_to.append(association_element)
 
-    def get_link(self, name:str = None, source:str = None, destination:str = None) -> dict:
+    def get_link(self, name:str = None, destination:str = None) -> dict:
+        """
+        get the information about a link of the bundle according to its name or its destination
+        """
         args = locals()
         if (any(args.values())==True) :
             for association_element in self.linked_to:
-                if (args['source']!= None):
-                    if (association_element['source'].name == h.convertToPascalcase(source)): return association_element
-                    
+                if (args['destination']!= None):
+                    if (association_element['destination'].name == destination): return association_element
                 else :
-                    if (args['destination']!= None):
-                        if (association_element['destination'].name == h.convertToPascalcase(destination)): return association_element
-                    else :
-                        if (association_element['name'] == name) : return association_element
+                    if (association_element['name'] == name) : return association_element
             raise Exception("L'association indiquée n'existe pas")
         else:
             raise ValueError('Au moins un paramètre par défaut doit être passé !')
 
     def write_json(self):
+        """
+        serialize the semantic model of the bundle in a json file
+        """
         ...

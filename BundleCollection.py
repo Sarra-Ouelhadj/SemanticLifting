@@ -16,18 +16,16 @@ class BundleCollection :
         cls.graph.add_edge(origin_bundle, new_bundle, predicate = predicate, operation = operation)
 
     @classmethod
-    def list_bundles(cls):
-        l = []
+    def metadata_info(cls):
+        nb_bun = cls.graph.number_of_nodes()
+        print("Nombre de bundles créés : ", nb_bun)
+        nb_cl = 0
         for n in cls.graph:
-            l.append(n)
-        return l
-
-    @classmethod
-    def get_neighbour(cls, node, predicate : str):
-        for nbr, datadict in cls.graph.adj[node].items():
-            if datadict['predicate'] == predicate :
-                return nbr
-        return Exception
+            if (str(type(n)) == "<class 'BundleClass.BundleClass'>") :
+                nb_cl+=1
+        print("Nombre de bundles de type `classe` : ", nb_cl)
+        print("Nombre de bundles de type `énumération` : ", nb_bun - nb_cl)
+        return(nb_bun, nb_cl, nb_bun - nb_cl)
 
     @classmethod
     def show(cls):
@@ -51,3 +49,4 @@ class BundleCollection :
     def save_figure(cls, path, format):
         plt.savefig(path, format=format)
         plt.clf()
+    
