@@ -2,10 +2,8 @@ from library.read import *
 from Bundle import Bundle
 
 def simplify_demo(bundle : Bundle, to_keep: list=['reseau_loc', 'revet_d', 'sens_d']):
-    for l in bundle.linked_to[:]:
-        if (l['destination'].name not in to_keep and type(l['destination'])== BundleEnum):
-            bundle.linked_to.remove(l)
-            BundleCollection(bundle)
+    bundle.linked_to = [lkd for lkd in bundle.linked_to if lkd['destination'].name in to_keep]
+    BundleCollection(bundle)
     return bundle
 
 schema = "https://schema.data.gouv.fr/schemas/etalab/schema-amenagements-cyclables/0.3.3/schema_amenagements_cyclables.json"
@@ -33,8 +31,8 @@ b0.write_rdf()
 
 # Part 2
 
-b1=b0.split("Commune",'code_com_d','traverse', ['nom_loc','num_iti'], ['sens_d'])
-b0.document(associations={'traverse': 'un aménagement qui traverse une commune'})
-b1.annotate("http://schema.org/Thing")
+# b1=b0.split("Commune",'code_com_d','traverse', ['nom_loc','num_iti'], ['sens_d'])
+# b0.document(associations={'traverse': 'un aménagement qui traverse une commune'})
+# b1.annotate("http://schema.org/Thing")
 
-b0.write_rdf(deep=True)
+# b0.write_rdf(deep=True)
