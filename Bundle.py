@@ -98,7 +98,7 @@ class Bundle(ABC) :
         
         self.linked_to.append(association_element)
 
-    def get_link(self, name:str = None, destination:str = None) -> dict:
+    def get_link(self, name:str = None, source:str = None, destination:str = None) -> dict:
         """
         get the information about a link of the bundle according to its name or its destination
         """
@@ -108,7 +108,10 @@ class Bundle(ABC) :
                 if (args['destination']!= None):
                     if (association_element['destination'].name == destination): return association_element
                 else :
-                    if (association_element['name'] == name) : return association_element
+                    if (args['name']!= None):
+                        if (association_element['name'] == name) : return association_element
+                    else : 
+                        if (association_element['source'] == source) : return association_element
             raise Exception("L'association indiquée n'existe pas")
         else:
             raise ValueError('Au moins un paramètre par défaut doit être passé !')

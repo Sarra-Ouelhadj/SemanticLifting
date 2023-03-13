@@ -1,5 +1,4 @@
 import copy
-import subprocess
 from BundleCollection import BundleCollection
 from library import helpers as h
 from rdflib.namespace import RDF, RDFS, OWL
@@ -448,3 +447,4 @@ class BundleClass(Bundle):
             if attribute_element["name"]==name_attribute :
                 return attribute_element
         raise Exception("L'attribut indiqué n'existe pas")
+    

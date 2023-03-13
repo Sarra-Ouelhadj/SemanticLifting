@@ -5,13 +5,32 @@ from BundleCollection import BundleCollection
 import geopandas as gpd
 from library import helpers as h
 
-def read_jsonSchema_geojsonData(schema_path:str, dataset_path:str, schema_title:str="exemple") :
+def read_jsonSchema_geojsonData(schema_path:str, dataset_path:str, schema_title:str="exemple") -> BundleClass:
+    """
+    initialize a first BundleClass with its dangling BundleEnums if enums exist, from a schema developped by schema.data.gouv.fr
+    of JSON Schema format and from any dataset compliant with it.
+     
+     Parameters
+     ----------
+     schema_path : relative, absolute path or URL given as a string
+        schema to be converted into the semantic model of the bundles created  
+     dataset_path : relative, absolute path or URL given as a string
+        dataset to be loaded into a geopandas.geoDataFrame
+     schema_title : str
+        title labeling the main concept described in the dataset. Ex: "Cycling facilities"
+
+     Returns
+     ---------
+     Bundle.BundleClass
+        BundleClass root created from the couple (schema, compliant dataset)
+
+    """
     
     response = requests.get(schema_path)
     schema = response.json()
-    dataset=gpd.read_file(dataset_path)
+    dataset=gpd.read_file(dataset_path, rows = 100)
 
-    class_name = schema_title
+    class_name = h.convertToPascalcase(schema_title)
     root_bundle = BundleClass(class_name, dataset)
 
     id_detected= False
