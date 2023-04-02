@@ -71,57 +71,11 @@ class Bundle(ABC):
         """
         children = {}
         for bun in self.linked_to:
-            children[bun["name"]] = bun["destination"]
+            children[bun["destination"].name] = bun["destination"]
         return children
 
-    def reformat(self, func):
-        return self.dataset.apply(func)
-
-    @abstractmethod
-    def document(self):
-        """
-        give a definition to an element of the semantic model
-        """
-        pass
-
-    @abstractmethod
-    def annotate(self):
-        """
-        give an IRI (Internationalized Resource Identifier) to an element of the semantic model
-        """
-        pass
-
-    @abstractmethod
-    def validate(self, errors=[], narrow=True):
-        """
-        verify the correctness of the semantic model, i.e. a BundleClass must have an IRI or a definition
-        """
-        pass
-
-    @abstractmethod
-    def generateOntology(self, narrow=True, kpi_results=pd.DataFrame()):
-        """
-        generate a turtle ontology file from the semantic model of the bundle
-        """
-        pass
-
-    # ---------------------------------- dataset utilities --------------------------------
-    def show_dataset(self):
-        """
-        show the content of the dataset
-        """
-        print(self.dataset)
-
-    # ---------------------------------- utilities --------------------------------
-
-    def index(self, lst: list, key, value):
-        """
-        get the index of an element in a list of dictionnaries
-        """
-        for i, dic in enumerate(lst):
-            if dic[key] == value:
-                return i
-        raise Exception
+    def apply(self, func_on_dataset, func_on_semantic_model):
+        return self.dataset.apply(func_on_dataset)
 
     def add_link(
         self, name: str, destination: "Bundle", IRI=None, definition: str = None
@@ -160,6 +114,59 @@ class Bundle(ABC):
             raise Exception("L'association indiquée n'existe pas")
         else:
             raise ValueError("Au moins un paramètre par défaut doit être passé !")
+
+    @abstractmethod
+    def document(self):
+        """
+        give a definition to an element of the semantic model
+        """
+        pass
+
+    @abstractmethod
+    def annotate(self):
+        """
+        give an IRI (Internationalized Resource Identifier) to an element of the semantic model
+        """
+        pass
+
+    @abstractmethod
+    def validate(self, errors=[], narrow=True):
+        """
+        verify the correctness of the semantic model, i.e. a BundleClass must have an IRI or a definition
+        """
+        pass
+
+    @abstractmethod
+    def generateOntology(self, narrow=True, kpi_results=pd.DataFrame()):
+        """
+        generate a turtle ontology file from the semantic model of the bundle
+        """
+        pass
+
+    @abstractmethod
+    def rename(self):
+        """
+        rename an element of the semantic model of the bundle
+        """
+        pass
+
+    # ---------------------------------- dataset utilities --------------------------------
+    def show_dataset(self):
+        """
+        show the content of the dataset
+        """
+        print(self.dataset)
+
+    # ---------------------------------- utilities --------------------------------
+
+    def index(self, lst: list, key, value):
+        """
+        get the index of an element in a list of dictionnaries
+        """
+        for i, dic in enumerate(lst):
+            if dic[key] == value:
+                return i
+        raise Exception
 
     def write_json(self):
         """

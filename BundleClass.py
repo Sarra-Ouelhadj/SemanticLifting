@@ -51,6 +51,36 @@ class BundleClass(Bundle):
                 print("destination :", link_element["destination"].name)
                 print("--------------")
 
+    def rename(
+        self, class_name: str = None, attributes: dict = None, associations: dict = None
+    ):
+        """
+        rename an element of the semantic model of the bundle
+        >>> rename (class_name = "InfrastructureCyclable")
+        >>> rename (attributes = {"id_local": "local_identifier"})
+        >>> rename (associations = {"reseau_loc": "aPourreseau_loc"})
+        """
+        args = locals()
+        if any(args.values()):
+            if class_name is not None:
+                self.name = class_name
+
+            if attributes is not None:
+                attributes_keys = list(attributes.keys())
+                for value in attributes_keys:
+                    i = self.index(self.attributes, "name", value)
+                    # assign the name
+                    self.attributes[i]["name"] = attributes[value]
+
+            if associations is not None:
+                associations_keys = list(associations.keys())
+                for value in associations_keys:
+                    i = self.index(self.linked_to, "name", value)
+                    # assign the name
+                    self.linked_to[i]["name"] = associations[value]
+        else:
+            raise ValueError("At least one default parameter must be passed!")
+
     def annotate(
         self, class_IRI: str = None, attributes: dict = None, associations: dict = None
     ):
@@ -79,7 +109,7 @@ class BundleClass(Bundle):
                     # affecter l'IRI
                     self.linked_to[i]["IRI"] = associations[value]
         else:
-            raise ValueError("Au moins un paramètre par défaut doit être passé !")
+            raise ValueError("At least one default parameter must be passed!")
 
     def validate(self, errors=[], deep=False):
         """
