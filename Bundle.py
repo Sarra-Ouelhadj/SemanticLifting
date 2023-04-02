@@ -74,9 +74,6 @@ class Bundle(ABC):
             children[bun["destination"].name] = bun["destination"]
         return children
 
-    def apply(self, func_on_dataset, func_on_semantic_model):
-        return self.dataset.apply(func_on_dataset)
-
     def add_link(
         self, name: str, destination: "Bundle", IRI=None, definition: str = None
     ):
