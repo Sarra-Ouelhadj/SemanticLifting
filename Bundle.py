@@ -89,22 +89,16 @@ class Bundle(ABC):
         """
         get the information about a link of the bundle according to its name or its destination
         """
-        args = locals()
-        if any(args.values()):
-            for association_element in self.linked_to:
-                if args["destination"] is not None:
-                    if association_element["destination"].name == destination:
-                        return association_element
-                else:
-                    if args["name"] is not None:
-                        if association_element["name"] == name:
-                            return association_element
-                    else:
-                        if association_element["source"] == source:
-                            return association_element
-            raise Exception("L'association indiquée n'existe pas")
-        else:
+        if name is None and source is None and destination is None:
             raise ValueError("Au moins un paramètre par défaut doit être passé !")
+        for association_element in self.linked_to:
+            if destination is not None and association_element["destination"].name == destination:
+                    return association_element
+            elif name is not None and association_element["name"] == name:
+                    return association_element
+            elif association_element["source"] == source:
+                    return association_element
+        raise Exception("L'association indiquée n'existe pas")
 
     @abstractmethod
     def document(self):
