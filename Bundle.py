@@ -3,6 +3,9 @@ from abc import ABC, abstractmethod
 import pandas as pd
 import re
 
+URI_PATTERN = re.compile(
+    r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/$"
+)
 
 class Bundle(ABC):
     name: str
@@ -31,28 +34,19 @@ class Bundle(ABC):
         self.linked_to = linked_to
 
     def set_instances_namespace(self, namespace: str):
-        pattern = re.compile(
-            r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/$"
-        )
-        if re.fullmatch(pattern, namespace):
+        if URI_PATTERN.fullmatch(namespace):
             self.instances_namespace = namespace
         else:
             raise ValueError("namespace doesn't match a correct URL pattern")
 
     def set_ontology_namespace(self, namespace: str):
-        pattern = re.compile(
-            r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/$"
-        )
-        if re.fullmatch(pattern, namespace):
+        if URI_PATTERN.fullmatch(namespace):
             self.ontology_namespace = namespace
         else:
             raise ValueError("namespace doesn't match a correct URL pattern")
 
     def set_vocabulary_namespace(self, namespace: str):
-        pattern = re.compile(
-            r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/$"
-        )
-        if re.fullmatch(pattern, namespace):
+        if URI_PATTERN.fullmatch(namespace):
             self.vocabulary_namespace = namespace
         else:
             raise ValueError("namespace doesn't match a correct URL pattern")
