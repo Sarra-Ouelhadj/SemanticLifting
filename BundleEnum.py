@@ -237,10 +237,7 @@ class BundleEnum(Bundle):
             enum_created = True
 
         for val in filter(
-            lambda value: False
-            if (value["IRI"] != "" and value["IRI"] is not None)
-            else True,
-            self.values,
+            lambda value: value["IRI"] == "" or value["IRI"] is None, self.values
         ):
             valueURI = URIRef(
                 self.vocabulary_namespace + h.convertToSnakecase(val["name"])
@@ -305,10 +302,7 @@ class BundleEnum(Bundle):
             kpi_results = pd.concat([kpi_results, df], ignore_index=True)
 
         for val in filter(
-            lambda value: False
-            if (value["IRI"] != "" and value["IRI"] is not None)
-            else True,
-            self.values,
+            lambda value: value["IRI"] == "" or value["IRI"] is None, self.values
         ):
             valueURI = URIRef(
                 self.vocabulary_namespace + h.convertToSnakecase(val["name"])
