@@ -169,4 +169,4 @@ class Bundle(ABC):
         """
         serialize the semantic model of the bundle in a json file
         """
-        ...
+        raise NotImplementedError()

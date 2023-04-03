@@ -101,16 +101,16 @@ def read_jsonSchema_geojsonData(schema_path:str, dataset_path:str, schema_title:
 
 #TODO
 def read_tableSchema_csvData(schema_path:str, dataset_path:str):
-    ...
+    raise NotImplementedError()
 
 #TODO
 def read_from_csvData():
-    ...
+    raise NotImplementedError()
 
 #TODO
 def read_from_geojsonData():
-    ...
+    raise NotImplementedError()
 
 #TODO
 def read_from_jsonData():
-    ...
+    raise NotImplementedError()
