@@ -52,7 +52,6 @@ def read_jsonSchema_geojsonData(
     for attr_elem in attributes:
         element_niv1 = {}
         element_niv1["IRI"] = None
-        element_niv1["source"] = attr_elem
 
         # le champs "description" est obligatoire
         if "description" in attributes[attr_elem]:
@@ -108,7 +107,6 @@ def read_jsonSchema_geojsonData(
                 definition=element_niv1["definition"],
                 linked_to=[],
             )
-            new_enum_bundle.source = element_niv1["source"]
             new_enum_bundle.type = element_niv1["type"]
             new_enum_bundle.required = element_niv1["required"]
 

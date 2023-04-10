@@ -35,9 +35,9 @@ class BundleClass(Bundle):
             print("\t name :", attr["name"])
             print("\t IRI :", attr["IRI"])
             print("\t definition :", attr["definition"])
-            print("\t source :", attr["source"])
             print("\t type :", attr["type"])
             print("\t id :", attr["id"])
+            print("\t required :", attr["required"])
             print("\t --------------")
         if self.linked_to:
             print("------- Links -------")
@@ -116,7 +116,6 @@ class BundleClass(Bundle):
         """
         verify the correctness of the semantic model
 
-
         class validation \n
         0. La classe doit avoir un nom
         1. La classe doit avoir un lien de référence ou une définition
@@ -124,10 +123,9 @@ class BundleClass(Bundle):
         attributes validation \n
         0. Chaque attribut doit avoir un nom
         1. Chaque attribut doit avoir un lien de référence ou une définition
-        2. Chaque attribut doit avoir une source
-        3. Le champs identifiant n'est pas vide
-        4. Chaque classe doit avoir au minimum un identifiant
-        5. Pas d'attributs avec le même nom dans le modèle sémantique
+        2. Le champs identifiant n'est pas vide
+        3. Chaque classe doit avoir au minimum un identifiant
+        4. Pas d'attributs avec le même nom dans le modèle sémantique
 
         associations validation \n
         0. Chaque association doit avoir un nom
@@ -173,10 +171,6 @@ class BundleClass(Bundle):
                 errors.append(
                     f"L'attribut `{attr['name']}` doit avoir un lien de référence ou une définition"
                 )
-
-            # 2. Chaque attribut doit avoir une source
-            if attr["source"] == "" or attr["source"] is None:
-                errors.append(f"L'attribut `{attr['name']}` doit avoir une source")
 
             # 3. Le champs identifiant n'est pas vide
             if attr["id"] == "" or attr["id"] is None:
@@ -543,7 +537,7 @@ class BundleClass(Bundle):
         attr_elem["id"] = "oui"
         attributes.append(attr_elem)
 
-        new_dataset = self.dataset[attr_elem["source"]].to_frame()
+        new_dataset = self.dataset[attr_elem["name"]].to_frame()
 
         # --- traiter le cas des autres attributs
         for attr_name in class_attributes:
@@ -554,9 +548,9 @@ class BundleClass(Bundle):
                 self.attributes.remove(attr_elem)  # MAJ du bundle initial
                 attributes.append(attr_elem)
 
-                new_dataset = new_dataset.join(self.dataset[attr_elem["source"]])
+                new_dataset = new_dataset.join(self.dataset[attr_elem["name"]])
                 self.dataset.drop(
-                    columns=attr_elem["source"], inplace=True
+                    columns=attr_elem["name"], inplace=True
                 )  # MAJ du bundle initial
 
         # --- Créer la nouvelle classe et le lien avec la classe initiale
@@ -585,10 +579,10 @@ class BundleClass(Bundle):
 
                 # MAJ datasets
                 new_bundle.dataset = new_bundle.dataset.join(
-                    self.dataset[ass_temp["destination"].source]
+                    self.dataset[ass_temp["destination"].name]
                 )
                 self.dataset.drop(
-                    columns=ass_temp["destination"].source, inplace=True
+                    columns=ass_temp["destination"].name, inplace=True
                 )  # MAJ du bundle initial
 
         return new_bundle
@@ -597,13 +591,13 @@ class BundleClass(Bundle):
         """
         Return an rdflib graph of a given bundle and it's dangling enumeration bundles
         """
-        class_id = self.get_id()["source"]
+        class_id = self.get_id()["name"]
         for index, series in self.dataset.iterrows():
             s = self.instances_namespace + self.name + "/" + series.get(class_id)
 
             for attr in filter(lambda value: value["id"] != "oui", self.attributes):
                 p = attr["IRI"]
-                o = series.get(attr["source"])
+                o = series.get(attr["name"])
                 if pd.notnull(o):
                     g.add((URIRef(s), URIRef(p), Literal(o)))
 
@@ -613,13 +607,13 @@ class BundleClass(Bundle):
                 if (
                     type(link_element["destination"]) == BundleEnum
                 ):  # it's an enumeration
-                    val = series.get(link_element["destination"].source)
+                    val = series.get(link_element["destination"].name)
                     if pd.notnull(val):
                         o = link_element["destination"].get_value(val)["IRI"]
                         g.add((URIRef(s), URIRef(p), URIRef(o)))
 
                 else:  # it's a class
-                    dest_class_id = link_element["destination"].get_id()["source"]
+                    dest_class_id = link_element["destination"].get_id()["name"]
                     val = series.get(dest_class_id)
                     if pd.notnull(val):
                         o = (

@@ -8,7 +8,6 @@ import pandas as pd
 
 class BundleEnum(Bundle):
     values = []
-    source: str = ""
     type: str = ""
     required: str = ""
 
@@ -22,7 +21,6 @@ class BundleEnum(Bundle):
     ) -> None:
         super().__init__(name, dataset, IRI, definition, linked_to)
         self.values = []
-        self.source = None
         self.type = None
         self.required = None
 
@@ -32,7 +30,6 @@ class BundleEnum(Bundle):
         """
         print("------- Enumeration -------")
         super().show()
-        print("source :", self.source)
         print("type :", self.type)
         print("required :", self.required)
         print("\t ------- Values -------")
@@ -88,7 +85,6 @@ class BundleEnum(Bundle):
         enumerations validation \n
         0. Chaque énumération doit avoir un nom
         1. Chaque énumération doit avoir un lien de référence ou une définition
-        2. Chaque énumération doit avoir une source
 
         enumeration values validation \n
         0. Chaque valeur d'énumération doit avoir un nom
@@ -111,10 +107,6 @@ class BundleEnum(Bundle):
             errors.append(
                 f"L'énumération `{self.name}` doit avoir un lien de référence ou une définition"
             )
-
-        # 2. L'énumération doit avoir une source
-        if self.source == "" or self.source is None:
-            errors.append(f"L'énumération `{self.name}` n'a pas de source")
 
         # ------------------------
         # enumeration values validation
@@ -160,10 +152,6 @@ class BundleEnum(Bundle):
             errors.append(
                 f"L'énumération `{self.name}` doit avoir un lien de référence ou une définition"
             )
-
-        # 2. L'énumération doit avoir une source
-        if self.source == "" or self.source is None:
-            errors.append(f"L'énumération `{self.name}` n'a pas de source")
 
         # ------------------------
         # enumeration values validation
