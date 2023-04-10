@@ -1,4 +1,6 @@
 import requests
+import urllib.parse
+import json
 from BundleClass import BundleClass
 from BundleEnum import BundleEnum
 from BundleCollection import BundleCollection
@@ -7,7 +9,7 @@ from library import helpers as h
 
 
 def read_jsonSchema_geojsonData(
-    schema_path: str, dataset_path: str, schema_title: str = "exemple"
+    schema_name: str, dataset_name: str, schema_title: str
 ) -> BundleClass:
     """
     initialize a first BundleClass with its dangling BundleEnums if enums exist, from a schema developped by schema.data.gouv.fr
@@ -15,9 +17,9 @@ def read_jsonSchema_geojsonData(
 
      Parameters
      ----------
-     schema_path : relative, absolute path or URL given as a string
+     schema_name : relative, absolute path or URL given as a string
         schema to be converted into the semantic model of the bundles created
-     dataset_path : relative, absolute path or URL given as a string
+     dataset_name : relative, absolute path or URL given as a string
         dataset to be loaded into a geopandas.geoDataFrame
      schema_title : str
         title labeling the main concept described in the dataset. Ex: "Cycling facilities"
@@ -28,10 +30,15 @@ def read_jsonSchema_geojsonData(
         BundleClass root created from the couple (schema, compliant dataset)
 
     """
+    response = urllib.parse.urlsplit(schema_name)
+    if response.scheme == "":  # it's a file path
+        with open(schema_name, "r") as f:
+            schema = json.load(f)
+    else:  # it's a URL
+        response = requests.get(schema_name)
+        schema = response.json()
 
-    response = requests.get(schema_path)
-    schema = response.json()
-    dataset = gpd.read_file(dataset_path, rows=100)
+    dataset = gpd.read_file(dataset_name, rows=100)
 
     class_name = h.convertToPascalcase(schema_title)
     root_bundle = BundleClass(class_name, dataset)
@@ -121,17 +128,21 @@ def read_jsonSchema_geojsonData(
     BundleCollection(root_bundle)
     return root_bundle
 
-#TODO
-def read_tableSchema_csvData(schema_path:str, dataset_path:str):
+
+# TODO
+def read_tableSchema_csvData(schema_name: str, dataset_name: str):
     raise NotImplementedError()
+
 
 # TODO
 def read_from_csvData():
     raise NotImplementedError()
 
+
 # TODO
 def read_from_geojsonData():
     raise NotImplementedError()
+
 
 # TODO
 def read_from_jsonData():
