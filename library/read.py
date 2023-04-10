@@ -121,22 +121,18 @@ def read_jsonSchema_geojsonData(
     BundleCollection(root_bundle)
     return root_bundle
 
-
-# TODO
-def read_tableSchema_csvData(schema_path: str, dataset_path: str):
-    ...
-
+#TODO
+def read_tableSchema_csvData(schema_path:str, dataset_path:str):
+    raise NotImplementedError()
 
 # TODO
 def read_from_csvData():
-    ...
-
+    raise NotImplementedError()
 
 # TODO
 def read_from_geojsonData():
-    ...
-
+    raise NotImplementedError()
 
 # TODO
 def read_from_jsonData():
-    ...
+    raise NotImplementedError()

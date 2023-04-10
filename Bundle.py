@@ -3,6 +3,9 @@ from abc import ABC, abstractmethod
 import pandas as pd
 import re
 
+URI_PATTERN = re.compile(
+    r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/$"
+)
 
 class Bundle(ABC):
     name: str
@@ -31,28 +34,19 @@ class Bundle(ABC):
         self.linked_to = linked_to
 
     def set_instances_namespace(self, namespace: str):
-        pattern = re.compile(
-            r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/$"
-        )
-        if re.fullmatch(pattern, namespace):
+        if URI_PATTERN.fullmatch(namespace):
             self.instances_namespace = namespace
         else:
             raise ValueError("namespace doesn't match a correct URL pattern")
 
     def set_ontology_namespace(self, namespace: str):
-        pattern = re.compile(
-            r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/$"
-        )
-        if re.fullmatch(pattern, namespace):
+        if URI_PATTERN.fullmatch(namespace):
             self.ontology_namespace = namespace
         else:
             raise ValueError("namespace doesn't match a correct URL pattern")
 
     def set_vocabulary_namespace(self, namespace: str):
-        pattern = re.compile(
-            r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/$"
-        )
-        if re.fullmatch(pattern, namespace):
+        if URI_PATTERN.fullmatch(namespace):
             self.vocabulary_namespace = namespace
         else:
             raise ValueError("namespace doesn't match a correct URL pattern")
@@ -95,22 +89,16 @@ class Bundle(ABC):
         """
         get the information about a link of the bundle according to its name or its destination
         """
-        args = locals()
-        if any(args.values()):
-            for association_element in self.linked_to:
-                if args["destination"] is not None:
-                    if association_element["destination"].name == destination:
-                        return association_element
-                else:
-                    if args["name"] is not None:
-                        if association_element["name"] == name:
-                            return association_element
-                    else:
-                        if association_element["source"] == source:
-                            return association_element
-            raise Exception("L'association indiquée n'existe pas")
-        else:
+        if name is None and source is None and destination is None:
             raise ValueError("Au moins un paramètre par défaut doit être passé !")
+        for association_element in self.linked_to:
+            if destination is not None and association_element["destination"].name == destination:
+                    return association_element
+            elif name is not None and association_element["name"] == name:
+                    return association_element
+            elif association_element["source"] == source:
+                    return association_element
+        raise Exception("L'association indiquée n'existe pas")
 
     @abstractmethod
     def document(self):
@@ -169,4 +157,4 @@ class Bundle(ABC):
         """
         serialize the semantic model of the bundle in a json file
         """
-        ...
+        raise NotImplementedError()
