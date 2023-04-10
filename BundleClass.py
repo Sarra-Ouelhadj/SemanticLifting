@@ -1,5 +1,6 @@
 import copy
 from BundleCollection import BundleCollection
+from BundleEnum import BundleEnum
 from library import helpers as h
 from rdflib.namespace import RDF, RDFS, OWL
 from rdflib import Graph, Literal, URIRef, Namespace
@@ -566,7 +567,7 @@ class BundleClass(Bundle):
 
         self.add_link(name=predicate, destination=new_bundle)
 
-        if enumerations != []:  # si la nvlle classe est liée à des énumérations
+        if len(enumerations) != 0:  # si la nvlle classe est liée à des énumérations
             for enum_name in enumerations:
                 ass_temp = self.get_link(destination=enum_name)
                 self.linked_to.remove(ass_temp)  # MAJ du bundle initial
@@ -600,29 +601,27 @@ class BundleClass(Bundle):
         for index, series in self.dataset.iterrows():
             s = self.instances_namespace + self.name + "/" + series.get(class_id)
 
-            for attr in filter(
-                lambda value: False if (value["id"] == "oui") else True, self.attributes
-            ):
+            for attr in filter(lambda value: value["id"] != "oui", self.attributes):
                 p = attr["IRI"]
                 o = series.get(attr["source"])
-                if pd.notna(o) and pd.notnull(o):
+                if pd.notnull(o):
                     g.add((URIRef(s), URIRef(p), Literal(o)))
 
             for link_element in self.linked_to:
                 p = link_element["IRI"]
 
-                if type(link_element["destination"]) != type(
-                    self
+                if (
+                    type(link_element["destination"]) == BundleEnum
                 ):  # it's an enumeration
                     val = series.get(link_element["destination"].source)
-                    if pd.notna(val) and pd.notnull(val):
+                    if pd.notnull(val):
                         o = link_element["destination"].get_value(val)["IRI"]
                         g.add((URIRef(s), URIRef(p), URIRef(o)))
 
                 else:  # it's a class
                     dest_class_id = link_element["destination"].get_id()["source"]
                     val = series.get(dest_class_id)
-                    if pd.notna(val) and pd.notnull(val):
+                    if pd.notnull(val):
                         o = (
                             link_element["destination"].instances_namespace
                             + link_element["destination"].name
