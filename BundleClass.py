@@ -279,9 +279,9 @@ class BundleClass(Bundle):
 
         return self
 
-    def generateOntology(self, ontology_path: str, deep=False):
+    def ontology_kpi(self, kpi_results: pd.DataFrame):
         """
-         generate a turtle ontology file from the semantic model of the bundle and some indicators: \n
+         generate some KPIs on the generated ontology: \n
         - number of classes
         - number of DatatypeProperties created
         - number of ObjectProperties created
@@ -289,89 +289,71 @@ class BundleClass(Bundle):
         - number of Concepts created
         - number of DatatypeProperties create per class if multiple classes created
         - number of ObjectProperties created per class if multiple classes created
-        - number of Concepts created per ConceptSchemes if multiple ConceptSchemes created
+        - number of Concepts created per ConceptScheme if multiple ConceptSchemes created
 
         """
-        ontology_graph = Graph()
-        kpi_results = pd.DataFrame()
-        g, kpi_results = self._generateOntology(
-            ontology_path, deep, ontology_graph, kpi_results
+
+        # Le nombre de classes créées au total
+        nb_cl = kpi_results.loc[kpi_results["type"] == "Class", "IRI"].count()
+        print("Le nombre de classes créées au total : ", nb_cl)
+
+        # Le nombre de DatatypeProperties créées au total
+        print(
+            "Le nombre de DatatypeProperties créées au total : ",
+            kpi_results.loc[kpi_results["type"] == "DatatypeProperty", "IRI"].count(),
         )
 
-        if kpi_results.empty is False:
-            with open(ontology_path, "w") as fo:
-                fo.write(g.serialize(format="turtle"))
+        # Le nombre d'ObjectProperties créés au total
+        print(
+            "Le nombre d'ObjectProperties créés au total : ",
+            kpi_results.loc[kpi_results["type"] == "ObjectProperty", "IRI"].count(),
+        )
 
-            # Le nombre de classes créées au total
-            nb_cl = kpi_results.loc[kpi_results["type"] == "Class", "IRI"].count()
-            print("Le nombre de classes créées au total : ", nb_cl)
+        # Le nombre de ConceptSchemes (énumérations) créés au total
+        nb_csch = kpi_results.loc[kpi_results["type"] == "ConceptScheme", "IRI"].count()
+        print("Le nombre de ConceptSchemes (énumérations) créés au total : ", nb_csch)
 
-            # Le nombre de DatatypeProperties créées au total
+        # Le nombre de Concepts (valeurs d'énumération) créés au total
+        print(
+            "Le nombre de Concepts (valeurs d'énumération) créés au total : ",
+            kpi_results.loc[kpi_results["type"] == "Concept", "IRI"].count(),
+        )
+
+        if nb_cl > 1:
+            # Le nombre de DatatypeProperties créées par classe
             print(
-                "Le nombre de DatatypeProperties créées au total : ",
+                "Le nombre de DatatypeProperties créées par classe : \n",
                 kpi_results.loc[
-                    kpi_results["type"] == "DatatypeProperty", "IRI"
-                ].count(),
+                    kpi_results["type"] == "DatatypeProperty", ["IRI", "related"]
+                ]
+                .groupby("related")["IRI"]
+                .count()
+                .to_frame(),
             )
 
-            # Le nombre d'ObjectProperties créés au total
+            # Le nombre d'ObjectProperties créés par classe
             print(
-                "Le nombre d'ObjectProperties créés au total : ",
-                kpi_results.loc[kpi_results["type"] == "ObjectProperty", "IRI"].count(),
+                "Le nombre d'ObjectProperties créés par classe : \n",
+                kpi_results.loc[
+                    kpi_results["type"] == "ObjectProperty", ["IRI", "related"]
+                ]
+                .groupby("related")["IRI"]
+                .count()
+                .to_frame(),
             )
 
-            # Le nombre de ConceptSchemes (énumérations) créés au total
-            nb_csch = kpi_results.loc[
-                kpi_results["type"] == "ConceptScheme", "IRI"
-            ].count()
+        if nb_csch > 1:
+            # Le nombre de Concepts créés par ConceptSchemes
             print(
-                "Le nombre de ConceptSchemes (énumérations) créés au total : ", nb_csch
+                "Le nombre de Concepts créés par ConceptSchemes : \n",
+                kpi_results.loc[kpi_results["type"] == "Concept", ["IRI", "related"]]
+                .groupby("related")["IRI"]
+                .count()
+                .to_frame(),
             )
 
-            # Le nombre de Concepts (valeurs d'énumération) créés au total
-            print(
-                "Le nombre de Concepts (valeurs d'énumération) créés au total : ",
-                kpi_results.loc[kpi_results["type"] == "Concept", "IRI"].count(),
-            )
-
-            if nb_cl > 1:
-                # Le nombre de DatatypeProperties créées par classe
-                print(
-                    "Le nombre de DatatypeProperties créées par classe : \n",
-                    kpi_results.loc[
-                        kpi_results["type"] == "DatatypeProperty", ["IRI", "related"]
-                    ]
-                    .groupby("related")["IRI"]
-                    .count()
-                    .to_frame(),
-                )
-
-                # Le nombre d'ObjectProperties créés par classe
-                print(
-                    "Le nombre d'ObjectProperties créés par classe : \n",
-                    kpi_results.loc[
-                        kpi_results["type"] == "ObjectProperty", ["IRI", "related"]
-                    ]
-                    .groupby("related")["IRI"]
-                    .count()
-                    .to_frame(),
-                )
-
-            if nb_csch > 1:
-                # Le nombre de Concepts créés par ConceptSchemes
-                print(
-                    "Le nombre de Concepts créés par ConceptSchemes : \n",
-                    kpi_results.loc[
-                        kpi_results["type"] == "Concept", ["IRI", "related"]
-                    ]
-                    .groupby("related")["IRI"]
-                    .count()
-                    .to_frame(),
-                )
-
-    def _generateOntology(
+    def generateOntology(
         self,
-        ontology_path: str,
         deep=False,
         ontology_graph=Graph(),
         kpi_results=pd.DataFrame(),
@@ -391,7 +373,7 @@ class BundleClass(Bundle):
                 self.ontology_namespace + h.convertToPascalcase(self.name)
             )
 
-            self.annotate(class_IRI=str(classeURI))
+            # self.annotate(class_IRI=str(classeURI))
 
             g.add((classeURI, RDF.type, OWL.Class))
             g.add((classeURI, RDFS.label, Literal(self.name)))
@@ -413,16 +395,14 @@ class BundleClass(Bundle):
         # Data Properties
         # ------------------------
         for attr in filter(
-            lambda value: False
-            if (value["IRI"] != "" and value["IRI"] is not None)
-            else True,
+            lambda value: value["IRI"] == "" or value["IRI"] is None,
             self.attributes,
         ):
             attributeURI = URIRef(
                 self.ontology_namespace + h.convertToCamelcase(attr["name"])
             )
 
-            self.annotate(attributes={attr["name"]: str(attributeURI)})
+            # self.annotate(attributes={attr["name"]: str(attributeURI)})
 
             g.add((attributeURI, RDF.type, OWL.DatatypeProperty))
             g.add((attributeURI, RDFS.label, Literal(attr["name"])))
@@ -444,16 +424,14 @@ class BundleClass(Bundle):
         # Object Properties
         # ------------------------
         for ass in filter(
-            lambda value: False
-            if (value["IRI"] != "" and value["IRI"] is not None)
-            else True,
+            lambda value: value["IRI"] == "" or value["IRI"] is None,
             self.linked_to,
         ):
             associationURI = URIRef(
                 self.ontology_namespace + h.convertToCamelcase(ass["name"])
             )
 
-            self.annotate(associations={ass["name"]: str(associationURI)})
+            # self.annotate(associations={ass["name"]: str(associationURI)})
 
             g.add((associationURI, RDF.type, OWL.ObjectProperty))
             g.add((associationURI, RDFS.label, Literal(ass["name"])))
@@ -471,50 +449,15 @@ class BundleClass(Bundle):
 
             kpi_results = pd.concat([kpi_results, df], ignore_index=True)
 
-            if type(ass["destination"]) == type(self):
+            if type(ass["destination"]) == BundleClass:
                 if deep:
-                    g, kpi_results = ass["destination"]._generateOntology(
-                        ontology_path, deep, g, kpi_results
+                    g, kpi_results = ass["destination"].generateOntology(
+                        deep, g, kpi_results
                     )
             else:
-                g, kpi_results = ass["destination"]._generateOntology(g, kpi_results)
+                g, kpi_results = ass["destination"].generateOntology(g, kpi_results)
 
         return g, kpi_results
-
-    def write_rdf(
-        self,
-        instance_path: str = "./results/instances.ttl",
-        ontology_path: str = "./results/ontology.ttl",
-        deep=False,
-    ):
-        """
-        Write in rdf the dataset.
-        """
-        g = self._write_rdf(ontology_path, deep)
-        if len(g):
-            with open(instance_path, "w") as f:
-                f.write(g.serialize(format="turtle"))
-
-    def _write_rdf(
-        self,
-        ontology_path: str = "./results/ontology.ttl",
-        deep=False,
-        instance_graph=Graph(),
-    ):
-        """
-        return rdflib graph of the dataset converted to RDF
-        """
-        g = instance_graph
-        if self.validate(deep=deep):
-            self.generateOntology(ontology_path, deep)
-            g = self._to_rdf(g)
-            if deep:
-                for link_element in self.linked_to:
-                    if type(link_element["destination"]) == type(self):
-                        g = link_element["destination"]._write_rdf(
-                            deep=deep, instance_graph=g
-                        )
-        return g
 
     def split(
         self,
@@ -587,29 +530,45 @@ class BundleClass(Bundle):
 
         return new_bundle
 
-    def _to_rdf(self, g=Graph()) -> Graph:
+    def generateRDF(self, deep=False, instance_graph=Graph()) -> Graph:
         """
         Return an rdflib graph of a given bundle and it's dangling enumeration bundles
         """
+        g = instance_graph
         class_id = self.get_id()["name"]
-        for index, series in self.dataset.iterrows():
+        for _, series in self.dataset.iterrows():
             s = self.instances_namespace + self.name + "/" + series.get(class_id)
 
             for attr in filter(lambda value: value["id"] != "oui", self.attributes):
-                p = attr["IRI"]
+                p = (
+                    self.ontology_namespace + h.convertToCamelcase(attr["name"])
+                    if (attr["IRI"] == "" or attr["IRI"] is None)
+                    else attr["IRI"]
+                )
                 o = series.get(attr["name"])
                 if pd.notnull(o):
                     g.add((URIRef(s), URIRef(p), Literal(o)))
 
             for link_element in self.linked_to:
-                p = link_element["IRI"]
+                p = (
+                    self.ontology_namespace + h.convertToCamelcase(link_element["name"])
+                    if (link_element["IRI"] == "" or link_element["IRI"] is None)
+                    else link_element["IRI"]
+                )
 
                 if (
                     type(link_element["destination"]) == BundleEnum
                 ):  # it's an enumeration
                     val = series.get(link_element["destination"].name)
                     if pd.notnull(val):
-                        o = link_element["destination"].get_value(val)["IRI"]
+                        val_temp = link_element["destination"].get_value(val)
+                        o = (
+                            self.vocabulary_namespace
+                            + h.convertToSnakecase(val_temp["name"])
+                            if (val_temp["IRI"] == "" or val_temp["IRI"] is None)
+                            else val_temp["IRI"]
+                        )
+
                         g.add((URIRef(s), URIRef(p), URIRef(o)))
 
                 else:  # it's a class
@@ -623,6 +582,9 @@ class BundleClass(Bundle):
                             + val
                         )
                         g.add((URIRef(s), URIRef(p), URIRef(o)))
+
+                    if deep:
+                        g = link_element["destination"].generateRDF(True, g)
         return g
 
     # ---------------------------------- Utilities --------------------------------

@@ -195,65 +195,7 @@ class BundleEnum(Bundle):
         else:
             raise ValueError("Au moins un paramètre par défaut doit être passé !")
 
-    def generateOntology(self, vocabulary_path: str):
-        """generate a turtle ontology file from the semantic model of the bundle"""
-
-        VS = Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
-        g2 = Graph()
-
-        enum_created = False
-        nb_value_created = 0
-        # ------------------------
-        # Individuals
-        # ------------------------
-        if self.IRI is not None and self.IRI != "":
-            enumerationURI = URIRef(self.IRI)
-        else:
-            enumerationURI = URIRef(
-                self.vocabulary_namespace + h.convertToPascalcase(self.name)
-            )
-
-            self.annotate(enumeration_IRI=str(enumerationURI))
-
-            g2.add((enumerationURI, RDF.type, SKOS.ConceptScheme))
-            g2.add((enumerationURI, SKOS.prefLabel, Literal(self.name)))
-            g2.add((enumerationURI, SKOS.definition, Literal(self.definition)))
-            g2.add(
-                (enumerationURI, RDFS.isDefinedBy, URIRef(self.vocabulary_namespace))
-            )
-            g2.add((enumerationURI, VS.term_status, Literal("testing")))
-            enum_created = True
-
-        for val in filter(
-            lambda value: value["IRI"] == "" or value["IRI"] is None, self.values
-        ):
-            valueURI = URIRef(
-                self.vocabulary_namespace + h.convertToSnakecase(val["name"])
-            )
-
-            self.annotate(enum_values={val["name"]: str(valueURI)})
-
-            g2.add((valueURI, RDF.type, SKOS.Concept))
-            g2.add((valueURI, SKOS.prefLabel, Literal(val["name"])))
-            g2.add((valueURI, SKOS.definition, Literal(val["definition"])))
-            g2.add((valueURI, RDFS.isDefinedBy, URIRef(self.vocabulary_namespace)))
-            g2.add((valueURI, SKOS.inScheme, enumerationURI))
-            g2.add((valueURI, VS.term_status, Literal("testing")))
-            nb_value_created += 1
-
-        if enum_created:
-            print(f"IRI de l'énumération {self.name} a été créé : {self.IRI}")
-
-        if nb_value_created > 0:
-            print(
-                f"Le nombre de valeurs créées pour l'énumération `{self.name}` est : {nb_value_created}"
-            )
-
-        if enum_created or nb_value_created > 0:
-            with open(vocabulary_path, "w") as fv:
-                fv.write(g2.serialize(format="turtle"))
-
-    def _generateOntology(self, vocabulary_graph=Graph(), kpi_results=pd.DataFrame()):
+    def generateOntology(self, vocabulary_graph=Graph(), kpi_results=pd.DataFrame()):
         """return rdflib graph of the ontology created"""
 
         VS = Namespace("http://www.w3.org/2003/06/sw-vocab-status/ns#")
@@ -269,7 +211,7 @@ class BundleEnum(Bundle):
                 self.vocabulary_namespace + h.convertToPascalcase(self.name)
             )
 
-            self.annotate(enumeration_IRI=str(enumerationURI))
+            # self.annotate(enumeration_IRI=str(enumerationURI))
 
             g2.add((enumerationURI, RDF.type, SKOS.ConceptScheme))
             g2.add((enumerationURI, SKOS.prefLabel, Literal(self.name)))
@@ -296,7 +238,7 @@ class BundleEnum(Bundle):
                 self.vocabulary_namespace + h.convertToSnakecase(val["name"])
             )
 
-            self.annotate(enum_values={val["name"]: str(valueURI)})
+            # self.annotate(enum_values={val["name"]: str(valueURI)})
 
             g2.add((valueURI, RDF.type, SKOS.Concept))
             g2.add((valueURI, SKOS.prefLabel, Literal(val["name"])))
