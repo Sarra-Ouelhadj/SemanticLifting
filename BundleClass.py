@@ -8,6 +8,16 @@ from Bundle import Bundle
 import geopandas as gpd
 import pandas as pd
 
+PANDAS_JSONSCHEMA_TYPES_MATCHING = {
+    "object": "string",
+    "int64": "integer",
+    "float64": "number",
+    "bool": "boolean",
+    "datetime64": "string",
+    "timedelta[ns]": "string",
+    "category": "string",
+}
+
 
 class BundleClass(Bundle):
     attributes = []
@@ -79,6 +89,7 @@ class BundleClass(Bundle):
                     i = self.index(self.linked_to, "name", value)
                     # assign the name
                     self.linked_to[i]["name"] = associations[value]
+            return self
         else:
             raise ValueError("At least one default parameter must be passed!")
 
@@ -109,6 +120,7 @@ class BundleClass(Bundle):
                     i = self.index(self.linked_to, "name", value)
                     # affecter l'IRI
                     self.linked_to[i]["IRI"] = associations[value]
+            return self
         else:
             raise ValueError("At least one default parameter must be passed!")
 
@@ -261,6 +273,7 @@ class BundleClass(Bundle):
                     i = self.index(self.linked_to, "name", value)
                     # donner une définition
                     self.linked_to[i]["definition"] = associations[value]
+            return self
         else:
             raise ValueError("Au moins un paramètre par défaut doit être passé !")
 
@@ -587,6 +600,36 @@ class BundleClass(Bundle):
                         g = link_element["destination"].generateRDF(True, g)
         return g
 
+    def apply(
+        self,
+        func_on_data,
+        result_column,
+        axis=0,
+        raw=False,
+        result_type=None,
+        args=(),
+        **kwargs,
+    ):
+        self.dataset[result_column] = self.dataset.apply(
+            func_on_data, axis, raw, result_type, args, kwargs
+        )
+
+        if result_column in self.dataset.columns:  # existing column updated
+            attr_elem = self.get_attribute(result_column)
+            attr_elem["type"] = PANDAS_JSONSCHEMA_TYPES_MATCHING[
+                self.dataset[result_column].dtype
+            ]
+
+        else:  # new column created
+            self.add_attribute(
+                result_column,
+                type=PANDAS_JSONSCHEMA_TYPES_MATCHING[
+                    self.dataset[result_column].dtype
+                ],
+            )
+
+        return self
+
     # ---------------------------------- Utilities --------------------------------
 
     def get_id(self) -> dict:
@@ -608,3 +651,23 @@ class BundleClass(Bundle):
             if attribute_element["name"] == name_attribute:
                 return attribute_element
         raise Exception("L'attribut indiqué n'existe pas")
+
+    def add_attribute(
+        self,
+        name: str,
+        IRI=None,
+        definition: str = None,
+        type: str = "string",
+        required: str = "non",
+    ):
+        """
+        add an attribute to the bundle
+        """
+        attribute_element = {}
+        attribute_element["name"] = name
+        attribute_element["IRI"] = IRI
+        attribute_element["definition"] = definition
+        attribute_element["type"] = type
+        attribute_element["required"] = required
+
+        self.attributes.append(attribute_element)
