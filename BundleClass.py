@@ -601,32 +601,25 @@ class BundleClass(Bundle):
         return g
 
     def apply(
-        self,
-        func_on_data,
-        result_column,
-        axis=0,
-        raw=False,
-        result_type=None,
-        args=(),
-        **kwargs,
+        self, func_on_data, columns_types_dic: dict, result_type=None, args=(), **kwargs
     ):
-        self.dataset[result_column] = self.dataset.apply(
-            func_on_data, axis, raw, result_type, args, kwargs
+        columns = self.dataset.columns
+        self.dataset[[*columns_types_dic]] = self.dataset.apply(
+            func_on_data,
+            axis=1,
+            raw=False,
+            result_type=result_type,
+            args=args,
+            **kwargs,
         )
 
-        if result_column in self.dataset.columns:  # existing column updated
-            attr_elem = self.get_attribute(result_column)
-            attr_elem["type"] = PANDAS_JSONSCHEMA_TYPES_MATCHING[
-                self.dataset[result_column].dtype
-            ]
+        for col, type in columns_types_dic.items():
+            if col in columns:  # existing column updated
+                attr_elem = self.get_attribute(col)
+                attr_elem["type"] = type
 
-        else:  # new column created
-            self.add_attribute(
-                result_column,
-                type=PANDAS_JSONSCHEMA_TYPES_MATCHING[
-                    self.dataset[result_column].dtype
-                ],
-            )
+            else:  # new column created
+                self.add_attribute(col, type=type)
 
         return self
 
