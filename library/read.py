@@ -3,7 +3,8 @@ import urllib.parse
 import json
 from BundleClass import BundleClass
 from BundleEnum import BundleEnum
-from BundleCollection import BundleCollection
+
+# from BundleCollection import BundleCollection
 import geopandas as gpd
 from library import helpers as h
 
@@ -17,11 +18,11 @@ def read_jsonSchema_geojsonData(
 
      Parameters
      ----------
-     schema_name : relative, absolute path or URL given as a string
+     schema_name: relative, absolute path or URL given as a string
         schema to be converted into the semantic model of the bundles created
-     dataset_name : relative, absolute path or URL given as a string
+     dataset_name: relative, absolute path or URL given as a string
         dataset to be loaded into a geopandas.geoDataFrame
-     schema_title : str
+     schema_title: str
         title labeling the main concept described in the dataset. Ex: "Cycling facilities"
 
      Returns
@@ -103,12 +104,13 @@ def read_jsonSchema_geojsonData(
         else:  # c'est une énumération
             new_enum_bundle = BundleEnum(
                 attr_elem,
-                dataset[attr_elem].to_frame(),
+                dataset[attr_elem].to_frame().drop_duplicates(ignore_index=True),
                 definition=element_niv1["definition"],
                 linked_to=[],
+                values=[],
+                type=element_niv1["type"],
+                required=element_niv1["required"],
             )
-            new_enum_bundle.type = element_niv1["type"]
-            new_enum_bundle.required = element_niv1["required"]
 
             # création de l'association entre la classe et le type énuméré
             root_bundle.add_link(
@@ -123,8 +125,13 @@ def read_jsonSchema_geojsonData(
                 enum_elem["IRI"] = None
                 new_enum_bundle.values.append(enum_elem)
 
-    BundleCollection(root_bundle)
+    # BundleCollection(root_bundle)
     return root_bundle
+
+
+# TODO
+def read_template_data(filename: str, dataset_name: str):
+    raise NotImplementedError()
 
 
 # TODO

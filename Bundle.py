@@ -2,10 +2,23 @@ import geopandas as gpd
 from abc import ABC, abstractmethod
 import pandas as pd
 import re
+import reconciler
 
 URI_PATTERN = re.compile(
     r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/$"
 )
+
+RECONCILIATION_SERVICES = {
+    "wikidata": {
+        "endpoint": "https://wikidata.reconci.link/en/api",
+        "namespace": "https://www.wikidata.org/entity/",
+    },
+    "eol": {
+        "endpoint": "https://eol.org/api/reconciliation",
+        "namespace": "https://eol.org/",
+    },
+}
+
 
 class Bundle(ABC):
     name: str
@@ -32,6 +45,7 @@ class Bundle(ABC):
         self.IRI = IRI
         self.definition = definition
         self.linked_to = linked_to
+        self.reconcilated = False
 
     def set_instances_namespace(self, namespace: str):
         if URI_PATTERN.fullmatch(namespace):
@@ -59,47 +73,6 @@ class Bundle(ABC):
         print("IRI :", self.IRI)
         print("definition :", self.definition)
 
-    def children(self) -> dict:
-        """
-        return the linked bundles in a dictionary of the form: {"name_of_the_bundle": memory_address_of_the_bundle}
-        """
-        children = {}
-        for bun in self.linked_to:
-            children[bun["destination"].name] = bun["destination"]
-        return children
-
-    def add_link(
-        self, name: str, destination: "Bundle", IRI=None, definition: str = None
-    ):
-        """
-        add to the bundle source a link to another bundle destination
-        """
-        association_element = {}
-        association_element["name"] = name
-        association_element["IRI"] = IRI
-        association_element["definition"] = definition
-        association_element["source"] = self
-        association_element["destination"] = destination
-
-        self.linked_to.append(association_element)
-
-    def get_link(
-        self, name: str = None, source: str = None, destination: str = None
-    ) -> dict:
-        """
-        get the information about a link of the bundle according to its name or its destination
-        """
-        if name is None and source is None and destination is None:
-            raise ValueError("Au moins un paramètre par défaut doit être passé !")
-        for association_element in self.linked_to:
-            if destination is not None and association_element["destination"].name == destination:
-                    return association_element
-            elif name is not None and association_element["name"] == name:
-                    return association_element
-            elif association_element["source"] == source:
-                    return association_element
-        raise Exception("L'association indiquée n'existe pas")
-
     @abstractmethod
     def document(self):
         """
@@ -124,16 +97,93 @@ class Bundle(ABC):
     @abstractmethod
     def generateOntology(self, narrow=True, kpi_results=pd.DataFrame()):
         """
-        generate a turtle ontology file from the semantic model of the bundle
+        return rdflib graph of the ontology created
         """
         pass
 
     @abstractmethod
     def rename(self):
         """
-        rename an element of the semantic model of the bundle
+        rename an element of the semantic model of the Bundle
         """
         pass
+
+    def reconcile(
+        self,
+        name_column_to_reconcile,
+        type_id=None,
+        top_res: int = 1,
+        property_mapping=None,
+        reconciliation_endpoint: str = RECONCILIATION_SERVICES["wikidata"]["endpoint"],
+        **filter_result
+    ):
+        """
+        reconcile the dataset with various reconciliation services, such as Wikidata.
+
+        Parameters
+        ----------
+        - name_column_to_reconcile: str
+            name of the dataset column
+        - type_id: str
+            type of items to reconcile against per the API specification (https://www.w3.org/community/reports/reconciliation/CG-FINAL-specs-0.2-20230410/)
+            example: type_id="Q515" for http://www.wikidata.org/entity/Q515 for wikidata reconciliation endpoint
+        - top_res: int | str
+            Either the number of results to return per entry or the string 'all' to return all results
+        - property_mapping: dict
+            A list of properties to filter results on per the API specification (https://www.w3.org/community/reports/reconciliation/CG-FINAL-specs-0.2-20230410/)
+            example for a dataframe (df) about contries reconciled with wikidata : property_mapping={"P17": df["Country"]}
+        - reconciliation_endpoint: str, default https://wikidata.reconci.link/en/api
+            The reconciliation service to connect to.
+        - **filter_result: `match`, `score` or `type_id` keywords to filter the rows of resulting DataFrame
+            match : bool
+            score : int, i.e. score must be > value
+            type_id : str, i.e. the result must be of specified type_id
+
+        Returns
+        ---------
+        DataFrame of columns:
+            id
+            description
+            match
+            name
+            score
+            type
+            type_id
+            input_value
+        """
+
+        df = reconciler.reconcile(
+            column_to_reconcile=self.dataset[name_column_to_reconcile],
+            type_id=type_id,
+            top_res=top_res,
+            property_mapping=property_mapping,
+            reconciliation_endpoint=reconciliation_endpoint,
+        )
+
+        for key in filter_result:
+            if key == "match":
+                df = df[df["match"] == filter_result["match"]]
+            if key == "score":
+                df = df[df["score"] >= filter_result["score"]]
+            if key == "type_id":
+                df = df[df["type_id"] == filter_result["type_id"]]
+
+        return df
+
+    def make_dictionnary_from_reconcilation_dataFrame(
+        self, dataframe: pd.DataFrame, reconciliation_service_name: str = "wikidata"
+    ):
+        """
+        from the reconcile output (DataFrame), make a dictionnary {input_value : IRI}
+        """
+        dict = {}
+
+        for _, series in dataframe.iterrows():
+            dict[series.get("input_value")] = RECONCILIATION_SERVICES[
+                reconciliation_service_name
+            ]["namespace"] + series.get("id")
+
+        return dict
 
     # ---------------------------------- dataset utilities --------------------------------
     def show_dataset(self):

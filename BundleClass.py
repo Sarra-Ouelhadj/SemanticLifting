@@ -1,5 +1,6 @@
 import copy
-from BundleCollection import BundleCollection
+
+# from BundleCollection import BundleCollection
 from BundleEnum import BundleEnum
 from library import helpers as h
 from rdflib.namespace import RDF, RDFS, OWL
@@ -55,43 +56,82 @@ class BundleClass(Bundle):
             print("name :", link_element["name"])
             print("IRI :", link_element["IRI"])
             print("definition :", link_element["definition"])
-            print("source :", link_element["source"])
             if deep:
                 link_element["destination"].show()
             else:
                 print("destination :", link_element["destination"].name)
                 print("--------------")
 
+    def children(self) -> dict:
+        """
+        return the linked bundles in a dictionary of the form: {"name_of_the_bundle": memory_address_of_the_bundle}
+        """
+        children = {}
+        for bun in self.linked_to:
+            children[bun["destination"].name] = bun["destination"]
+        return children
+
+    def add_link(
+        self, name: str, destination: "Bundle", IRI=None, definition: str = None
+    ):
+        """
+        add a link to another bundle
+        """
+        association_element = {}
+        association_element["name"] = name
+        association_element["IRI"] = IRI
+        association_element["definition"] = definition
+        association_element["destination"] = destination
+
+        self.linked_to.append(association_element)
+
+    def get_link(self, name: str = None, destination: str = None) -> dict:
+        """
+        get the information about a link of the bundle according to its name or its destination
+        """
+        if name is None and destination is None:
+            raise ValueError("At least one default parameter must be passed!")
+        for association_element in self.linked_to:
+            if (
+                destination is not None
+                and association_element["destination"].name == destination
+            ):
+                return association_element
+            elif name is not None and association_element["name"] == name:
+                return association_element
+        raise Exception("The association indicated doesn't exist")
+
     def rename(
         self, class_name: str = None, attributes: dict = None, associations: dict = None
     ):
         """
-        rename an element of the semantic model of the bundle
+        rename an element of the semantic model of the BundleClass
         >>> rename (class_name = "InfrastructureCyclable")
         >>> rename (attributes = {"id_local": "local_identifier"})
         >>> rename (associations = {"reseau_loc": "aPourreseau_loc"})
         """
-        args = locals()
-        if any(args.values()):
-            if class_name is not None:
-                self.name = class_name
 
-            if attributes is not None:
-                attributes_keys = list(attributes.keys())
-                for value in attributes_keys:
-                    i = self.index(self.attributes, "name", value)
-                    # assign the name
-                    self.attributes[i]["name"] = attributes[value]
-
-            if associations is not None:
-                associations_keys = list(associations.keys())
-                for value in associations_keys:
-                    i = self.index(self.linked_to, "name", value)
-                    # assign the name
-                    self.linked_to[i]["name"] = associations[value]
-            return self
-        else:
+        if class_name is None and attributes is None and associations is None:
             raise ValueError("At least one default parameter must be passed!")
+
+        if class_name is not None:
+            self.name = class_name
+
+        if attributes is not None:
+            for value in attributes:
+                i = self.index(self.attributes, "name", value)
+                # assign the name
+                self.attributes[i]["name"] = attributes[value]
+
+            self.dataset.rename(columns=attributes, inplace=True)
+
+        if associations is not None:
+            for value in associations:
+                i = self.index(self.linked_to, "name", value)
+                # assign the name
+                self.linked_to[i]["name"] = associations[value]
+
+        return self
 
     def annotate(
         self, class_IRI: str = None, attributes: dict = None, associations: dict = None
@@ -102,27 +142,25 @@ class BundleClass(Bundle):
         >>> annotate(attributes={"nom_loc":"http://schema.org/name", "num_iti":"http://schema.org/name"})
         >>> annotate(associations={"reseau_loc":"http://exemple/reseau_loc"})
         """
-        args = locals()
-        if any(args.values()) is True:
-            if class_IRI is not None:
-                self.IRI = class_IRI
-
-            if attributes is not None:
-                attributes_keys = list(attributes.keys())
-                for value in attributes_keys:
-                    i = self.index(self.attributes, "name", value)
-                    # affecter l'IRI
-                    self.attributes[i]["IRI"] = attributes[value]
-
-            if associations is not None:
-                associations_keys = list(associations.keys())
-                for value in associations_keys:
-                    i = self.index(self.linked_to, "name", value)
-                    # affecter l'IRI
-                    self.linked_to[i]["IRI"] = associations[value]
-            return self
-        else:
+        if class_IRI is None and attributes is None and associations is None:
             raise ValueError("At least one default parameter must be passed!")
+
+        if class_IRI is not None:
+            self.IRI = class_IRI
+
+        if attributes is not None:
+            for value in attributes:
+                i = self.index(self.attributes, "name", value)
+                # assign IRI
+                self.attributes[i]["IRI"] = attributes[value]
+
+        if associations is not None:
+            for value in associations:
+                i = self.index(self.linked_to, "name", value)
+                # assign IRI
+                self.linked_to[i]["IRI"] = associations[value]
+
+        return self
 
     def validate(self, errors=[], deep=False):
         """
@@ -255,27 +293,26 @@ class BundleClass(Bundle):
         give a definition to an element of the semantic model
         >>> document(associations = {'aPourProfession' : 'La profession de la personne'})
         """
-        args = locals()
-        if any(args.values()):
-            if class_definition is not None:
-                self.definition = class_definition
 
-            if attributes is not None:
-                attributes_keys = list(attributes.keys())
-                for value in attributes_keys:
-                    i = self.index(self.attributes, "name", value)
-                    # donner une définition
-                    self.attributes[i]["definition"] = attributes[value]
+        if class_definition is None and attributes is None and associations is None:
+            raise ValueError("At least one default parameter must be passed!")
 
-            if associations is not None:
-                associations_keys = list(associations.keys())
-                for value in associations_keys:
-                    i = self.index(self.linked_to, "name", value)
-                    # donner une définition
-                    self.linked_to[i]["definition"] = associations[value]
-            return self
-        else:
-            raise ValueError("Au moins un paramètre par défaut doit être passé !")
+        if class_definition is not None:
+            self.definition = class_definition
+
+        if attributes is not None:
+            for value in attributes:
+                i = self.index(self.attributes, "name", value)
+                # assign a definition
+                self.attributes[i]["definition"] = attributes[value]
+
+        if associations is not None:
+            for value in associations:
+                i = self.index(self.linked_to, "name", value)
+                # assign a definition
+                self.linked_to[i]["definition"] = associations[value]
+
+        return self
 
     def mark_identifier(self, name_attribute: str):
         """
@@ -306,36 +343,36 @@ class BundleClass(Bundle):
 
         """
 
-        # Le nombre de classes créées au total
+        # The total number of classes created
         nb_cl = kpi_results.loc[kpi_results["type"] == "Class", "IRI"].count()
-        print("Le nombre de classes créées au total : ", nb_cl)
+        print("The total number of classes created: ", nb_cl)
 
-        # Le nombre de DatatypeProperties créées au total
+        # The total number of DatatypeProperties created
         print(
-            "Le nombre de DatatypeProperties créées au total : ",
+            "The total number of DatatypeProperties created: ",
             kpi_results.loc[kpi_results["type"] == "DatatypeProperty", "IRI"].count(),
         )
 
-        # Le nombre d'ObjectProperties créés au total
+        # The total number of ObjectProperties created
         print(
-            "Le nombre d'ObjectProperties créés au total : ",
+            "The total number of ObjectProperties created: ",
             kpi_results.loc[kpi_results["type"] == "ObjectProperty", "IRI"].count(),
         )
 
-        # Le nombre de ConceptSchemes (énumérations) créés au total
+        # The total number of ConceptSchemes (enumerations) created
         nb_csch = kpi_results.loc[kpi_results["type"] == "ConceptScheme", "IRI"].count()
-        print("Le nombre de ConceptSchemes (énumérations) créés au total : ", nb_csch)
+        print("The total number of ConceptSchemes (enumerations) created: ", nb_csch)
 
-        # Le nombre de Concepts (valeurs d'énumération) créés au total
+        # The total number of Concepts (enumeration values) created
         print(
-            "Le nombre de Concepts (valeurs d'énumération) créés au total : ",
+            "The total number of Concepts (enumeration values) created: ",
             kpi_results.loc[kpi_results["type"] == "Concept", "IRI"].count(),
         )
 
         if nb_cl > 1:
-            # Le nombre de DatatypeProperties créées par classe
+            # The number of DatatypeProperties created per class
             print(
-                "Le nombre de DatatypeProperties créées par classe : \n",
+                "The number of DatatypeProperties created per class: \n",
                 kpi_results.loc[
                     kpi_results["type"] == "DatatypeProperty", ["IRI", "related"]
                 ]
@@ -344,9 +381,9 @@ class BundleClass(Bundle):
                 .to_frame(),
             )
 
-            # Le nombre d'ObjectProperties créés par classe
+            # The number of ObjectProperties created per class
             print(
-                "Le nombre d'ObjectProperties créés par classe : \n",
+                "The number of ObjectProperties created per class: \n",
                 kpi_results.loc[
                     kpi_results["type"] == "ObjectProperty", ["IRI", "related"]
                 ]
@@ -356,9 +393,9 @@ class BundleClass(Bundle):
             )
 
         if nb_csch > 1:
-            # Le nombre de Concepts créés par ConceptSchemes
+            # The number of Concepts created by ConceptSchemes
             print(
-                "Le nombre de Concepts créés par ConceptSchemes : \n",
+                "The number of Concepts created by ConceptSchemes: \n",
                 kpi_results.loc[kpi_results["type"] == "Concept", ["IRI", "related"]]
                 .groupby("related")["IRI"]
                 .count()
@@ -385,8 +422,6 @@ class BundleClass(Bundle):
             classeURI = URIRef(
                 self.ontology_namespace + h.convertToPascalcase(self.name)
             )
-
-            # self.annotate(class_IRI=str(classeURI))
 
             g.add((classeURI, RDF.type, OWL.Class))
             g.add((classeURI, RDFS.label, Literal(self.name)))
@@ -415,8 +450,6 @@ class BundleClass(Bundle):
                 self.ontology_namespace + h.convertToCamelcase(attr["name"])
             )
 
-            # self.annotate(attributes={attr["name"]: str(attributeURI)})
-
             g.add((attributeURI, RDF.type, OWL.DatatypeProperty))
             g.add((attributeURI, RDFS.label, Literal(attr["name"])))
             g.add((attributeURI, RDFS.comment, Literal(attr["definition"])))
@@ -443,8 +476,6 @@ class BundleClass(Bundle):
             associationURI = URIRef(
                 self.ontology_namespace + h.convertToCamelcase(ass["name"])
             )
-
-            # self.annotate(associations={ass["name"]: str(associationURI)})
 
             g.add((associationURI, RDF.type, OWL.ObjectProperty))
             g.add((associationURI, RDFS.label, Literal(ass["name"])))
@@ -481,65 +512,62 @@ class BundleClass(Bundle):
         enumerations: list = [],
     ):
         """
-        divide a bundle into 2 new bundles linked to each other
+        divide the BundleClass into 2 new BundleClasses linked to each other
         >>> b1=b0.split(new_class_name = 'Commune', class_id='code_com_d', predicate='traverseCommuneADroite',
                         class_attributes = ['code_com_g'])
         """
 
         attributes = []
 
-        # --- traiter le cas de l'identifiant de la nouvelle classe (clé étrangère pour l'ancienne classe)
+        # --- treat the new-BundleClass identifier attribute (foreign key of the old class)
         attr_elem = copy.deepcopy(self.get_attribute(class_id))
         attr_elem["id"] = "oui"
         attributes.append(attr_elem)
 
         new_dataset = self.dataset[attr_elem["name"]].to_frame()
 
-        # --- traiter le cas des autres attributs
+        # --- treat the rest of attributes
         for attr_name in class_attributes:
             if (
                 attr_name != class_id
-            ):  # si l'identifiant n'est pas compris dans la liste des attributs (vérification)
+            ):  # if the identifier is not included in the list of attributes
                 attr_elem = self.get_attribute(attr_name)
-                self.attributes.remove(attr_elem)  # MAJ du bundle initial
+                self.attributes.remove(attr_elem)  # initial BundleClass update
                 attributes.append(attr_elem)
 
                 new_dataset = new_dataset.join(self.dataset[attr_elem["name"]])
                 self.dataset.drop(
                     columns=attr_elem["name"], inplace=True
-                )  # MAJ du bundle initial
+                )  # initial BundleClass update
 
-        # --- Créer la nouvelle classe et le lien avec la classe initiale
+        # --- Create the new BundleClass and the link with the initial BundleClass
         new_bundle = BundleClass(
             new_class_name, new_dataset, attributes=attributes, linked_to=[]
         )
-        BundleCollection.add_bundle(self, new_bundle, predicate)
+        # BundleCollection.add_bundle(self, new_bundle, predicate)
 
         self.add_link(name=predicate, destination=new_bundle)
 
-        if len(enumerations) != 0:  # si la nvlle classe est liée à des énumérations
+        if len(enumerations) != 0:  # if the new BundleClass is linked to enumerations
             for enum_name in enumerations:
                 ass_temp = self.get_link(destination=enum_name)
-                self.linked_to.remove(ass_temp)  # MAJ du bundle initial
+                self.linked_to.remove(ass_temp)  # initial BundleClass update
 
-                BundleCollection.graph.remove_edge(self, ass_temp["destination"])
+                # BundleCollection.graph.remove_edge(self, ass_temp["destination"])
 
-                ass_temp["source"] = new_bundle  # modifier la source
-                new_bundle.linked_to.append(
-                    ass_temp
-                )  # ajouter le lien à la nouvelle classe
+                new_bundle.linked_to.append(ass_temp)  # add link to new BundleClass
 
-                BundleCollection.add_bundle(
-                    new_bundle, ass_temp["destination"], ass_temp["name"]
-                )
+                # BundleCollection.add_bundle(
+                #     new_bundle, ass_temp["destination"], ass_temp["name"]
+                # )
 
-                # MAJ datasets
+                # datasets update
                 new_bundle.dataset = new_bundle.dataset.join(
                     self.dataset[ass_temp["destination"].name]
                 )
                 self.dataset.drop(
                     columns=ass_temp["destination"].name, inplace=True
-                )  # MAJ du bundle initial
+                )  # initial BundleClass update
 
         return new_bundle
 
@@ -584,6 +612,36 @@ class BundleClass(Bundle):
 
                         g.add((URIRef(s), URIRef(p), URIRef(o)))
 
+                        if link_element[
+                            "destination"
+                        ].reconcilated:  # go down in depth in the graph
+                            for item in link_element["destination"].linked_to:
+                                if (
+                                    val_temp["name"] in item["result"]
+                                ):  # if value is reconciliated
+                                    if (
+                                        type(item["links"]) == str
+                                    ):  # same link for all enum values
+                                        g.add(
+                                            (
+                                                URIRef(o),
+                                                URIRef(item["links"]),
+                                                URIRef(
+                                                    item["result"][val_temp["name"]]
+                                                ),
+                                            )
+                                        )
+                                    else:  # precise links for each enum value
+                                        g.add(
+                                            (
+                                                URIRef(o),
+                                                URIRef(item["links"][val_temp["name"]]),
+                                                URIRef(
+                                                    item["result"][val_temp["name"]]
+                                                ),
+                                            )
+                                        )
+
                 else:  # it's a class
                     dest_class_id = link_element["destination"].get_id()["name"]
                     val = series.get(dest_class_id)
@@ -603,6 +661,10 @@ class BundleClass(Bundle):
     def apply(
         self, func_on_data, columns_types_dic: dict, result_type=None, args=(), **kwargs
     ):
+        """
+        apply a function (func_on_data) to each row of specfied columns (keys of columns_types_dic dictionnary) of the the dataset,
+        and update the semantic model accordingly, i.e. update existing columns type or add new attributes for new columns added
+        """
         columns = self.dataset.columns
         self.dataset[[*columns_types_dic]] = self.dataset.apply(
             func_on_data,
@@ -622,6 +684,41 @@ class BundleClass(Bundle):
                 self.add_attribute(col, type=type)
 
         return self
+
+    def transform_attribute_to_BundleEnum(self, name_attribute):
+        """
+        transform an attribute to an enumeration as a BundleEnum
+        """
+        attribute_element = self.get_attribute(name_attribute)
+        dataset_serie = self.dataset[attribute_element["name"]].drop_duplicates()
+
+        # enumeration values
+        values = []
+        for enum_value in dataset_serie:
+            enum_elem = {}
+            enum_elem["name"] = enum_value.upper()
+            enum_elem["definition"] = None
+            enum_elem["IRI"] = None
+            values.append(enum_elem)
+
+        new_enum_bundle = BundleEnum(
+            attribute_element["name"],
+            dataset=dataset_serie.to_frame(),
+            definition=attribute_element["definition"],
+            linked_to=[],
+            values=values,
+            type=attribute_element["type"],
+            required=attribute_element["required"],
+        )
+
+        # add link between the BundleClass and the BundleEnum
+        self.add_link(
+            attribute_element["name"],
+            new_enum_bundle,
+            None,
+            attribute_element["definition"],
+        )
+        return new_enum_bundle
 
     # ---------------------------------- Utilities --------------------------------
 
@@ -654,7 +751,7 @@ class BundleClass(Bundle):
         required: str = "non",
     ):
         """
-        add an attribute to the bundle
+        add an attribute to the BundleClass and its information
         """
         attribute_element = {}
         attribute_element["name"] = name
@@ -664,3 +761,15 @@ class BundleClass(Bundle):
         attribute_element["required"] = required
 
         self.attributes.append(attribute_element)
+
+    def delete_attribute(self, name_attribute):
+        """
+        delete an attribute of the BundleClass (not an identifier attribute)
+        """
+        attribute_element = self.get_attribute(name_attribute)
+        if attribute_element["id"] != "oui":
+            self.attributes.remove(attribute_element)
+        else:
+            raise Exception(
+                "the attribute is an identifier of the class, please mark another identifier for this class to delete this attribute."
+            )

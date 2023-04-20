@@ -18,11 +18,14 @@ class BundleEnum(Bundle):
         IRI=None,
         definition=None,
         linked_to=[],
+        values=[],
+        type=None,
+        required=None,
     ) -> None:
         super().__init__(name, dataset, IRI, definition, linked_to)
-        self.values = []
-        self.type = None
-        self.required = None
+        self.values = values
+        self.type = type
+        self.required = required
 
     def show(self):
         """
@@ -41,22 +44,25 @@ class BundleEnum(Bundle):
 
     def rename(self, enumeration_name: str = None, enum_values: dict = None):
         """
-        rename an element of the semantic model of the bundle
-        >>> rename (enumeration_name = "ame_d_options")
+        rename an element of the semantic model of the BundleEnum
+        >>> rename (enumeration_name = "reseau_loc_options")
+        >>> rename(enum_values={"REV": "REVETEMENT"})
         """
-        args = locals()
-        if any(args.values()) is True:
-            if enumeration_name is not None:
-                self.name = enumeration_name
 
-            if enum_values is not None:
-                enum_keys = list(enum_values.keys())
-                for value in enum_keys:
-                    i = self.index(self.values, "name", value)
-                    # assign the name
-                    self.values[i]["name"] = enum_values[value]
-        else:
+        if enumeration_name is None and enum_values is None:
             raise ValueError("At least one default parameter must be passed!")
+
+        if enumeration_name is not None:
+            self.dataset.rename(columns={self.name: enumeration_name}, inplace=True)
+            self.name = enumeration_name
+
+        if enum_values is not None:
+            for value in enum_values:
+                i = self.index(self.values, "name", value)
+                # assign the name
+                self.values[i]["name"] = enum_values[value]
+
+        return self
 
     def annotate(self, enumeration_IRI: str = None, enum_values: dict = None):
         """
@@ -64,19 +70,20 @@ class BundleEnum(Bundle):
         >>> annotate(enumeration_IRI="http://schema.org/Thing")
         >>> annotate(enum_values={"REV":"http://exemple/REV"})
         """
-        args = locals()
-        if any(args.values()) is True:
-            if enumeration_IRI is not None:
-                self.IRI = enumeration_IRI
 
-            if enum_values is not None:
-                enum_keys = list(enum_values.keys())
-                for value in enum_keys:
-                    i = self.index(self.values, "name", value)
-                    # affecter l'IRI
-                    self.values[i]["IRI"] = enum_values[value]
-        else:
-            raise ValueError("Au moins un paramètre par défaut doit être passé !")
+        if enumeration_IRI is None and enum_values is None:
+            raise ValueError("At least one default parameter must be passed!")
+
+        if enumeration_IRI is not None:
+            self.IRI = enumeration_IRI
+
+        if enum_values is not None:
+            for value in enum_values:
+                i = self.index(self.values, "name", value)
+                # assign IRI
+                self.values[i]["IRI"] = enum_values[value]
+
+        return self
 
     def validate(self):
         """
@@ -181,19 +188,19 @@ class BundleEnum(Bundle):
                                 "BIDIRECTIONNEL":"dans les deux directions"})
         """
 
-        args = locals()
-        if any(args.values()) is True:
-            if enum_definition is not None:
-                self.definition = enum_definition
+        if enum_definition is None and enum_values is None:
+            raise ValueError("At least one default parameter must be passed!")
 
-            if enum_values is not None:
-                enum_keys = list(enum_values.keys())
-                for value in enum_keys:
-                    i = self.index(self.values, "name", value)
-                    # donner une définition
-                    self.values[i]["definition"] = enum_values[value]
-        else:
-            raise ValueError("Au moins un paramètre par défaut doit être passé !")
+        if enum_definition is not None:
+            self.definition = enum_definition
+
+        if enum_values is not None:
+            for value in enum_values:
+                i = self.index(self.values, "name", value)
+                # assign a definition
+                self.values[i]["definition"] = enum_values[value]
+
+        return self
 
     def generateOntology(self, vocabulary_graph=Graph(), kpi_results=pd.DataFrame()):
         """return rdflib graph of the ontology created"""
@@ -210,8 +217,6 @@ class BundleEnum(Bundle):
             enumerationURI = URIRef(
                 self.vocabulary_namespace + h.convertToPascalcase(self.name)
             )
-
-            # self.annotate(enumeration_IRI=str(enumerationURI))
 
             g2.add((enumerationURI, RDF.type, SKOS.ConceptScheme))
             g2.add((enumerationURI, SKOS.prefLabel, Literal(self.name)))
@@ -238,8 +243,6 @@ class BundleEnum(Bundle):
                 self.vocabulary_namespace + h.convertToSnakecase(val["name"])
             )
 
-            # self.annotate(enum_values={val["name"]: str(valueURI)})
-
             g2.add((valueURI, RDF.type, SKOS.Concept))
             g2.add((valueURI, SKOS.prefLabel, Literal(val["name"])))
             g2.add((valueURI, SKOS.definition, Literal(val["definition"])))
@@ -259,11 +262,60 @@ class BundleEnum(Bundle):
 
         return g2, kpi_results
 
+    def reconcile(
+        self,
+        name_column_to_reconcile=None,
+        type_id=None,
+        top_res: int = 1,
+        property_mapping=None,
+        reconciliation_endpoint: str = ...,
+        **filter_result,
+    ):
+        return super().reconcile(
+            self.name,
+            type_id,
+            top_res,
+            property_mapping,
+            reconciliation_endpoint,
+            **filter_result,
+        )
+
+    def take_reconcilation_into_account(self, **kwargs):
+        """
+        for the RDF generation, align IRI of values with the reconcilated IRI of format: {enum_value : IRI}.
+
+        Parameters
+        ----------
+        **kwargs: variables of type dictionnary for each reconciliation endpoint
+            example of variables:
+                enpoint1 = {
+                    "result": {
+                                "UNIDIRECTIONNEL": "http://example1.com/unidirectionnel",
+                                "BIDIRECTIONNEL": "http://example1.com/bidirectionnel"
+                    },
+                    "links":"http://www.w3.org/2004/02/skos/core#exactMatch"
+                }
+                endpoint2 = {
+                    "result": {
+                                "UNIDIRECTIONNEL": "http://example2.com/unidirectionnel",
+                                "BIDIRECTIONNEL": "http://example2.com/bidirectionnel"
+                    },
+                    "links":{
+                        "UNIDIRECTIONNEL": "http://www.w3.org/2004/02/skos/core#closeMatch",
+                        "BIDIRECTIONNEL": "http://www.w3.org/2004/02/skos/core#exactMatch"
+                    }
+                }
+        """
+        self.reconcilated = True
+
+        for key in kwargs:
+            self.linked_to.append(kwargs[key])
+
     # ---------------------------------- Utilities --------------------------------
 
     def get_value(self, name_value: str) -> dict:
         """
-        get a value of the bundle and its information
+        get a value of the BundleEnum and its information
         """
         for value_element in self.values:
             if value_element["name"].upper() == name_value.upper():
