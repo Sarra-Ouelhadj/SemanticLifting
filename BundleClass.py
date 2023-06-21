@@ -8,6 +8,7 @@ from rdflib import Graph, Literal, URIRef, Namespace
 from Bundle import Bundle
 import geopandas as gpd
 import pandas as pd
+import urllib.parse
 
 PANDAS_JSONSCHEMA_TYPES_MATCHING = {
     "object": "string",
@@ -21,7 +22,8 @@ PANDAS_JSONSCHEMA_TYPES_MATCHING = {
 
 
 class BundleClass(Bundle):
-    attributes = []
+    attributes: list = []
+    linked_to: list = []
 
     def __init__(
         self,
@@ -32,8 +34,9 @@ class BundleClass(Bundle):
         attributes=[],
         linked_to=[],
     ) -> None:
-        super().__init__(name, dataset, IRI, definition, linked_to)
+        super().__init__(name, dataset, IRI, definition)
         self.attributes = attributes
+        self.linked_to = linked_to
 
     def show(self, deep=False):
         """
@@ -505,11 +508,10 @@ class BundleClass(Bundle):
 
     def split(
         self,
-        new_class_name: str,
         class_id: str,
-        predicate: str,
         class_attributes: list = [],
         enumerations: list = [],
+        new_class_name: str = None,
     ):
         """
         divide the BundleClass into 2 new BundleClasses linked to each other
@@ -518,6 +520,7 @@ class BundleClass(Bundle):
         """
 
         attributes = []
+        class_name = class_id if (new_class_name is None) else new_class_name
 
         # --- treat the new-BundleClass identifier attribute (foreign key of the old class)
         attr_elem = copy.deepcopy(self.get_attribute(class_id))
@@ -542,11 +545,11 @@ class BundleClass(Bundle):
 
         # --- Create the new BundleClass and the link with the initial BundleClass
         new_bundle = BundleClass(
-            new_class_name, new_dataset, attributes=attributes, linked_to=[]
+            class_name, new_dataset, attributes=attributes, linked_to=[]
         )
         # BundleCollection.add_bundle(self, new_bundle, predicate)
 
-        self.add_link(name=predicate, destination=new_bundle)
+        self.add_link(name=class_id, destination=new_bundle)
 
         if len(enumerations) != 0:  # if the new BundleClass is linked to enumerations
             for enum_name in enumerations:
@@ -578,7 +581,12 @@ class BundleClass(Bundle):
         g = instance_graph
         class_id = self.get_id()["name"]
         for _, series in self.dataset.iterrows():
-            s = self.instances_namespace + self.name + "/" + series.get(class_id)
+            s = (
+                self.instances_namespace
+                + self.name
+                + "/"
+                + urllib.parse.quote(series.get(class_id))
+            )
 
             for attr in filter(lambda value: value["id"] != "oui", self.attributes):
                 p = (
@@ -650,7 +658,7 @@ class BundleClass(Bundle):
                             link_element["destination"].instances_namespace
                             + link_element["destination"].name
                             + "/"
-                            + val
+                            + urllib.parse.quote(val)
                         )
                         g.add((URIRef(s), URIRef(p), URIRef(o)))
 
@@ -720,6 +728,41 @@ class BundleClass(Bundle):
         )
         return new_enum_bundle
 
+    def _generatePlantUML(self, s, deep=False):
+        """generate PlantUML code from a dictionary"""
+
+        s += ("class {} {{".format(self.name)) + "\n"
+
+        for attr in self.attributes:
+            s += "\t"
+            if attr["id"] == "oui":
+                s += "{static} "
+            s += attr["name"] + "\n"
+        s += "}" + "\n"
+
+        for link_element in self.linked_to:
+            if type(link_element["destination"]) == BundleEnum:  # it's an enumeration
+                s += (
+                    "{} --> {} : {}".format(
+                        self.name,
+                        link_element["destination"].name,
+                        link_element["name"],
+                    )
+                ) + "\n"
+                s = link_element["destination"]._generatePlantUML(s)
+            else:  # it's a class
+                if deep:
+                    s += (
+                        "{} --> {} : {}".format(
+                            self.name,
+                            link_element["destination"].name,
+                            link_element["name"],
+                        )
+                    ) + "\n"
+                    s = link_element["destination"]._generatePlantUML(s)
+
+        return s
+
     # ---------------------------------- Utilities --------------------------------
 
     def get_id(self) -> dict:
@@ -758,6 +801,7 @@ class BundleClass(Bundle):
         attribute_element["IRI"] = IRI
         attribute_element["definition"] = definition
         attribute_element["type"] = type
+        attribute_element["id"] = "non"
         attribute_element["required"] = required
 
         self.attributes.append(attribute_element)

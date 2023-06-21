@@ -3,6 +3,8 @@ from abc import ABC, abstractmethod
 import pandas as pd
 import re
 import reconciler
+import subprocess
+from IPython.display import SVG
 
 URI_PATTERN = re.compile(
     r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/$"
@@ -24,7 +26,6 @@ class Bundle(ABC):
     name: str
     IRI: str
     definition: str
-    linked_to: list
 
     dataset: gpd.GeoDataFrame
 
@@ -38,13 +39,11 @@ class Bundle(ABC):
         dataset: gpd.GeoDataFrame,
         IRI=None,
         definition=None,
-        linked_to=[],
     ) -> None:
         self.name = name
         self.dataset = dataset
         self.IRI = IRI
         self.definition = definition
-        self.linked_to = linked_to
         self.reconcilated = False
 
     def set_instances_namespace(self, namespace: str):
@@ -184,6 +183,29 @@ class Bundle(ABC):
             ]["namespace"] + series.get("id")
 
         return dict
+
+    @abstractmethod
+    def _generatePlantUML(self, s, deep=False):
+        pass
+
+    def generatePlantUML(self, deep=False):
+        s = "@startuml\n"
+        s = self._generatePlantUML(s, deep)
+        s += "@enduml\n"
+
+        return s
+
+    def show_semantic_model(
+        self, deep=False, file_name: str = "./results/SemanticModel"
+    ):
+        plantuml_script = self.generatePlantUML(deep=deep)
+        file = file_name + ".plt"
+        with open(file, "w") as fp:
+            fp.write(plantuml_script)
+        subprocess.run(
+            "java -jar ./static/jar/plantuml*.jar -tsvg " + file, shell=True
+        )  # convert PlantUML file to svg image
+        return SVG(filename=file_name + ".svg")
 
     # ---------------------------------- dataset utilities --------------------------------
     def show_dataset(self):

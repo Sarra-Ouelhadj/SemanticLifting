@@ -17,12 +17,11 @@ class BundleEnum(Bundle):
         dataset: gpd.GeoDataFrame,
         IRI=None,
         definition=None,
-        linked_to=[],
         values=[],
         type=None,
         required=None,
     ) -> None:
-        super().__init__(name, dataset, IRI, definition, linked_to)
+        super().__init__(name, dataset, IRI, definition)
         self.values = values
         self.type = type
         self.required = required
@@ -310,6 +309,16 @@ class BundleEnum(Bundle):
 
         for key in kwargs:
             self.linked_to.append(kwargs[key])
+
+    def _generatePlantUML(self, s):
+        """generate PlantUML code from a dictionary"""
+
+        s += ("enum {} {{".format(self.name)) + "\n"
+        for value in self.values:
+            s += "\t" + value["name"] + "\n..\n"
+        s += "}" + "\n"
+
+        return s
 
     # ---------------------------------- Utilities --------------------------------
 
