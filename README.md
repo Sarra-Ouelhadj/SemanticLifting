@@ -10,8 +10,6 @@ sETL aims at leveraging schemas in a knowledge graph construction process follow
 * Jupyter
 
 ## For testing in local
-1. Run ```
-$ pip install -r requirements.txt```
-2. For Jupyter, run ```
-$ jupyter notebbok```
+1. Run ```$ pip install -r requirements.txt```
+2. For Jupyter, run ```$ jupyter notebbok```
 3. Launch `Pipeline.ipynb` file
