@@ -1,6 +1,6 @@
 # sETL: An ETL Prototype Framework for Knowledge Graph Construction
 sETL aims at leveraging schemas in a knowledge graph construction process following the ETL paradigm.
-![sETL overview](https://github.com/OpenTransport/gtfs-csv2rdf/assets/59183609/ab944b76-de1e-4440-880a-3607afa9a3e7)
+![sETL overview](https://github.com/Sarra-Ouelhadj/SemanticLifting/assets/59183609/09b58f8e-1cd1-4a62-b512-a03f38f9fe10)
 
 ## See running example
 Open [Pipeline.ipynb](https://github.com/Sarra-Ouelhadj/SemanticLifting/blob/master/Pipeline.ipynb) file
