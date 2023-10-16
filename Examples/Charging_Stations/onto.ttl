@@ -1,0 +1,106 @@
+@prefix ns1: <http://www.w3.org/2004/02/skos/core#> .
+@prefix ns2: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://data.grandlyon.com/onto/Operateur> a owl:Class ;
+    rdfs:label "operateur" ;
+    rdfs:comment "L'opérateur est la personne qui exploite l'infrastructure de recharger pour le compte d'un aménageur dans le cadre d'un contrat ou pour son propre compte s'il est l'aménageur." ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/Station> a owl:Class ;
+    rdfs:label "Station" ;
+    rdfs:comment "None" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/contactOperateur> a owl:DatatypeProperty ;
+    rdfs:label "contact_operateur" ;
+    rdfs:comment "Adresse courriel de l'opérateur. Favoriser les adresses génériques de contact." ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/idStationLocal> a owl:DatatypeProperty ;
+    rdfs:label "id_station_local" ;
+    rdfs:comment "Identifiant de la station utilisé localement. Si vous n'avez pas d'identifiant unique et que vous souhaitez en récupérer un, vous pouvez vous rendre sur https://heidi.app.etalab.studio. En cas de station qui n'est pas ouverte à l'itinérance, cet identifiant est indispensable." ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/implantationStation> a owl:ObjectProperty ;
+    rdfs:label "implantation_station" ;
+    rdfs:comment """Le type d'implantation de la station. 
+Pour une station sur voirie, sélectionner "Voirie". 
+Pour un parking public, (en ouvrage, en enclos, etc.), sélectionner "Parking public". Ces parkings sont généralement en gestion directe ou déléguée de la collectivité territoriale. 
+Pour un parking privé à usage public / parking ouvert (ex: zone commerciale), sélectionner "Parking privé à usage public". 
+Pour un parking réservé à la clientèle, aux usagers, sélectionnez "Parking privé réservé à la clientèle" (il s'agit d'un choix de l'aménageur public ou privé sur l'utilisation de son parking. Ex: hôtel, commerce, éventuellement certains bâtiments publics). 
+Pour une station dédiée à la recharge rapide dont la durée d'utilisation est généralement limitée à la recharge principalement rapide et dont la première fonction de la station est la recharge et non le stationnement, sélectionner "Station dédiée à la recharge rapide" (ex : aires de service sur axes routiers, stations services, etc.).""" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/nomOperateur> a owl:DatatypeProperty,
+        owl:ObjectProperty ;
+    rdfs:label "nom_operateur" ;
+    rdfs:comment "La dénomination sociale de l'opérateur. L'opérateur est la personne qui exploite l'infrastructure de recharger pour le compte d'un aménageur dans le cadre d'un contrat ou pour son propre compte s'il est l'aménageur. Vous pouvez accéder à cette dénomination exacte sur le site annuaire-entreprises.data.gouv.fr.",
+        "None" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/nomStation> a owl:DatatypeProperty ;
+    rdfs:label "nom_station" ;
+    rdfs:comment "Le nom de la station." ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/telephoneOperateur> a owl:DatatypeProperty ;
+    rdfs:label "telephone_operateur" ;
+    rdfs:comment "Numéro de téléphone permettant de contacter l'opérateur." ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/vocab/parking_privé_réservé_à_la_clientèle> a ns1:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns2:term_status "testing" ;
+    ns1:definition "None" ;
+    ns1:inScheme <https://data.grandlyon.com/vocab/Implantation_station> ;
+    ns1:prefLabel "Parking privé réservé à la clientèle" .
+
+<https://data.grandlyon.com/vocab/parking_privé_à_usage_public> a ns1:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns2:term_status "testing" ;
+    ns1:definition "None" ;
+    ns1:inScheme <https://data.grandlyon.com/vocab/Implantation_station> ;
+    ns1:prefLabel "Parking privé à usage public" .
+
+<https://data.grandlyon.com/vocab/parking_public> a ns1:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns2:term_status "testing" ;
+    ns1:definition "None" ;
+    ns1:inScheme <https://data.grandlyon.com/vocab/Implantation_station> ;
+    ns1:prefLabel "Parking public" .
+
+<https://data.grandlyon.com/vocab/station_dédiée_à_la_recharge_rapide> a ns1:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns2:term_status "testing" ;
+    ns1:definition "None" ;
+    ns1:inScheme <https://data.grandlyon.com/vocab/Implantation_station> ;
+    ns1:prefLabel "Station dédiée à la recharge rapide" .
+
+<https://data.grandlyon.com/vocab/voirie> a ns1:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns2:term_status "testing" ;
+    ns1:definition "Aménagement et entretien des voies, des chemins ; administration publique qui s'occupe de l'ensemble des voies de communication." ;
+    ns1:inScheme <https://data.grandlyon.com/vocab/Implantation_station> ;
+    ns1:prefLabel "Voirie" .
+
+<https://data.grandlyon.com/vocab/Implantation_station> a ns1:ConceptScheme ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns2:term_status "testing" ;
+    ns1:definition """Le type d'implantation de la station. 
+Pour une station sur voirie, sélectionner "Voirie". 
+Pour un parking public, (en ouvrage, en enclos, etc.), sélectionner "Parking public". Ces parkings sont généralement en gestion directe ou déléguée de la collectivité territoriale. 
+Pour un parking privé à usage public / parking ouvert (ex: zone commerciale), sélectionner "Parking privé à usage public". 
+Pour un parking réservé à la clientèle, aux usagers, sélectionnez "Parking privé réservé à la clientèle" (il s'agit d'un choix de l'aménageur public ou privé sur l'utilisation de son parking. Ex: hôtel, commerce, éventuellement certains bâtiments publics). 
+Pour une station dédiée à la recharge rapide dont la durée d'utilisation est généralement limitée à la recharge principalement rapide et dont la première fonction de la station est la recharge et non le stationnement, sélectionner "Station dédiée à la recharge rapide" (ex : aires de service sur axes routiers, stations services, etc.).""" ;
+    ns1:prefLabel "implantation_station" .
+

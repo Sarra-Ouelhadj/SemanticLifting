@@ -1,0 +1,482 @@
+@prefix ns1: <https://data.grandlyon.com/onto/> .
+@prefix ns2: <https://schema.org/> .
+
+<https://data.grandlyon.com/id/Station/377745> ns1:implantationStation <https://data.grandlyon.com/vocab/voirie> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "CARF - Bornes Publiques/A94F6CB6-F1DE-4311-87F5-E1C21C182281" ;
+    ns2:address "9  Boulevard des Moneghetti, Beausoleil  06240  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Beausoleil" ;
+    ns2:postalCode "06240" ;
+    ns2:streetAddress "9  Boulevard des Moneghetti" .
+
+<https://data.grandlyon.com/id/Station/377766> ns1:implantationStation <https://data.grandlyon.com/vocab/parking_public> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "CARF - Bornes Publiques/50298C72-AF6A-4A0E-B49C-304F82EECC24" ;
+    ns2:address "81  Avenue Cernuschi, Menton  06500  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Menton" ;
+    ns2:postalCode "06500" ;
+    ns2:streetAddress "81  Avenue Cernuschi" .
+
+<https://data.grandlyon.com/id/Station/377772> ns1:implantationStation <https://data.grandlyon.com/vocab/parking_public> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "CARF - Bornes Publiques/0246A32B-4DA5-45F3-83CD-58BBBA40C570" ;
+    ns2:address "  Quai de Monléon, Menton  06500  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Menton" ;
+    ns2:postalCode "06500" ;
+    ns2:streetAddress "  Quai de Monléon" .
+
+<https://data.grandlyon.com/id/Station/377778> ns1:implantationStation <https://data.grandlyon.com/vocab/parking_public> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "CARF - Bornes Publiques/8C44E3B4-E0FC-406A-A255-BBA4F44A6DBC" ;
+    ns2:address "50  Promenade de la Mer, Menton  06500  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Menton" ;
+    ns2:postalCode "06500" ;
+    ns2:streetAddress "50  Promenade de la Mer" .
+
+<https://data.grandlyon.com/id/Station/377796> ns1:implantationStation <https://data.grandlyon.com/vocab/parking_public> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "CARF - Bornes Publiques/8CF2C967-C80C-4463-B4BE-A2D9C79A1A2A" ;
+    ns2:address "  Avenue de la Paix, Roquebrune-Cap-Martin  06190  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Roquebrune-Cap-Martin" ;
+    ns2:postalCode "06190" ;
+    ns2:streetAddress "  Avenue de la Paix" .
+
+<https://data.grandlyon.com/id/Station/510419> ns1:implantationStation <https://data.grandlyon.com/vocab/parking_public> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/WattzHub%20%7C%20FR%2ASMI>,
+        "WattzHub | FR*SMI" ;
+    ns1:nomStation "WattzHub/625fc63fb907c5cc90734800" ;
+    ns2:address "40  Allée de la Mare Jodoin, Gif-sur-Yvette  91190  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Gif-sur-Yvette" ;
+    ns2:postalCode "91190" ;
+    ns2:streetAddress "40  Allée de la Mare Jodoin" .
+
+<https://data.grandlyon.com/id/Station/590672> ns1:implantationStation <https://data.grandlyon.com/vocab/parking_public> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "CARF - Bornes Publiques/30863A27-91A6-40AA-9C8C-2A08ADC581E5" ;
+    ns2:address "11  Boulevard Borriglione, Moulinet  06380  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Moulinet" ;
+    ns2:postalCode "06380" ;
+    ns2:streetAddress "11  Boulevard Borriglione" .
+
+<https://data.grandlyon.com/id/Station/593318> ns1:implantationStation <https://data.grandlyon.com/vocab/parking_public> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "CARF - Bornes Publiques/02D28A55-8180-4EE2-967B-C4DE85CE8DE6" ;
+    ns2:address "37  Boulevard Rouvier, Breil-sur-Roya  06540  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Breil-sur-Roya" ;
+    ns2:postalCode "06540" ;
+    ns2:streetAddress "37  Boulevard Rouvier" .
+
+<https://data.grandlyon.com/id/Station/593321> ns1:implantationStation <https://data.grandlyon.com/vocab/parking_public> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "CARF - Bornes Publiques/31B87691-9930-4034-AF37-E159F2AB1A15" ;
+    ns2:address "40  Chemin de Peille, Gorbio  06500  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Gorbio" ;
+    ns2:postalCode "06500" ;
+    ns2:streetAddress "40  Chemin de Peille" .
+
+<https://data.grandlyon.com/id/Station/593324> ns1:implantationStation <https://data.grandlyon.com/vocab/parking_public> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "CARF - Bornes Publiques/366DA9E5-C295-45AD-B9EC-911517B8A0A6" ;
+    ns2:address "95  Avenue du Dr Joseph Daveo, Saorge  06540  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Saorge" ;
+    ns2:postalCode "06540" ;
+    ns2:streetAddress "95  Avenue du Dr Joseph Daveo" .
+
+<https://data.grandlyon.com/id/Station/593330> ns1:implantationStation <https://data.grandlyon.com/vocab/parking_public> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "CARF - Bornes Publiques/816CEDC2-FF5E-4942-B617-CD0569448D2F" ;
+    ns2:address "182  Avenue de Saint-Antoine, Castellar  06500  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Castellar" ;
+    ns2:postalCode "06500" ;
+    ns2:streetAddress "182  Avenue de Saint-Antoine" .
+
+<https://data.grandlyon.com/id/Station/593336> ns1:implantationStation <https://data.grandlyon.com/vocab/voirie> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "CARF - Bornes Publiques/91981169-1681-42D0-836C-51CDB0788AEC" ;
+    ns2:address "248  Route de Saint-Jean, Sainte-Agnès  06500  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Sainte-Agnès" ;
+    ns2:postalCode "06500" ;
+    ns2:streetAddress "248  Route de Saint-Jean" .
+
+<https://data.grandlyon.com/id/Station/593339> ns1:implantationStation <https://data.grandlyon.com/vocab/voirie> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "CARF - Bornes Publiques/A1952231-8C6B-4306-B109-106BE66B07FC" ;
+    ns2:address "103  Avenue Saint-Michel, Sainte-Agnès  06500  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Sainte-Agnès" ;
+    ns2:postalCode "06500" ;
+    ns2:streetAddress "103  Avenue Saint-Michel" .
+
+<https://data.grandlyon.com/id/Station/597192> ns1:implantationStation <https://data.grandlyon.com/vocab/parking_public> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "CARF - Bornes Publiques/52948FDE-1CE5-4462-BD34-8B5A6EF684DA" ;
+    ns2:address "5  Place de la Résistance, Tende  06430  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Tende" ;
+    ns2:postalCode "06430" ;
+    ns2:streetAddress "5  Place de la Résistance" .
+
+<https://data.grandlyon.com/id/Station/612871> ns1:implantationStation <https://data.grandlyon.com/vocab/parking_public> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "CARF - Bornes Publiques/97BBD38A-F72F-4418-9160-266374714746" ;
+    ns2:address "  Promenade du Maréchal Leclerc de Hautecloque, Menton  06500  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Menton" ;
+    ns2:postalCode "06500" ;
+    ns2:streetAddress "  Promenade du Maréchal Leclerc de Hautecloque" .
+
+<https://data.grandlyon.com/id/Station/613273> ns1:implantationStation <https://data.grandlyon.com/vocab/voirie> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "ENGIE MAMP - Bornes publiques/07732A52-7E9B-4CE7-B528-7194497E2FA4" ;
+    ns2:address "91  Rue du Rouet, Marseille  13008  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Marseille" ;
+    ns2:postalCode "13008" ;
+    ns2:streetAddress "91  Rue du Rouet" .
+
+<https://data.grandlyon.com/id/Station/613282> ns1:implantationStation <https://data.grandlyon.com/vocab/voirie> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "ENGIE MAMP - Bornes publiques/2BF3213A-A7EC-40A8-B813-0BF5E51C0015" ;
+    ns2:address "  Boulevard de la Libération, Marseille  13001  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Marseille" ;
+    ns2:postalCode "13001" ;
+    ns2:streetAddress "  Boulevard de la Libération" .
+
+<https://data.grandlyon.com/id/Station/613285> ns1:implantationStation <https://data.grandlyon.com/vocab/voirie> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "ENGIE MAMP - Bornes publiques/2EBBB4AD-905E-4898-95B8-DDDE26691452" ;
+    ns2:address "12  Rue Urbain V, Marseille  13002  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Marseille" ;
+    ns2:postalCode "13002" ;
+    ns2:streetAddress "12  Rue Urbain V" .
+
+<https://data.grandlyon.com/id/Station/613300> ns1:implantationStation <https://data.grandlyon.com/vocab/voirie> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "ENGIE MAMP - Bornes publiques/5492DD66-0694-4F31-9E42-717F02FF06CA" ;
+    ns2:address "4  Rue André Isaia, Marseille  13013  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Marseille" ;
+    ns2:postalCode "13013" ;
+    ns2:streetAddress "4  Rue André Isaia" .
+
+<https://data.grandlyon.com/id/Station/613312> ns1:implantationStation <https://data.grandlyon.com/vocab/voirie> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "ENGIE MAMP - Bornes publiques/8EF05F63-6AFE-4F04-A9E3-CA50849D61AC" ;
+    ns2:address "57  Rue de la Loubière, Marseille  13005  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Marseille" ;
+    ns2:postalCode "13005" ;
+    ns2:streetAddress "57  Rue de la Loubière" .
+
+<https://data.grandlyon.com/id/Station/613315> ns1:implantationStation <https://data.grandlyon.com/vocab/voirie> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "ENGIE MAMP - Bornes publiques/A3F0F8CA-B96A-4723-99B2-CFB3EFC15224" ;
+    ns2:address "58  Boulevard Vauban, Marseille  13006  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Marseille" ;
+    ns2:postalCode "13006" ;
+    ns2:streetAddress "58  Boulevard Vauban" .
+
+<https://data.grandlyon.com/id/Station/613318> ns1:implantationStation <https://data.grandlyon.com/vocab/voirie> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "ENGIE MAMP - Bornes publiques/ACA96EA3-15A1-4A74-B9CC-B0B82AA7962C" ;
+    ns2:address "  Avenue de Mazargues, Marseille  13008  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Marseille" ;
+    ns2:postalCode "13008" ;
+    ns2:streetAddress "  Avenue de Mazargues" .
+
+<https://data.grandlyon.com/id/Station/613321> ns1:implantationStation <https://data.grandlyon.com/vocab/voirie> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "ENGIE MAMP - Bornes publiques/B606C19F-6882-41AF-A504-A237DF388AFC" ;
+    ns2:address "14  Rue des Orgues, Marseille  13004  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Marseille" ;
+    ns2:postalCode "13004" ;
+    ns2:streetAddress "14  Rue des Orgues" .
+
+<https://data.grandlyon.com/id/Station/613324> ns1:implantationStation <https://data.grandlyon.com/vocab/voirie> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "ENGIE MAMP - Bornes publiques/B9BE4900-8288-48A1-B1BF-31418A18AC91" ;
+    ns2:address "3  Rue Bailli de Suffren, Plan-de-Cuques  13380  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Plan-de-Cuques" ;
+    ns2:postalCode "13380" ;
+    ns2:streetAddress "3  Rue Bailli de Suffren" .
+
+<https://data.grandlyon.com/id/Station/613327> ns1:implantationStation <https://data.grandlyon.com/vocab/voirie> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "ENGIE MAMP - Bornes publiques/D4DFEB50-10D6-4E3F-806D-D36CB1A244D4" ;
+    ns2:address "2  Boulevard Gillibert, Marseille  13009  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Marseille" ;
+    ns2:postalCode "13009" ;
+    ns2:streetAddress "2  Boulevard Gillibert" .
+
+<https://data.grandlyon.com/id/Station/626567> ns1:implantationStation <https://data.grandlyon.com/vocab/voirie> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "CARF - Bornes Publiques/0B1B7295-2206-42B1-8951-22521F6E8E76" ;
+    ns2:address "7  Avenue de la 1ère Division Française Libre, Sospel  06380  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Sospel" ;
+    ns2:postalCode "06380" ;
+    ns2:streetAddress "7  Avenue de la 1ère Division Française Libre" .
+
+<https://data.grandlyon.com/id/Station/674339> ns1:implantationStation <https://data.grandlyon.com/vocab/voirie> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "CARF - Bornes Publiques/1e51511b-9531-42b9-a289-d22cf5984e15" ;
+    ns2:address "  Avenue de Verdun, Beausoleil  06240  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Beausoleil" ;
+    ns2:postalCode "06240" ;
+    ns2:streetAddress "  Avenue de Verdun" .
+
+<https://data.grandlyon.com/id/Station/674618> ns1:implantationStation <https://data.grandlyon.com/vocab/parking_public> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "CARF - Bornes Publiques/8A492B9B-057C-4B3A-8020-E5835B62CF39" ;
+    ns2:address "49  Route de Sospel, Menton  06500  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Menton" ;
+    ns2:postalCode "06500" ;
+    ns2:streetAddress "49  Route de Sospel" .
+
+<https://data.grandlyon.com/id/Station/674621> ns1:implantationStation <https://data.grandlyon.com/vocab/parking_public> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "CARF - Bornes Publiques/81878BD6-4B78-4DBE-94AD-872F818E1194" ;
+    ns2:address "  Route de Menton, Sospel  06380  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Sospel" ;
+    ns2:postalCode "06380" ;
+    ns2:streetAddress "  Route de Menton" .
+
+<https://data.grandlyon.com/id/Station/674633> ns1:implantationStation <https://data.grandlyon.com/vocab/parking_public> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "CARF - Bornes Publiques/4E5A40E1-AB25-4ADD-A460-22AA8193CB6F" ;
+    ns2:address "  Avenue du 16 Septembre 1947, Tende  06430  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Tende" ;
+    ns2:postalCode "06430" ;
+    ns2:streetAddress "  Avenue du 16 Septembre 1947" .
+
+<https://data.grandlyon.com/id/Station/674639> ns1:implantationStation <https://data.grandlyon.com/vocab/parking_public> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "CARF - Bornes Publiques/25F18F8B-FED0-497F-9D7D-71FEF99B4A70" ;
+    ns2:address "  Avenue Paul Doumer, Roquebrune-Cap-Martin  06190  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Roquebrune-Cap-Martin" ;
+    ns2:postalCode "06190" ;
+    ns2:streetAddress "  Avenue Paul Doumer" .
+
+<https://data.grandlyon.com/id/Station/678947> ns1:implantationStation <https://data.grandlyon.com/vocab/voirie> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "ENGIE MAMP - Bornes publiques/42113B28-27BD-4D95-9734-AFCB50E0863D" ;
+    ns2:address "84  Rue de Lodi, Marseille  13006  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Marseille" ;
+    ns2:postalCode "13006" ;
+    ns2:streetAddress "84  Rue de Lodi" .
+
+<https://data.grandlyon.com/id/Station/678950> ns1:implantationStation <https://data.grandlyon.com/vocab/voirie> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "ENGIE MAMP - Bornes publiques/D2447B64-5CEF-4A60-8CE9-8BAA3D3145E8" ;
+    ns2:address "  Rue Guy de Combaud Roquebrune, Marseille  13007  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Marseille" ;
+    ns2:postalCode "13007" ;
+    ns2:streetAddress "  Rue Guy de Combaud Roquebrune" .
+
+<https://data.grandlyon.com/id/Station/678953> ns1:implantationStation <https://data.grandlyon.com/vocab/voirie> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "ENGIE MAMP - Bornes publiques/F624558B-6A95-4B20-963A-5E3BD485F7E0" ;
+    ns2:address "132  Boulevard de Roux Prolongé, Marseille  13004  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Marseille" ;
+    ns2:postalCode "13004" ;
+    ns2:streetAddress "132  Boulevard de Roux Prolongé" .
+
+<https://data.grandlyon.com/id/Station/683225> ns1:implantationStation <https://data.grandlyon.com/vocab/voirie> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "CARF - Bornes Publiques/07A6ED91-C96F-4871-AC56-6982896A4AA0" ;
+    ns2:address "  Rue Prato, Menton  06500  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Menton" ;
+    ns2:postalCode "06500" ;
+    ns2:streetAddress "  Rue Prato" .
+
+<https://data.grandlyon.com/id/Station/683228> ns1:implantationStation <https://data.grandlyon.com/vocab/voirie> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "CARF - Bornes Publiques/170A9812-9FD4-4F8A-85EA-C6C26D275BAA" ;
+    ns2:address "  Avenue Princesse Grace, Roquebrune-Cap-Martin  06190  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Roquebrune-Cap-Martin" ;
+    ns2:postalCode "06190" ;
+    ns2:streetAddress "  Avenue Princesse Grace" .
+
+<https://data.grandlyon.com/id/Station/683231> ns1:implantationStation <https://data.grandlyon.com/vocab/parking_public> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "CARF - Bornes Publiques/1FE96331-2018-4918-AA44-11F7900143C8" ;
+    ns2:address "68  Chemin de Saint-Antonin, Castillon  06500  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Castillon" ;
+    ns2:postalCode "06500" ;
+    ns2:streetAddress "68  Chemin de Saint-Antonin" .
+
+<https://data.grandlyon.com/id/Station/683234> ns1:implantationStation <https://data.grandlyon.com/vocab/parking_public> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "CARF - Bornes Publiques/44287F2F-18FC-4312-BE87-87739EAF3357" ;
+    ns2:address "  Place Neuve, La Turbie  06320  France" ;
+    ns2:addressCountry "06320" ;
+    ns2:addressLocality "La" ;
+    ns2:postalCode "Turbie" ;
+    ns2:streetAddress "  Place Neuve" .
+
+<https://data.grandlyon.com/id/Station/683237> ns1:implantationStation <https://data.grandlyon.com/vocab/voirie> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "CARF - Bornes Publiques/86AFAEBF-A07F-4F93-981B-80D9BC7F856F" ;
+    ns2:address "  Avenue Raymond Poincaré, Roquebrune-Cap-Martin  06190  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Roquebrune-Cap-Martin" ;
+    ns2:postalCode "06190" ;
+    ns2:streetAddress "  Avenue Raymond Poincaré" .
+
+<https://data.grandlyon.com/id/Station/683240> ns1:implantationStation <https://data.grandlyon.com/vocab/parking_public> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "CARF - Bornes Publiques/87BFBA33-19FC-42C0-AAA8-223154A083C8" ;
+    ns2:address "  Quai de la Roya, Fontan  06540  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Fontan" ;
+    ns2:postalCode "06540" ;
+    ns2:streetAddress "  Quai de la Roya" .
+
+<https://data.grandlyon.com/id/Station/756453> ns1:implantationStation <https://data.grandlyon.com/vocab/voirie> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/Borneco%20%7C%20FR%2ABHM>,
+        "Borneco | FR*BHM" ;
+    ns1:nomStation "BornEco/63dcef1cde530c3ec2928c1e" ;
+    ns2:address "3  Place Maurice de Sully, Sully-sur-Loire  45600  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Sully-sur-Loire" ;
+    ns2:postalCode "45600" ;
+    ns2:streetAddress "3  Place Maurice de Sully" .
+
+<https://data.grandlyon.com/id/Station/767304> ns1:implantationStation <https://data.grandlyon.com/vocab/parking_public> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/Borneco%20%7C%20FR%2ABHM>,
+        "Borneco | FR*BHM" ;
+    ns1:nomStation "BornEco/640729936e73c7acf2766af1" ;
+    ns2:address "189  Avenue de Fontainebleau, Saint-Fargeau-Ponthierry  77310  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Saint-Fargeau-Ponthierry" ;
+    ns2:postalCode "77310" ;
+    ns2:streetAddress "189  Avenue de Fontainebleau" .
+
+<https://data.grandlyon.com/id/Station/767307> ns1:implantationStation <https://data.grandlyon.com/vocab/voirie> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/Borneco%20%7C%20FR%2ABHM>,
+        "Borneco | FR*BHM" ;
+    ns1:nomStation "BornEco/63dcefa3de530c3ec2928c39" ;
+    ns2:address "  Place des Jeux, Donnemarie-Dontilly  77520  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Donnemarie-Dontilly" ;
+    ns2:postalCode "77520" ;
+    ns2:streetAddress "  Place des Jeux" .
+
+<https://data.grandlyon.com/id/Station/767310> ns1:implantationStation <https://data.grandlyon.com/vocab/parking_public> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/Borneco%20%7C%20FR%2ABHM>,
+        "Borneco | FR*BHM" ;
+    ns1:nomStation "BornEco/63dcf040de530c3ec2928d03" ;
+    ns2:address "  Rue Maréchal de Lattre de Tassigny, Nangis  77370  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Nangis" ;
+    ns2:postalCode "77370" ;
+    ns2:streetAddress "  Rue Maréchal de Lattre de Tassigny" .
+
+<https://data.grandlyon.com/id/Station/767313> ns1:implantationStation <https://data.grandlyon.com/vocab/parking_public> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/Borneco%20%7C%20FR%2ABHM>,
+        "Borneco | FR*BHM" ;
+    ns1:nomStation "BornEco/63dcf0bade530c3ec2928d14" ;
+    ns2:address "6  Place Dupont Perrot, Nangis  77370  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Nangis" ;
+    ns2:postalCode "77370" ;
+    ns2:streetAddress "6  Place Dupont Perrot" .
+
+<https://data.grandlyon.com/id/Station/771717> ns1:implantationStation <https://data.grandlyon.com/vocab/voirie> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ>,
+        "evZen | FR*EVZ" ;
+    ns1:nomStation "EVzen/0da11575-ea62-47e1-be6f-247316d0fcbf" ;
+    ns2:address "12  Avenue Draio de la Mar, Carry-le-Rouet  13620  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Carry-le-Rouet" ;
+    ns2:postalCode "13620" ;
+    ns2:streetAddress "12  Avenue Draio de la Mar" .
+
+<https://data.grandlyon.com/id/Station/782313> ns1:implantationStation <https://data.grandlyon.com/vocab/voirie> ;
+    ns1:nomOperateur <https://data.grandlyon.com/id/operateur/Borneco%20%7C%20FR%2ABHM>,
+        "Borneco | FR*BHM" ;
+    ns1:nomStation "BornEco/64255ebeceade60b493082cc" ;
+    ns2:address "38  Avenue de New York, Paris  75116  France" ;
+    ns2:addressCountry "France" ;
+    ns2:addressLocality "Paris" ;
+    ns2:postalCode "75116" ;
+    ns2:streetAddress "38  Avenue de New York" .
+
+<https://data.grandlyon.com/id/operateur/WattzHub%20%7C%20FR%2ASMI> ns1:contactOperateur "contact@wattzhub.com" ;
+    ns1:telephoneOperateur "33185412867" .
+
+<https://data.grandlyon.com/id/operateur/Borneco%20%7C%20FR%2ABHM> ns1:contactOperateur "technique.borneco@gmail.com" ;
+    ns1:telephoneOperateur "33123456789" .
+
+<https://data.grandlyon.com/id/operateur/evZen%20%7C%20FR%2AEVZ> ns1:contactOperateur "support@evzen.com" ;
+    ns1:telephoneOperateur "33123456789" .
+
