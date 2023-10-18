@@ -595,7 +595,7 @@ class BundleClass(Bundle):
                     else attr["IRI"]
                 )
                 o = series.get(attr["name"])
-                if pd.notnull(o):
+                if pd.notnull(o) and str(o) != '' and not str(o).isspace():
                     g.add((URIRef(s), URIRef(p), Literal(o)))
 
             for link_element in self.linked_to:
@@ -609,7 +609,7 @@ class BundleClass(Bundle):
                     type(link_element["destination"]) == BundleEnum
                 ):  # it's an enumeration
                     val = series.get(link_element["destination"].name)
-                    if pd.notnull(val):
+                    if pd.notnull(val) and str(val) != '' and not str(val).isspace() :
                         val_temp = link_element["destination"].get_value(val)
                         o = (
                             self.vocabulary_namespace
