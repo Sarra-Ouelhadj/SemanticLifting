@@ -1,0 +1,178 @@
+@prefix ns1: <http://www.w3.org/2004/02/skos/core#> .
+@prefix ns2: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://data.grandlyon.com/onto/Commune> a owl:Class ;
+    rdfs:label "Commune" ;
+    rdfs:comment "None" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/codeComD> a owl:DatatypeProperty ;
+    rdfs:label "code_com_d" ;
+    rdfs:comment "Code INSEE de la commune (5 caractères alphanumériques) sur la voie de droite" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/codeComG> a owl:DatatypeProperty,
+        owl:ObjectProperty ;
+    rdfs:label "code_com_g" ;
+    rdfs:comment "Code INSEE de la commune (5 caractères alphanumériques) sur la voie de gauche",
+        "None" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/comm> a owl:DatatypeProperty ;
+    rdfs:label "comm" ;
+    rdfs:comment "Remarques éventuelles au sujet de l'aménagement" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/dService> a owl:DatatypeProperty ;
+    rdfs:label "d_service" ;
+    rdfs:comment "Date de mise en oeuvre de l'aménagement (AAAA)" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/dateMaj> a owl:DatatypeProperty ;
+    rdfs:label "date_maj" ;
+    rdfs:comment "Date de dernière mise à jour des données du segment. Notation ISO 8601, format AAAA-MM-JJ" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/havereseauLoc> a owl:ObjectProperty ;
+    rdfs:label "haveReseau_loc" ;
+    rdfs:comment "Type de réseau structurant local auquel l'aménagement appartient" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/idOsm> a owl:DatatypeProperty ;
+    rdfs:label "id_osm" ;
+    rdfs:comment "Identifiant de l'aménagement sur OSM" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/largeurD> a owl:DatatypeProperty ;
+    rdfs:label "largeur_d" ;
+    rdfs:comment "Largeur hors marquage minimale utile de la voie de droite réservée au cycliste, en mètre. La largeur du marquage est exclue" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/largeurG> a owl:DatatypeProperty ;
+    rdfs:label "largeur_g" ;
+    rdfs:comment "Largeur hors marquage minimale utile de la voie de gauche réservée au cycliste, en mètre. La largeur du marquage est exclue" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/localIdentifier> a owl:DatatypeProperty ;
+    rdfs:label "local_identifier" ;
+    rdfs:comment "Identifiant unique pérenne défini par la collectivité" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/lumiere> a owl:DatatypeProperty ;
+    rdfs:label "lumiere" ;
+    rdfs:comment "Aménagement éclairé" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/numIti> a owl:DatatypeProperty ;
+    rdfs:label "num_iti" ;
+    rdfs:comment "Numéro des itinéraires, des EuroVelo au schéma départementaux, auxquels le segment appartient. Séparé par « : »" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/projectC> a owl:DatatypeProperty ;
+    rdfs:label "project_c" ;
+    rdfs:comment "Projection cartographique de la donnée source" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/refGeo> a owl:DatatypeProperty ;
+    rdfs:label "ref_geo" ;
+    rdfs:comment "Référentiel géographique utilisé " ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/revetD> a owl:ObjectProperty ;
+    rdfs:label "revet_d" ;
+    rdfs:comment "Type de revêtement de l'aménagement sur la voie de droite" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/sensD> a owl:ObjectProperty ;
+    rdfs:label "sens_d" ;
+    rdfs:comment "Sens de circulation pour les cyclistes sur la voie de droite" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/source> a owl:DatatypeProperty ;
+    rdfs:label "source" ;
+    rdfs:comment "Entité ayant fourni les données" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/traficVit> a owl:DatatypeProperty ;
+    rdfs:label "trafic_vit" ;
+    rdfs:comment "Vitesse maximale autorisée pour le trafic adjacent à l'aménagement, en km/h. La vitesse 5 km/h correspond à une vitesse à l'allure du pas" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/vocab/Revet_d_options> a ns1:ConceptScheme ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns2:term_status "testing" ;
+    ns1:definition "Type de revêtement de l'aménagement sur la voie de droite" ;
+    ns1:prefLabel "revet_d_options" .
+
+<https://data.grandlyon.com/vocab/autre> a ns1:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns2:term_status "testing" ;
+    ns1:definition "None" ;
+    ns1:inScheme <https://data.grandlyon.com/vocab/Reseau_loc> ;
+    ns1:prefLabel "Autre" .
+
+<https://data.grandlyon.com/vocab/bidirectionnel> a ns1:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns2:term_status "testing" ;
+    ns1:definition "Deux direction",
+        "None" ;
+    ns1:inScheme <https://data.grandlyon.com/vocab/Sens_d> ;
+    ns1:prefLabel "BIDIRECTIONNEL" .
+
+<https://data.grandlyon.com/vocab/rev> a ns1:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns2:term_status "testing" ;
+    ns1:definition "None",
+        "REseau Vélo" ;
+    ns1:inScheme <https://data.grandlyon.com/vocab/Reseau_loc> ;
+    ns1:prefLabel "REV" .
+
+<https://data.grandlyon.com/vocab/structurant> a ns1:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns2:term_status "testing" ;
+    ns1:definition "None",
+        "un sous maillage du REV" ;
+    ns1:inScheme <https://data.grandlyon.com/vocab/Reseau_loc> ;
+    ns1:prefLabel "Structurant" .
+
+<https://data.grandlyon.com/vocab/unidirectionnel> a ns1:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns2:term_status "testing" ;
+    ns1:definition "None",
+        "Une seule direction" ;
+    ns1:inScheme <https://data.grandlyon.com/vocab/Sens_d> ;
+    ns1:prefLabel "UNIDIRECTIONNEL" .
+
+<https://data.grandlyon.com/vocab/Sens_d> a ns1:ConceptScheme ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns2:term_status "testing" ;
+    ns1:definition "Sens de circulation pour les cyclistes sur la voie de droite" ;
+    ns1:prefLabel "sens_d" .
+
+<https://data.grandlyon.com/vocab/Reseau_loc> a ns1:ConceptScheme ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns2:term_status "testing" ;
+    ns1:definition "Type de réseau structurant local auquel l'aménagement appartient" ;
+    ns1:prefLabel "reseau_loc" .
+

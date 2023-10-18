@@ -1,0 +1,918 @@
+@prefix ns1: <https://data.grandlyon.com/onto/> .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc104160764> ns1:codeComD "34090" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34090>,
+        "34090" ;
+    ns1:dateMaj "2021-04-14" ;
+    ns1:idOsm "way/104160764" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc104160767> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-14" ;
+    ns1:idOsm "way/104160767" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc104163459> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2015-10-30" ;
+    ns1:idOsm "way/104163459" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc1049594168> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2022-04-06" ;
+    ns1:idOsm "way/1049594168" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc1085025363> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2022-08-09" ;
+    ns1:idOsm "way/1085025363" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/unidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc1085025364> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2022-08-09" ;
+    ns1:idOsm "way/1085025364" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc119608603> ns1:codeComD "34077" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34077>,
+        "34077" ;
+    ns1:dateMaj "2021-04-13" ;
+    ns1:idOsm "way/119608603" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc137186901> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-20" ;
+    ns1:idOsm "way/137186901" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc165976486> ns1:codeComD "34120" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34120>,
+        "34120" ;
+    ns1:dateMaj "2021-04-13" ;
+    ns1:idOsm "way/165976486" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc165979841> ns1:codeComD "34090" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34090>,
+        "34090" ;
+    ns1:dateMaj "2012-06-03" ;
+    ns1:idOsm "way/165979841" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc165979849> ns1:codeComD "34090" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34090>,
+        "34090" ;
+    ns1:dateMaj "2021-04-13" ;
+    ns1:idOsm "way/165979849" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc167072020> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2016-01-24" ;
+    ns1:idOsm "way/167072020" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc212427000> ns1:codeComD "34120" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34120>,
+        "34120" ;
+    ns1:dateMaj "2021-04-13" ;
+    ns1:idOsm "way/212427000" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc212427001> ns1:codeComD "34090" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34090>,
+        "34090" ;
+    ns1:dateMaj "2021-04-13" ;
+    ns1:idOsm "way/212427001" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc224485564> ns1:codeComD "34090" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34090>,
+        "34090" ;
+    ns1:dateMaj "2021-04-14" ;
+    ns1:idOsm "way/224485564" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc258107387> ns1:codeComD "34058" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34058>,
+        "34058" ;
+    ns1:dateMaj "2021-06-10" ;
+    ns1:idOsm "way/258107387" ;
+    ns1:lumiere "false" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc28067161> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2014-12-29" ;
+    ns1:idOsm "way/28067161" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc28105498> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2015-07-07" ;
+    ns1:idOsm "way/28105498" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc28109940> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2022-01-27" ;
+    ns1:idOsm "way/28109940" ;
+    ns1:projectC "WGS84" ;
+    ns1:refGeo "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre;mise à jour : 2009" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/unidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc288658140> ns1:codeComD "34120" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34120>,
+        "34120" ;
+    ns1:dateMaj "2021-04-13" ;
+    ns1:idOsm "way/288658140" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc298103820> ns1:codeComD "34120" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34120>,
+        "34120" ;
+    ns1:dateMaj "2021-04-13" ;
+    ns1:idOsm "way/298103820" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc30472397> ns1:codeComD "34077" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34077>,
+        "34077" ;
+    ns1:dateMaj "2021-11-07" ;
+    ns1:idOsm "way/30472397" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc32732123> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2022-01-27" ;
+    ns1:idOsm "way/32732123" ;
+    ns1:projectC "WGS84" ;
+    ns1:refGeo "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre;mise à jour : 2009" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/unidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc34093988> ns1:codeComD "34077" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34077>,
+        "34077" ;
+    ns1:dateMaj "2021-10-10" ;
+    ns1:idOsm "way/34093988" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc341725729> ns1:codeComD "34120" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34120>,
+        "34120" ;
+    ns1:dateMaj "2015-04-30" ;
+    ns1:idOsm "way/341725729" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc359148063> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-14" ;
+    ns1:idOsm "way/359148063" ;
+    ns1:projectC "WGS84" ;
+    ns1:refGeo "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc359148078> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2015-07-07" ;
+    ns1:idOsm "way/359148078" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc377675920> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-20" ;
+    ns1:idOsm "way/377675920" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc377675935> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-20" ;
+    ns1:idOsm "way/377675935" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/unidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc377675936> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-20" ;
+    ns1:idOsm "way/377675936" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc377675954> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-20" ;
+    ns1:idOsm "way/377675954" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc377675964> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2020-06-27" ;
+    ns1:idOsm "way/377675964" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc377675969> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2015-10-30" ;
+    ns1:idOsm "way/377675969" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc377675984> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2020-06-27" ;
+    ns1:idOsm "way/377675984" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc377676009> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2019-06-12" ;
+    ns1:idOsm "way/377676009" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc377676011> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-20" ;
+    ns1:idOsm "way/377676011" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc377676027> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-20" ;
+    ns1:idOsm "way/377676027" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc377676031> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2015-10-30" ;
+    ns1:idOsm "way/377676031" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc377676051> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2015-10-30" ;
+    ns1:idOsm "way/377676051" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc377676054> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-20" ;
+    ns1:idOsm "way/377676054" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/unidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc377676056> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-20" ;
+    ns1:idOsm "way/377676056" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc377676061> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2015-10-30" ;
+    ns1:idOsm "way/377676061" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc377676064> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-20" ;
+    ns1:idOsm "way/377676064" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc377676065> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2015-10-30" ;
+    ns1:idOsm "way/377676065" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc377676068> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2015-10-30" ;
+    ns1:idOsm "way/377676068" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc377676073> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-20" ;
+    ns1:idOsm "way/377676073" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc387336979> ns1:codeComD "34090" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34090>,
+        "34090" ;
+    ns1:dateMaj "2021-04-14" ;
+    ns1:idOsm "way/387336979" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc387336982> ns1:codeComD "34090" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34090>,
+        "34090" ;
+    ns1:dateMaj "2021-04-14" ;
+    ns1:idOsm "way/387336982" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc389705688> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-09-18" ;
+    ns1:idOsm "way/389705688" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/unidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc390458810> ns1:codeComD "34090" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34090>,
+        "34090" ;
+    ns1:dateMaj "2016-01-09" ;
+    ns1:idOsm "way/390458810" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc390458818> ns1:codeComD "34090" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34090>,
+        "34090" ;
+    ns1:dateMaj "2021-04-14" ;
+    ns1:idOsm "way/390458818" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc390458825> ns1:codeComD "34090" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34090>,
+        "34090" ;
+    ns1:dateMaj "2021-04-14" ;
+    ns1:idOsm "way/390458825" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc390458827> ns1:codeComD "34090" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34090>,
+        "34090" ;
+    ns1:dateMaj "2016-01-09" ;
+    ns1:idOsm "way/390458827" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc390458835> ns1:codeComD "34090" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34090>,
+        "34090" ;
+    ns1:dateMaj "2019-01-02" ;
+    ns1:idOsm "way/390458835" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc391351136> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-20" ;
+    ns1:idOsm "way/391351136" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc392881380> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2022-08-09" ;
+    ns1:idOsm "way/392881380" ;
+    ns1:projectC "WGS84" ;
+    ns1:refGeo "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2013" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/unidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc392881381> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2016-01-23" ;
+    ns1:idOsm "way/392881381" ;
+    ns1:projectC "WGS84" ;
+    ns1:refGeo "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2013" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/unidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc393281006> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2016-01-24" ;
+    ns1:idOsm "way/393281006" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc393489256> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2016-01-25" ;
+    ns1:idOsm "way/393489256" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc404945559> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2020-06-17" ;
+    ns1:idOsm "way/404945559" ;
+    ns1:projectC "WGS84" ;
+    ns1:refGeo "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/unidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc417203184> ns1:codeComD "34090" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34090>,
+        "34090" ;
+    ns1:dateMaj "2022-06-09" ;
+    ns1:idOsm "way/417203184" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc56437452> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2022-08-09" ;
+    ns1:idOsm "way/56437452" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc56437457> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2022-04-06" ;
+    ns1:idOsm "way/56437457" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc56437458> ns1:codeComD "34090" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34090>,
+        "34090" ;
+    ns1:comm "Interdit à la circulation des vélos et deux roues motorisés, interdiction d'allumer du feu/barbecue, Chiens autorisés si tenus en laisse" ;
+    ns1:dateMaj "2022-05-11" ;
+    ns1:idOsm "way/56437458" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc564727637> ns1:codeComD "34090" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34090>,
+        "34090" ;
+    ns1:dateMaj "2020-04-27" ;
+    ns1:idOsm "way/564727637" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc564727639> ns1:codeComD "34090" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34090>,
+        "34090" ;
+    ns1:dateMaj "2020-04-27" ;
+    ns1:idOsm "way/564727639" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc57742696> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-20" ;
+    ns1:idOsm "way/57742696" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/unidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc57743170> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-20" ;
+    ns1:idOsm "way/57743170" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/unidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc57743396> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2015-10-30" ;
+    ns1:idOsm "way/57743396" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc60703701> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2015-10-30" ;
+    ns1:idOsm "way/60703701" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc60703759> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-20" ;
+    ns1:idOsm "way/60703759" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/unidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc60703959> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-20" ;
+    ns1:idOsm "way/60703959" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/unidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc60705187> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-20" ;
+    ns1:idOsm "way/60705187" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc60705713> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-20" ;
+    ns1:idOsm "way/60705713" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc60705714> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-20" ;
+    ns1:idOsm "way/60705714" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc659958503> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-14" ;
+    ns1:idOsm "way/659958503" ;
+    ns1:projectC "WGS84" ;
+    ns1:refGeo "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc696656346> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2019-06-12" ;
+    ns1:idOsm "way/696656346" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc723893624> ns1:codeComD "34090" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34090>,
+        "34090" ;
+    ns1:dateMaj "2020-04-27" ;
+    ns1:idOsm "way/723893624" ;
+    ns1:projectC "WGS84" ;
+    ns1:refGeo "BDOrtho IGN" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc738601750> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-14" ;
+    ns1:idOsm "way/738601750" ;
+    ns1:projectC "WGS84" ;
+    ns1:refGeo "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc81452577> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-02-17" ;
+    ns1:idOsm "way/81452577" ;
+    ns1:projectC "WGS84" ;
+    ns1:refGeo "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre;mise à jour : 2009" ;
+    ns1:source "OpenStreetMap" ;
+    ns1:traficVit "30" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc84175113> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-14" ;
+    ns1:idOsm "way/84175113" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc89034120> ns1:codeComD "34120" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34120>,
+        "34120" ;
+    ns1:dateMaj "2021-04-13" ;
+    ns1:idOsm "way/89034120" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc896276859> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-01-17" ;
+    ns1:idOsm "way/896276859" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc899804563> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-14" ;
+    ns1:idOsm "way/899804563" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc930347875> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2022-04-22" ;
+    ns1:idOsm "way/930347875" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/unidirectionnel> ;
+    ns1:source "OpenStreetMap" ;
+    ns1:traficVit "70" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc930381152> ns1:codeComD "34077" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34077>,
+        "34077" ;
+    ns1:dateMaj "2021-05-10" ;
+    ns1:idOsm "way/930381152" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/unidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc930381155> ns1:codeComD "34077" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34077>,
+        "34077" ;
+    ns1:dateMaj "2021-05-10" ;
+    ns1:idOsm "way/930381155" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/unidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc930381156> ns1:codeComD "34077" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34077>,
+        "34077" ;
+    ns1:dateMaj "2021-10-10" ;
+    ns1:idOsm "way/930381156" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc930433495> ns1:codeComD "34120" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34120>,
+        "34120" ;
+    ns1:dateMaj "2021-04-13" ;
+    ns1:idOsm "way/930433495" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc930433496> ns1:codeComD "34090" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34090>,
+        "34090" ;
+    ns1:dateMaj "2022-05-02" ;
+    ns1:idOsm "way/930433496" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc930433497> ns1:codeComD "34120" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34120>,
+        "34120" ;
+    ns1:dateMaj "2021-06-29" ;
+    ns1:idOsm "way/930433497" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc930433498> ns1:codeComD "34120" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34120>,
+        "34120" ;
+    ns1:dateMaj "2021-04-13" ;
+    ns1:idOsm "way/930433498" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc930433499> ns1:codeComD "34120" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34120>,
+        "34120" ;
+    ns1:dateMaj "2021-06-29" ;
+    ns1:idOsm "way/930433499" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc930770531> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-14" ;
+    ns1:idOsm "way/930770531" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc932930864> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-20" ;
+    ns1:idOsm "way/932930864" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc932930865> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-20" ;
+    ns1:idOsm "way/932930865" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc932930866> ns1:codeComD "34057" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34057>,
+        "34057" ;
+    ns1:dateMaj "2021-04-20" ;
+    ns1:idOsm "way/932930866" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc952924161> ns1:codeComD "34058" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34058>,
+        "34058" ;
+    ns1:dateMaj "2021-06-10" ;
+    ns1:idOsm "way/952924161" ;
+    ns1:lumiere "false" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc952924162> ns1:codeComD "34058" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34058>,
+        "34058" ;
+    ns1:dateMaj "2021-06-10" ;
+    ns1:idOsm "way/952924162" ;
+    ns1:lumiere "false" ;
+    ns1:projectC "WGS84" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
+<https://data.grandlyon.com/id/CyclingInfrastructure/id_loc97066405> ns1:codeComD "34327" ;
+    ns1:codeComG <https://data.grandlyon.com/id/Commune/34327>,
+        "34327" ;
+    ns1:dateMaj "2011-01-28" ;
+    ns1:idOsm "way/97066405" ;
+    ns1:projectC "WGS84" ;
+    ns1:refGeo "cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011" ;
+    ns1:sensD <https://data.grandlyon.com/vocab/bidirectionnel> ;
+    ns1:source "OpenStreetMap" .
+
