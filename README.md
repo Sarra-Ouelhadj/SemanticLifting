@@ -3,7 +3,7 @@ sETL aims at leveraging schemas in a knowledge graph construction process follow
 ![sETL overview](https://github.com/Sarra-Ouelhadj/SemanticLifting/assets/59183609/09b58f8e-1cd1-4a62-b512-a03f38f9fe10)
 
 ## See running example
-Open [Pipeline_Charging_Sations.ipynb](https://github.com/Sarra-Ouelhadj/SemanticLifting/blob/master/Pipeline_Charging_Stations.ipynb) file
+Open [Pipeline_Charging_Stations.ipynb](https://github.com/Sarra-Ouelhadj/SemanticLifting/blob/master/Pipeline_Charging_Stations.ipynb) file
 
 ## Test in local
 ### Requirements
