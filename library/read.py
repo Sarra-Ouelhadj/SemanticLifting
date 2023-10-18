@@ -121,7 +121,7 @@ def read_jsonSchema_geojsonData(
             # enumerated value
             for enum_value in attributes[attr_elem]["enum"]:
                 enum_elem = {}
-                enum_elem["name"] = enum_value
+                enum_elem["name"] = enum_value if (enum_value != None) else "null"
                 enum_elem["definition"] = None
                 enum_elem["IRI"] = None
                 new_enum_bundle.values.append(enum_elem)

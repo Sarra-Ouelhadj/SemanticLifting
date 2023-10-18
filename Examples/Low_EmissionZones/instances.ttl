@@ -1,0 +1,16 @@
+@prefix ns1: <https://data.grandlyon.com/onto/> .
+
+<https://data.grandlyon.com/id/EmissionZone/200046977-ZFE-001> ns1:autobusAutocarsCritair <https://data.grandlyon.com/vocab/v5> ;
+    ns1:autobusAutocarsHoraires "24/7" ;
+    ns1:dateDebut "2020-01-01" ;
+    ns1:deuxRmCritair <https://data.grandlyon.com/vocab/v5> ;
+    ns1:deuxRmHoraires "24/7" ;
+    ns1:plCritair <https://data.grandlyon.com/vocab/v3> ;
+    ns1:plHoraires "24/7" ;
+    ns1:urlArrete "https://agora.grandlyon.com/webdelib/files/unzip//seance_264250/23_d1647427974276.pdf" ;
+    ns1:urlSiteInformation "https://www.grandlyon.com/actions/zfe.html#c20726" ;
+    ns1:vpCritair <https://data.grandlyon.com/vocab/v5> ;
+    ns1:vpHoraires "24/7" ;
+    ns1:vulCritair <https://data.grandlyon.com/vocab/v3> ;
+    ns1:vulHoraires "24/7" .
+

@@ -1,0 +1,219 @@
+@prefix ns1: <http://www.w3.org/2004/02/skos/core#> .
+@prefix ns2: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://data.grandlyon.com/onto/Emissionzone> a owl:Class ;
+    rdfs:label "EmissionZone" ;
+    rdfs:comment "None" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/autobusAutocarsCritair> a owl:ObjectProperty ;
+    rdfs:label "autobus_autocars_critair" ;
+    rdfs:comment "Autobus et autocars : Vignette CRITAIR à partir de laquelle la circulation n'est pas autorisée. Par exemple V4 signifie que les véhicules CRITAIR 4, CRITAIR 5 et sans vignettes ne sont pas autorisés à circuler. L'ordre des vignettes est le suivant : EL, V1, V2, V3, V4, V5, NC. EL correspond aux véhicules électriques et NC aux véhicules sans vignette." ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/autobusAutocarsHoraires> a owl:DatatypeProperty ;
+    rdfs:label "autobus_autocars_horaires" ;
+    rdfs:comment "Autobus et autocars : jours et horaires de restriction au format 'opening hours' d'OpenStreetMap : https://wiki.openstreetmap.org/wiki/Key:opening_hours" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/dateDebut> a owl:DatatypeProperty ;
+    rdfs:label "date_debut" ;
+    rdfs:comment "Date d'entrée en vigueur de la réglementation" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/dateFin> a owl:DatatypeProperty ;
+    rdfs:label "date_fin" ;
+    rdfs:comment "Date de fin de la réglementation" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/deuxRmCritair> a owl:ObjectProperty ;
+    rdfs:label "deux_rm_critair" ;
+    rdfs:comment "Deux roues, tricycles et quadricycles à moteur : Vignette CRITAIR à partir de laquelle la circulation n'est pas autorisée. Par exemple V4 signifie que les véhicules CRITAIR 4, CRITAIR 5 et sans vignettes ne sont pas autorisés à circuler. L'ordre des vignettes est le suivant : EL, V1, V2, V3, V4, V5, NC. EL correspond aux véhicules électriques et NC aux véhicules sans vignette." ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/deuxRmHoraires> a owl:DatatypeProperty ;
+    rdfs:label "deux_rm_horaires" ;
+    rdfs:comment "Deux roues, tricycles et quadricycles à moteur : jours et horaires de restriction au format 'opening hours' d'OpenStreetMap : https://wiki.openstreetmap.org/wiki/Key:opening_hours" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/id> a owl:DatatypeProperty ;
+    rdfs:label "id" ;
+    rdfs:comment "Identifiant unique de l'aire réglementée. Pour construire l'identifiant on utilise cette formule : 'Code SIREN de l'entité administrative englobant la zone' - ZFE - XXX. Identifiant unique cleabs du tronçon routier issu de la couche TRONCON_DE_ROUTE de la BD Topo produite par l'IGN" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/plCritair> a owl:ObjectProperty ;
+    rdfs:label "pl_critair" ;
+    rdfs:comment "Poids lourds (>3,5t): Vignette CRITAIR à partir de laquelle la circulation n'est pas autorisée. Par exemple V4 signifie que les véhicules CRITAIR 4, CRITAIR 5 et sans vignettes ne sont pas autorisés à circuler. L'ordre des vignettes est le suivant : EL, V1, V2, V3, V4, V5, NC. EL correspond aux véhicules électriques et NC aux véhicules sans vignette." ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/plHoraires> a owl:DatatypeProperty ;
+    rdfs:label "pl_horaires" ;
+    rdfs:comment "Poids lourds (>3,5t): jours et horaires de restriction au format 'opening hours' d'OpenStreetMap : https://wiki.openstreetmap.org/wiki/Key:opening_hours" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/urlArrete> a owl:DatatypeProperty ;
+    rdfs:label "url_arrete" ;
+    rdfs:comment "Lien de l'arrêté administratif précisant la réglementation sur la zone ou sur le tronçon de route." ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/urlSiteInformation> a owl:DatatypeProperty ;
+    rdfs:label "url_site_information" ;
+    rdfs:comment "Page web décrivant le dispositif et précisant la réglementation sur la zone ou sur le tronçon de route." ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/vpCritair> a owl:ObjectProperty ;
+    rdfs:label "vp_critair" ;
+    rdfs:comment "Véhicules particuliers : Vignette CRITAIR à partir de laquelle la circulation n'est pas autorisée. Par exemple V4 signifie que les véhicules CRITAIR 4, CRITAIR 5 et sans vignettes ne sont pas autorisés à circuler. L'ordre des vignettes est le suivant : EL, V1, V2, V3, V4, V5, NC. EL correspond aux véhicules électriques et NC aux véhicules sans vignette." ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/vpHoraires> a owl:DatatypeProperty ;
+    rdfs:label "vp_horaires" ;
+    rdfs:comment "Véhicules particuliers : jours et horaires de restriction au format 'opening hours' d'OpenStreetMap : https://wiki.openstreetmap.org/wiki/Key:opening_hours" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/vulCritair> a owl:ObjectProperty ;
+    rdfs:label "vul_critair" ;
+    rdfs:comment "Véhicules utilitaires légers : Vignette CRITAIR à partir de laquelle la circulation n'est pas autorisée. Par exemple V4 signifie que les véhicules CRITAIR 4, CRITAIR 5 et sans vignettes ne sont pas autorisés à circuler. L'ordre des vignettes est le suivant : EL, V1, V2, V3, V4, V5, NC. EL correspond aux véhicules électriques et NC aux véhicules sans vignette." ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/onto/vulHoraires> a owl:DatatypeProperty ;
+    rdfs:label "vul_horaires" ;
+    rdfs:comment "Véhicules utilitaires légers : jours et horaires de restriction au format 'opening hours' d'OpenStreetMap : https://wiki.openstreetmap.org/wiki/Key:opening_hours" ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/onto/> ;
+    ns2:term_status "testing" .
+
+<https://data.grandlyon.com/vocab/el> a ns1:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns2:term_status "testing" ;
+    ns1:definition "véhicules électriques" ;
+    ns1:inScheme <https://data.grandlyon.com/vocab/Autobus_autocars_critair>,
+        <https://data.grandlyon.com/vocab/Deux_rm_critair>,
+        <https://data.grandlyon.com/vocab/Pl_critair>,
+        <https://data.grandlyon.com/vocab/Vp_critair>,
+        <https://data.grandlyon.com/vocab/Vul_critair> ;
+    ns1:prefLabel "EL" .
+
+<https://data.grandlyon.com/vocab/nc> a ns1:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns2:term_status "testing" ;
+    ns1:definition "véhicules sans vignette" ;
+    ns1:inScheme <https://data.grandlyon.com/vocab/Autobus_autocars_critair>,
+        <https://data.grandlyon.com/vocab/Deux_rm_critair>,
+        <https://data.grandlyon.com/vocab/Pl_critair>,
+        <https://data.grandlyon.com/vocab/Vp_critair>,
+        <https://data.grandlyon.com/vocab/Vul_critair> ;
+    ns1:prefLabel "NC" .
+
+<https://data.grandlyon.com/vocab/null> a ns1:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns2:term_status "testing" ;
+    ns1:definition "non mentionné" ;
+    ns1:inScheme <https://data.grandlyon.com/vocab/Autobus_autocars_critair>,
+        <https://data.grandlyon.com/vocab/Deux_rm_critair>,
+        <https://data.grandlyon.com/vocab/Pl_critair>,
+        <https://data.grandlyon.com/vocab/Vp_critair>,
+        <https://data.grandlyon.com/vocab/Vul_critair> ;
+    ns1:prefLabel "null" .
+
+<https://data.grandlyon.com/vocab/v1> a ns1:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns2:term_status "testing" ;
+    ns1:definition "véhicules CRITAIR 1" ;
+    ns1:inScheme <https://data.grandlyon.com/vocab/Autobus_autocars_critair>,
+        <https://data.grandlyon.com/vocab/Deux_rm_critair>,
+        <https://data.grandlyon.com/vocab/Pl_critair>,
+        <https://data.grandlyon.com/vocab/Vp_critair>,
+        <https://data.grandlyon.com/vocab/Vul_critair> ;
+    ns1:prefLabel "V1" .
+
+<https://data.grandlyon.com/vocab/v2> a ns1:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns2:term_status "testing" ;
+    ns1:definition "véhicules CRITAIR 2" ;
+    ns1:inScheme <https://data.grandlyon.com/vocab/Autobus_autocars_critair>,
+        <https://data.grandlyon.com/vocab/Deux_rm_critair>,
+        <https://data.grandlyon.com/vocab/Pl_critair>,
+        <https://data.grandlyon.com/vocab/Vp_critair>,
+        <https://data.grandlyon.com/vocab/Vul_critair> ;
+    ns1:prefLabel "V2" .
+
+<https://data.grandlyon.com/vocab/v3> a ns1:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns2:term_status "testing" ;
+    ns1:definition "véhicules CRITAIR 3" ;
+    ns1:inScheme <https://data.grandlyon.com/vocab/Autobus_autocars_critair>,
+        <https://data.grandlyon.com/vocab/Deux_rm_critair>,
+        <https://data.grandlyon.com/vocab/Pl_critair>,
+        <https://data.grandlyon.com/vocab/Vp_critair>,
+        <https://data.grandlyon.com/vocab/Vul_critair> ;
+    ns1:prefLabel "V3" .
+
+<https://data.grandlyon.com/vocab/v4> a ns1:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns2:term_status "testing" ;
+    ns1:definition "véhicules CRITAIR 4" ;
+    ns1:inScheme <https://data.grandlyon.com/vocab/Autobus_autocars_critair>,
+        <https://data.grandlyon.com/vocab/Deux_rm_critair>,
+        <https://data.grandlyon.com/vocab/Pl_critair>,
+        <https://data.grandlyon.com/vocab/Vp_critair>,
+        <https://data.grandlyon.com/vocab/Vul_critair> ;
+    ns1:prefLabel "V4" .
+
+<https://data.grandlyon.com/vocab/v5> a ns1:Concept ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns2:term_status "testing" ;
+    ns1:definition "véhicules CRITAIR 5" ;
+    ns1:inScheme <https://data.grandlyon.com/vocab/Autobus_autocars_critair>,
+        <https://data.grandlyon.com/vocab/Deux_rm_critair>,
+        <https://data.grandlyon.com/vocab/Pl_critair>,
+        <https://data.grandlyon.com/vocab/Vp_critair>,
+        <https://data.grandlyon.com/vocab/Vul_critair> ;
+    ns1:prefLabel "V5" .
+
+<https://data.grandlyon.com/vocab/Autobus_autocars_critair> a ns1:ConceptScheme ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns2:term_status "testing" ;
+    ns1:definition "Autobus et autocars : Vignette CRITAIR à partir de laquelle la circulation n'est pas autorisée. Par exemple V4 signifie que les véhicules CRITAIR 4, CRITAIR 5 et sans vignettes ne sont pas autorisés à circuler. L'ordre des vignettes est le suivant : EL, V1, V2, V3, V4, V5, NC. EL correspond aux véhicules électriques et NC aux véhicules sans vignette." ;
+    ns1:prefLabel "autobus_autocars_critair" .
+
+<https://data.grandlyon.com/vocab/Deux_rm_critair> a ns1:ConceptScheme ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns2:term_status "testing" ;
+    ns1:definition "Deux roues, tricycles et quadricycles à moteur : Vignette CRITAIR à partir de laquelle la circulation n'est pas autorisée. Par exemple V4 signifie que les véhicules CRITAIR 4, CRITAIR 5 et sans vignettes ne sont pas autorisés à circuler. L'ordre des vignettes est le suivant : EL, V1, V2, V3, V4, V5, NC. EL correspond aux véhicules électriques et NC aux véhicules sans vignette." ;
+    ns1:prefLabel "deux_rm_critair" .
+
+<https://data.grandlyon.com/vocab/Pl_critair> a ns1:ConceptScheme ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns2:term_status "testing" ;
+    ns1:definition "Poids lourds (>3,5t): Vignette CRITAIR à partir de laquelle la circulation n'est pas autorisée. Par exemple V4 signifie que les véhicules CRITAIR 4, CRITAIR 5 et sans vignettes ne sont pas autorisés à circuler. L'ordre des vignettes est le suivant : EL, V1, V2, V3, V4, V5, NC. EL correspond aux véhicules électriques et NC aux véhicules sans vignette." ;
+    ns1:prefLabel "pl_critair" .
+
+<https://data.grandlyon.com/vocab/Vp_critair> a ns1:ConceptScheme ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns2:term_status "testing" ;
+    ns1:definition "Véhicules particuliers : Vignette CRITAIR à partir de laquelle la circulation n'est pas autorisée. Par exemple V4 signifie que les véhicules CRITAIR 4, CRITAIR 5 et sans vignettes ne sont pas autorisés à circuler. L'ordre des vignettes est le suivant : EL, V1, V2, V3, V4, V5, NC. EL correspond aux véhicules électriques et NC aux véhicules sans vignette." ;
+    ns1:prefLabel "vp_critair" .
+
+<https://data.grandlyon.com/vocab/Vul_critair> a ns1:ConceptScheme ;
+    rdfs:isDefinedBy <https://data.grandlyon.com/vocab/> ;
+    ns2:term_status "testing" ;
+    ns1:definition "Véhicules utilitaires légers : Vignette CRITAIR à partir de laquelle la circulation n'est pas autorisée. Par exemple V4 signifie que les véhicules CRITAIR 4, CRITAIR 5 et sans vignettes ne sont pas autorisés à circuler. L'ordre des vignettes est le suivant : EL, V1, V2, V3, V4, V5, NC. EL correspond aux véhicules électriques et NC aux véhicules sans vignette." ;
+    ns1:prefLabel "vul_critair" .
+
