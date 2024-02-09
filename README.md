@@ -4,6 +4,10 @@ sETL aims at leveraging schemas in a knowledge graph construction process follow
 
 ## See running example
 Open [Pipeline_Charging_Stations.ipynb](https://github.com/Sarra-Ouelhadj/SemanticLifting/blob/master/Examples/Charging_Stations/Pipeline_Charging_Stations.ipynb) file
+### See other examples
+* [Cycling facilities](https://github.com/Sarra-Ouelhadj/SemanticLifting/blob/master/Examples/Cycling_Facilities/Pipeline_Cycling_Facilities.ipynb)
+* [Parking places](https://github.com/Sarra-Ouelhadj/SemanticLifting/blob/master/Examples/Parking_Places/Pipeline_Parking_Places.ipynb)
+* [Low emission zones](https://github.com/Sarra-Ouelhadj/SemanticLifting/blob/master/Examples/Low_EmissionZones/Pipeline_Low_EmissionZones.ipynb)
 
 ## Test in local
 ### Requirements
