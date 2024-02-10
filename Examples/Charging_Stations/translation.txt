@@ -1,0 +1,18 @@
+English : French
+
+Columns
+operator_name : nom_operateur,
+operator_contact : contact_operateur, 
+operator_telephone : telephone_operateur, 
+local_station_id : id_station_local, 
+station_name : nom_station, 
+station_address : adresse_station,
+station_implantation : implantation_station,
+
+
+Values of station_implantation
+"Road" : "Voirie", 
+"Public car park" : "Parking public", 
+"Private car park for public use" : "Parking privé à usage public", 
+"Private car park for customer use" : "Parking privé réservé à la clientèle", 
+"Dedicated fast-charging station" : "Station dédiée à la recharge rapide".
